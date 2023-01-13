@@ -13,7 +13,7 @@
                 <ColumnDefinition Width="3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="1">
-                <DataGrid ScrollViewer.HorizontalScrollBarVisibility="Hidden" Name="recipeData">
+                <DataGrid ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Step Num" Width="60" Binding="{Binding StepNum}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Step Time" Width="*" Binding="{Binding StepTime}"></DataGridTextColumn>
