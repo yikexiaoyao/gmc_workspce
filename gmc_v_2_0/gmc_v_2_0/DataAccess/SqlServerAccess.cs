@@ -176,5 +176,11 @@ namespace gmc_v_2_0.DataAccess
             string strSql = $"select * from recipes_data where recipe_info_id=1";
             return GetDatas(strSql);
         }
+
+        public DataTable AddRecipeData()
+        {
+            string strSql = $"insert into recipes_data(recipe_data_id, step_num, step_time,wafer_rotatior_val,wafer_rotatior_acc,rinse_arm_disp,rinse_arm_speed,rinse_arm_start_pos,rinse_arm_end_pos,rinse_arm_scan,dev_arm_disp,dev_arm_time,dev_arm_speed,dev_arm_start_pos,dev_arm_end_pos,dev_arm_scan,auto_damp,n2_dry,wait_type,recipe_info_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            return GetDatas(strSql);
+        }
     }
 }
