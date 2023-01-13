@@ -1,0 +1,16 @@
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\001-Base\obj\Debug\001-Base.csproj.AssemblyReference.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\001-Base\obj\Debug\001-Base.csproj.SuggestedBindingRedirects.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\001-Base\obj\Debug\MainWindow.g.cs
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\001-Base\obj\Debug\App.g.cs
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\001-Base\obj\Debug\001-Base_MarkupCompile.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\001-Base\obj\Debug\001-Base_MarkupCompile.lref
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\001-Base\bin\Debug\001-Base.exe.config
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\001-Base\bin\Debug\001-Base.exe
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\001-Base\bin\Debug\001-Base.pdb
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\001-Base\obj\Debug\MainWindow.baml
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\001-Base\obj\Debug\001-Base.g.resources
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\001-Base\obj\Debug\_001_Base.Properties.Resources.resources
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\001-Base\obj\Debug\001-Base.csproj.GenerateResource.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\001-Base\obj\Debug\001-Base.csproj.CoreCompileInputs.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\001-Base\obj\Debug\001-Base.exe
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\001-Base\obj\Debug\001-Base.pdb

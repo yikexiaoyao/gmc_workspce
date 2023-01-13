@@ -1,0 +1,11 @@
+C:\Users\华硕\Desktop\C#\CSharpToolBox\015-StatusStrip_状态栏菜单控件\bin\Debug\015-StatusStrip_状态栏菜单控件.exe.config
+C:\Users\华硕\Desktop\C#\CSharpToolBox\015-StatusStrip_状态栏菜单控件\bin\Debug\015-StatusStrip_状态栏菜单控件.exe
+C:\Users\华硕\Desktop\C#\CSharpToolBox\015-StatusStrip_状态栏菜单控件\bin\Debug\015-StatusStrip_状态栏菜单控件.pdb
+C:\Users\华硕\Desktop\C#\CSharpToolBox\015-StatusStrip_状态栏菜单控件\obj\Debug\015-StatusStrip_状态栏菜单控件.csproj.AssemblyReference.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox\015-StatusStrip_状态栏菜单控件\obj\Debug\015-StatusStrip_状态栏菜单控件.csproj.SuggestedBindingRedirects.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox\015-StatusStrip_状态栏菜单控件\obj\Debug\_015_StatusStrip_状态栏菜单控件.Form1.resources
+C:\Users\华硕\Desktop\C#\CSharpToolBox\015-StatusStrip_状态栏菜单控件\obj\Debug\_015_StatusStrip_状态栏菜单控件.Properties.Resources.resources
+C:\Users\华硕\Desktop\C#\CSharpToolBox\015-StatusStrip_状态栏菜单控件\obj\Debug\015-StatusStrip_状态栏菜单控件.csproj.GenerateResource.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox\015-StatusStrip_状态栏菜单控件\obj\Debug\015-StatusStrip_状态栏菜单控件.csproj.CoreCompileInputs.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox\015-StatusStrip_状态栏菜单控件\obj\Debug\015-StatusStrip_状态栏菜单控件.exe
+C:\Users\华硕\Desktop\C#\CSharpToolBox\015-StatusStrip_状态栏菜单控件\obj\Debug\015-StatusStrip_状态栏菜单控件.pdb

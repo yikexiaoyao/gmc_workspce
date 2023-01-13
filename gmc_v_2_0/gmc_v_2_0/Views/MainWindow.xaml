@@ -1,0 +1,308 @@
+﻿<Window x:Class="gmc_v_2_0.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:gmc_v_2_0"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1024" Width="1280" WindowStartupLocation="CenterScreen"
+        FontFamily="Microsoft YaHei" FontWeight="ExtraLight" Foreground="#333"
+        WindowStyle="None" AllowsTransparency="True" Background="#FFF6F7FC"
+        ResizeMode="CanResizeWithGrip">
+    <Window.Resources>
+        <!-- 最小化、最大化、关闭 -->
+        <ControlTemplate TargetType="Button" x:Key="ControlButtonTemplate">
+            <Grid Background="Transparent" Height="30" Width="45" Name="back">
+                <Border Name="hover" Background="{TemplateBinding Background}" Visibility="Collapsed" />
+                <TextBlock Text="{TemplateBinding Content}" FontFamily="{StaticResource iconfont}"
+                           VerticalAlignment="Center" HorizontalAlignment="Center" Name="txt" />
+            </Grid>
+            <ControlTemplate.Triggers>
+                <!-- 鼠标悬停显示文本 -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Visibility" Value="Visible" TargetName="hover" />
+                    <Setter TargetName="txt" Property="Foreground"
+                            Value="{Binding Tag,RelativeSource={RelativeSource AncestorType=Button,Mode=FindAncestor}}" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <!-- 状态灯 -->
+        <Style TargetType="TextBlock" x:Key="TopLampStyle">
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
+            <Setter Property="Margin" Value="10,0,10,0"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        </Style>
+
+        <!-- 左侧导航栏 子节点 -->
+        <Style TargetType="RadioButton" x:Key="LeftMenuItemButtonStyle">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="24" />
+            <!--光标-->
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid Background="Transparent" Name="back" Margin="0,10,0,0">
+                            <TextBlock Text="{TemplateBinding Content}" FontFamily="{StaticResource iconfont}"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#11FFFFFF" TargetName="back" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" Value="#33FFFFFF" TargetName="back" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 右键菜单 -->
+        <Style TargetType="ContextMenu" x:Key="ContextMenuStyle">
+            <Setter Property="Background" Value="#FFFFFF"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+        </Style>
+
+        <!-- 右键菜单选项 -->
+        <Style TargetType="MenuItem" x:Key="MenuItemStyle">
+            <Setter Property="Background" Value="#FFFFFF"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFFFFF"></Setter>
+                    <Setter Property="BorderThickness" Value="0"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="Transparent" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <!-- <RowDefinition Height="80"></RowDefinition> -->
+        </Grid.RowDefinitions>
+        <!-- 头部 -->
+        <Border Background="#66CCFF">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="450"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!-- logo -->
+                <Image Source="pack://application:,,,/gmc_v_2_0;component/Assets/Images/吉姆西半导体LOGO矢量图最新版.png"
+                       Width="400">
+                </Image>
+
+                <!-- 状态灯 -->
+                <WrapPanel Grid.Column="1" VerticalAlignment="Center">
+                    <Border Background="Green" BorderThickness="1" BorderBrush="White" CornerRadius="5"
+                            Margin="10,5,10,5">
+                        <TextBlock Text="Lamp1" Style="{StaticResource TopLampStyle}">
+                            <TextBlock.ContextMenu>
+                                <ContextMenu Style="{StaticResource ContextMenuStyle}">
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Name="MenuItem" Header="111">
+                                    </MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="222"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="333"></MenuItem>
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                    </Border>
+                    <Border Background="Green" BorderThickness="1" BorderBrush="White" CornerRadius="5"
+                            Margin="10,5,10,5">
+                        <TextBlock Text="Lamp2" Style="{StaticResource TopLampStyle}">
+                            <TextBlock.ContextMenu>
+                                <ContextMenu Style="{StaticResource ContextMenuStyle}">
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="111"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="222"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="333"></MenuItem>
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                    </Border>
+                    <Border Background="Green" BorderThickness="1" BorderBrush="White" CornerRadius="5"
+                            Margin="10,5,10,5">
+                        <TextBlock Text="Lamp3" Style="{StaticResource TopLampStyle}">
+                            <TextBlock.ContextMenu>
+                                <ContextMenu Style="{StaticResource ContextMenuStyle}">
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="111"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="222"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="333"></MenuItem>
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                    </Border>
+                    <Border Background="Green" BorderThickness="1" BorderBrush="White" CornerRadius="5"
+                            Margin="10,5,10,5">
+                        <TextBlock Text="Lamp4" Style="{StaticResource TopLampStyle}">
+                            <TextBlock.ContextMenu>
+                                <ContextMenu Style="{StaticResource ContextMenuStyle}">
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="111"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="222"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="333"></MenuItem>
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                    </Border>
+                    <Border Background="Green" BorderThickness="1" BorderBrush="White" CornerRadius="5"
+                            Margin="10,5,10,5">
+                        <TextBlock Text="Lamp5" Style="{StaticResource TopLampStyle}">
+                            <TextBlock.ContextMenu>
+                                <ContextMenu Style="{StaticResource ContextMenuStyle}">
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="111"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="222"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="333"></MenuItem>
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                    </Border>
+                    <Border Background="Green" BorderThickness="1" BorderBrush="White" CornerRadius="5"
+                            Margin="10,5,10,5">
+                        <TextBlock Text="Lamp6" Style="{StaticResource TopLampStyle}">
+                            <TextBlock.ContextMenu>
+                                <ContextMenu Style="{StaticResource ContextMenuStyle}">
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="111"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="222"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="333"></MenuItem>
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                    </Border>
+                    <Border Background="Green" BorderThickness="1" BorderBrush="White" CornerRadius="5"
+                            Margin="10,5,10,5">
+                        <TextBlock Text="Lamp7" Style="{StaticResource TopLampStyle}">
+                            <TextBlock.ContextMenu>
+                                <ContextMenu Style="{StaticResource ContextMenuStyle}">
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="111"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="222"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="333"></MenuItem>
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                    </Border>
+                    <Border Background="Green" BorderThickness="1" BorderBrush="White" CornerRadius="5"
+                            Margin="10,5,10,5">
+                        <TextBlock Text="Lamp8" Style="{StaticResource TopLampStyle}">
+                            <TextBlock.ContextMenu>
+                                <ContextMenu Style="{StaticResource ContextMenuStyle}">
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="111"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="222"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="333"></MenuItem>
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                    </Border>
+                    <Border Background="Green" BorderThickness="1" BorderBrush="White" CornerRadius="5"
+                            Margin="10,5,10,5">
+                        <TextBlock Text="Lamp9" Style="{StaticResource TopLampStyle}">
+                            <TextBlock.ContextMenu>
+                                <ContextMenu Style="{StaticResource ContextMenuStyle}">
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="111"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="222"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="333"></MenuItem>
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                    </Border>
+                    <Border Background="Green" BorderThickness="1" BorderBrush="White" CornerRadius="5"
+                            Margin="10,5,10,5">
+                        <TextBlock Text="Lamp10" Style="{StaticResource TopLampStyle}">
+                            <TextBlock.ContextMenu>
+                                <ContextMenu Style="{StaticResource ContextMenuStyle}">
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="111"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="222"></MenuItem>
+                                    <MenuItem Style="{StaticResource MenuItemStyle}" Header="333"></MenuItem>
+                                </ContextMenu>
+                            </TextBlock.ContextMenu>
+                        </TextBlock>
+                    </Border>
+                </WrapPanel>
+
+                <Grid Grid.Column="2">
+                    <!-- 最小化、最大化、关闭 -->
+                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" Orientation="Horizontal">
+                        <Button Content="&#xe650;" Template="{StaticResource ControlButtonTemplate}"
+                                Background="#11000000" Tag="#333" Foreground="White"
+                                Command="{Binding MinCommand}"
+                                CommandParameter="{Binding .,RelativeSource={RelativeSource AncestorType=Window}}" />
+                        <Button Content="&#xe534;" Template="{StaticResource ControlButtonTemplate}"
+                                Background="#11000000" Tag="#333" Foreground="White"
+                                Command="{Binding MaxCommand}"
+                                CommandParameter="{Binding .,RelativeSource={RelativeSource AncestorType=Window}}" />
+                        <Button Content="&#xe69a;" Template="{StaticResource ControlButtonTemplate}"
+                                Background="#FFE63535" Tag="White" Foreground="White"
+                                Command="{Binding CloseCommand}"
+                                CommandParameter="{Binding .,RelativeSource={RelativeSource AncestorType=Window}}" />
+                    </StackPanel>
+
+                    <!-- 指示灯 -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Margin="10,0,10,0">
+                        <TextBlock Text="Running&#x0a;State" Margin="0,20,20,0" Foreground="White" FontSize="18"
+                                   FontWeight="Bold">
+                        </TextBlock>
+                        <StackPanel Margin="0,12,0,0">
+                            <Border Background="Red" Width="15" Height="15" />
+                            <Border Background="Yellow" Width="15" Height="15" />
+                            <Border Background="Green" Width="15" Height="15" />
+                            <Border Background="Blue" Width="15" Height="15" />
+                        </StackPanel>
+                    </StackPanel>
+                    <!-- 时间 -->
+                    <TextBlock Text="{Binding MainModel.Time}" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                               Margin="15,0" Foreground="White"
+                               FontSize="18"
+                               FontFamily="pack://application:,,,/gmc_v_2_0;component/Assets/Fonts/#digital display">
+                    </TextBlock>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- 中间 -->
+        <Border Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <!-- 左侧导航栏 -->
+                <TreeView Background="LightGray" FontSize="24">
+                    <RadioButton Content="Dashboard" Style="{StaticResource LeftMenuItemButtonStyle}"
+                                 ToolTip="Dashboard" Command="{Binding MenuItemCommand}"
+                                 CommandParameter="gmc_v_2_0.Views.DashboardView">
+                    </RadioButton>
+                    <TreeViewItem Header="Recipe" ToolTip="Contains:&#x0a;Unit">
+                        <RadioButton Content="Unit" Style="{StaticResource LeftMenuItemButtonStyle}"
+                                     ToolTip="Unit" Command="{Binding MenuItemCommand}"
+                                     CommandParameter="gmc_v_2_0.Views.RecipeUnitView">
+                        </RadioButton>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Service" ToolTip="Contains:&#x0a;Process&#x0a;Manual">
+                        <TreeViewItem Header="Process"></TreeViewItem>
+                        <TreeViewItem Header="Manual"></TreeViewItem>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Config">
+                        <TreeViewItem Header="3"></TreeViewItem>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Utility" ToolTip="Contains:&#x0a;Alarm History&#x0a;User&#x0a;Plotter">
+                        <TreeViewItem Header="Alarm History"></TreeViewItem>
+                        <TreeViewItem Header="User"></TreeViewItem>
+                        <TreeViewItem Header="Plotter"></TreeViewItem>
+                    </TreeViewItem>
+                    <TreeViewItem Header="OEM">
+                        <TreeViewItem Header="3"></TreeViewItem>
+                    </TreeViewItem>
+                </TreeView>
+                <!-- 内容 -->
+                <ContentControl Grid.Column="1" Content="{Binding MainModel.MainContent}" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

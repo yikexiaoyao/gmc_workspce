@@ -1,0 +1,525 @@
+﻿<UserControl x:Class="WPFTemplate01.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WPFTemplate01.Views"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d" Foreground="#444"
+             d:DesignHeight="650" d:DesignWidth="1200">
+    <UserControl.Resources>
+        <!--报警事件根据时间切换数据-->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/WPFTemplate01;component/Assets/Styles/DataGridStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/WPFTemplate01;component/Assets/Styles/ScrollViewerStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary>
+                    <Style TargetType="RadioButton" x:Key="TimeRangeButtonStyle">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="RadioButton">
+                                    <TextBlock Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10" />
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter Property="Foreground" Value="#FF3269DE" />
+                                            <Setter Property="FontWeight" Value="Bold" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--第一行-->
+        <Grid Margin="30,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="#EEE" BorderThickness="1.0" Grid.Column="1"></Border>
+            <!--设备运行状况-->
+            <Grid Margin="0,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="设备运行状况" FontWeight="Bold" Foreground="#555" VerticalAlignment="Center" Margin="5,0"></TextBlock>
+                <ItemsControl Grid.Row="1" ItemsSource="{Binding RunLabels}">
+                    <!--容器-->
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="3" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <!--模板-->
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="White" CornerRadius="5" Margin="5">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="0" BlurRadius="3" Opacity="0.1" />
+                                </Border.Effect>
+                                <StackPanel VerticalAlignment="Center" Margin="10,0">
+                                    <TextBlock Text="{Binding Text}" FontSize="10" Foreground="#999" />
+                                    <TextBlock Text="{Binding Value}" Grid.Row="1" FontSize="14" Margin="0,3" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <!--设备基本信息-->
+                <TextBlock Text="设备基本信息" Grid.Row="3" FontWeight="Bold" Foreground="#555" VerticalAlignment="Center" Margin="5,0"></TextBlock>
+                <ItemsControl Grid.Row="4" Margin="10,0" ItemsSource="{Binding BaseLabels}">
+                    <!--容器-->
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="3" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <!--模板-->
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="{Binding Value}" FontSize="16" />
+                                <TextBlock Text="{Binding Text}" FontSize="10" Foreground="#666" Margin="0,3" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+
+            <!--参数分析-->
+            <Grid Margin="10,0" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Text="参数分析" FontWeight="Bold" Foreground="#555" VerticalAlignment="Center" Margin="5,0" />
+                <Border Background="White" Grid.Row="1" CornerRadius="5" Margin="5">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="3" Opacity="0.1" />
+                    </Border.Effect>
+                </Border>
+                <!--图表板块-->
+                <UniformGrid Columns="2" Grid.Row="1">
+                    <!--图表一-->
+                    <Grid Margin="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <!--图表名称-->
+                        <TextBlock Text="[电压]" VerticalAlignment="Top" />
+                        <!--图表展示-->
+                        <lvc:CartesianChart Grid.Row="1">
+                            <!--曲线-->
+                            <lvc:CartesianChart.Series>
+                                <lvc:LineSeries Stroke="#FF7261" Values="156,600,70,760,320,540,880,340,500">
+                                    <lvc:LineSeries.Fill>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Color="#FFE3E0" Offset="0" />
+                                            <GradientStop Color="White" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </lvc:LineSeries.Fill>
+                                </lvc:LineSeries>
+                            </lvc:CartesianChart.Series>
+                            <!--X轴-->
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis ShowLabels="True" Labels="1:00,2:00,3:00,4:00,5:00,6:00,7:00,8:00,9:00"
+                                          LabelsRotation="0" FontSize="8">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1" StrokeThickness="0" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                            <!--Y轴-->
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis MinValue="0" ShowLabels="True" FontSize="8">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="200" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                        </lvc:CartesianChart>
+                    </Grid>
+                    <!--图表二-->
+                    <Grid Margin="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="[电流]" VerticalAlignment="Top" />
+                        <lvc:CartesianChart Grid.Row="1">
+                            <lvc:CartesianChart.Series>
+                                <lvc:LineSeries Stroke="#FECC71" Values="156,600,70,760,320,540,880,340,500">
+                                    <lvc:LineSeries.Fill>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Color="#FFF2DE" Offset="0" />
+                                            <GradientStop Color="White" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </lvc:LineSeries.Fill>
+                                </lvc:LineSeries>
+                            </lvc:CartesianChart.Series>
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis ShowLabels="True" Labels="1:00,2:00,3:00,4:00,5:00,6:00,7:00,8:00,9:00"
+                                          LabelsRotation="0" FontSize="8">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1" StrokeThickness="0" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis MinValue="0" ShowLabels="True" FontSize="8">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="200" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                        </lvc:CartesianChart>
+                    </Grid>
+                    <!--图表三-->
+                    <Grid Margin="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="[电流]" VerticalAlignment="Top" />
+                        <lvc:CartesianChart Grid.Row="1">
+                            <lvc:CartesianChart.Series>
+                                <lvc:LineSeries Stroke="#5CD0E1" Values="156,600,70,760,320,540,880,340,500">
+                                    <lvc:LineSeries.Fill>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Color="#DBF3F9" Offset="0" />
+                                            <GradientStop Color="White" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </lvc:LineSeries.Fill>
+                                </lvc:LineSeries>
+                            </lvc:CartesianChart.Series>
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis ShowLabels="True" Labels="1:00,2:00,3:00,4:00,5:00,6:00,7:00,8:00,9:00"
+                                          LabelsRotation="0" FontSize="8">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1" StrokeThickness="0" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis MinValue="0" ShowLabels="True" FontSize="8">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="200" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                        </lvc:CartesianChart>
+                    </Grid>
+                    <!--图表四-->
+                    <Grid Margin="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="[电流]" VerticalAlignment="Top" />
+                        <lvc:CartesianChart Grid.Row="1">
+                            <lvc:CartesianChart.Series>
+                                <lvc:LineSeries Stroke="#7ADA95" Values="156,600,70,760,320,540,880,340,500">
+                                    <lvc:LineSeries.Fill>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Color="#EDFAF0" Offset="0" />
+                                            <GradientStop Color="White" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </lvc:LineSeries.Fill>
+                                </lvc:LineSeries>
+                            </lvc:CartesianChart.Series>
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis ShowLabels="True" Labels="1:00,2:00,3:00,4:00,5:00,6:00,7:00,8:00,9:00"
+                                          LabelsRotation="0" FontSize="8">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1" StrokeThickness="0" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis MinValue="0" ShowLabels="True" FontSize="8">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="200" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                        </lvc:CartesianChart>
+                    </Grid>
+                </UniformGrid>
+            </Grid>
+
+            <!--报警信息-->
+            <Grid Grid.Column="2" Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <!--报警信息板块-->
+                <TextBlock Text="报警事件" FontWeight="Bold" Foreground="#555" VerticalAlignment="Center" Margin="5,0" />
+                <!--时间切换-->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <RadioButton Content="本月" Style="{StaticResource TimeRangeButtonStyle}" />
+                    <RadioButton Content="本周" IsChecked="True" Style="{StaticResource TimeRangeButtonStyle}" Margin="10,0" />
+                    <RadioButton Content="本日" Style="{StaticResource TimeRangeButtonStyle}" />
+                </StackPanel>
+                <!--报警事件-->
+                <Grid Grid.Row="1" TextBlock.Foreground="White" TextBlock.FontSize="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <!--<ScrollViewer>-->
+                    <!--<UniformGrid>-->
+                    <!--事件一-->
+                    <Border Background="#3269DE" Margin="5" CornerRadius="5">
+                        <Grid>
+                            <!--水印-->
+                            <TextBlock Text="Alarm" Foreground="#11FFFFFF" FontSize="60" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                       Margin="0,0,-10,-20" FontWeight="Bold" />
+                            <Grid VerticalAlignment="Center" Margin="10,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="设备二" FontSize="16" />
+                                <TextBlock Text="级别：紧急" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <StackPanel Grid.Row="1" Margin="0,8">
+                                    <TextBlock Text="设备停止运行" />
+                                    <TextBlock Text="生命值较低，建议维修。" />
+                                </StackPanel>
+                                <TextBlock Text="2022/12/30 02:00:00" Grid.Row="2" HorizontalAlignment="Right" Margin="0,10,0,0" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <!--事件二-->
+                    <Border Background="#3269DE" Margin="5" CornerRadius="5" Grid.Column="1">
+                        <Grid>
+                            <!--水印-->
+                            <TextBlock Text="Alarm" Foreground="#11FFFFFF" FontSize="60" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                       Margin="0,0,-10,-20" FontWeight="Bold" />
+                            <Grid VerticalAlignment="Center" Margin="10,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="设备二" FontSize="16" />
+                                <TextBlock Text="级别：紧急" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <StackPanel Grid.Row="1" Margin="0,8">
+                                    <TextBlock Text="设备停止运行" />
+                                    <TextBlock Text="生命值较低，建议维修。" />
+                                </StackPanel>
+                                <TextBlock Text="2022/12/30 02:00:00" Grid.Row="2" HorizontalAlignment="Right" Margin="0,10,0,0" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <!--</UniformGrid>-->
+                    <!--</ScrollViewer>-->
+                </Grid>
+                <!--产量统计数据-->
+                <TextBlock Text="产量统计" FontWeight="Bold" Foreground="#555" VerticalAlignment="Center" Margin="5,0" Grid.Row="2" />
+                <lvc:CartesianChart Grid.Row="3" Margin="10">
+                    <!--柱形-->
+                    <lvc:CartesianChart.Series>
+                        <lvc:ColumnSeries Values="22,30,10,50,80,40,27,60,56" Width="5" Fill="Orange" MaxColumnWidth="15"
+                                              DataLabels="True" Foreground="#888" />
+                    </lvc:CartesianChart.Series>
+                    <!--X轴-->
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis  Labels="1/1,1/2,1/3,1/4,1/5,1/6,1/7,1/8,1/9" FontSize="8" DisableAnimations="False">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator Step="1" StrokeThickness="0" />
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                    <!--Y轴-->
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis FontSize="8">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator Step="20" />
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+                <!--产量汇总-->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="4">
+                    <TextBlock Grid.Row="3">
+                        <Run Text="今日计划产量" />
+                        <Run Text="100" />
+                    </TextBlock>
+                    <TextBlock Grid.Row="3" Margin="20,0">
+                        <Run Text="今日完成产量" />
+                        <Run Text="100" />
+                    </TextBlock>
+                    <TextBlock Grid.Row="3">
+                        <Run Text="今日完成率" />
+                        <Run Text="100%" />
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <!--第二行-->
+        <Grid Grid.Row="1" Margin="30,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <!--与上面对齐-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <!--流程进度-->
+            <StackPanel Orientation="Horizontal">
+                <!--<ComboBox SelectedIndex="0">
+                    <ComboBoxItem Content="5号生产车间" />
+                    <ComboBoxItem Content="6号生产车间" />
+                </ComboBox>-->
+                <Border Height="28" Width="120"  Grid.Row="2" Background="#FF0091F0" BorderBrush="#FF0091F0" BorderThickness="1" CornerRadius="3" Margin="5,0">
+                    <TextBlock Text="5号生产车间" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Border>
+                <Border Height="28" Width="120"  Grid.Row="2" Background="#FF0091F0" BorderBrush="#FF0091F0" BorderThickness="1" CornerRadius="3">
+                    <TextBlock Text="本月类别统计" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Border>
+            </StackPanel>
+            <!--进度板块-->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <!--流程一-->
+                    <Border Background="#550091F0" CornerRadius="3" Margin="5,5,10,5">
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" TextBlock.FontSize="10" Margin="10,0">
+                                <TextBlock Foreground="White" Margin="0,4">
+                                            <Run Text="生产车间：" />
+                                            <Run Text="车间-12号" />
+                                </TextBlock>
+                                <TextBlock Foreground="White" Margin="0,4">
+                                            <Run Text="设备编号：" />
+                                            <Run Text="设备-19号" />
+                                </TextBlock>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="76" Background="#55FFFFFF" BorderThickness="0"
+                                                 Height="12" Foreground="#FF0091F0" Margin="10,3" />
+                                <Grid Margin="10,0" TextBlock.FontFamily="8" TextBlock.FontSize="10">
+                                    <TextBlock Text="0" HorizontalAlignment="Left" Foreground="White" />
+                                    <TextBlock Text="100%" HorizontalAlignment="Right" Foreground="White" />
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <!--流程二-->
+                    <Border Background="#550091F0" CornerRadius="3" Margin="5,5,10,5">
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" TextBlock.FontSize="10"
+                                                Margin="10,0">
+                                <TextBlock Foreground="White" Margin="0,4">
+                                            <Run Text="生产车间：" />
+                                            <Run Text="车间-12号" />
+                                </TextBlock>
+                                <TextBlock Foreground="White" Margin="0,4">
+                                            <Run Text="设备编号：" />
+                                            <Run Text="设备-19号" />
+                                </TextBlock>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="76" Background="#55FFFFFF" BorderThickness="0"
+                                                 Height="12" Foreground="#FF0091F0" Margin="10,3" />
+                                <Grid Margin="10,0" TextBlock.FontFamily="8" TextBlock.FontSize="10">
+                                    <TextBlock Text="0" HorizontalAlignment="Left" Foreground="White" />
+                                    <TextBlock Text="100%" HorizontalAlignment="Right" Foreground="White" />
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <!--流程三-->
+                    <Border Background="#550091F0" CornerRadius="3" Margin="5,5,10,5">
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" TextBlock.FontSize="10"
+                                                Margin="10,0">
+                                <TextBlock Foreground="White" Margin="0,4">
+                                            <Run Text="生产车间：" />
+                                            <Run Text="车间-12号" />
+                                </TextBlock>
+                                <TextBlock Foreground="White" Margin="0,4">
+                                            <Run Text="设备编号：" />
+                                            <Run Text="设备-19号" />
+                                </TextBlock>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="76" Background="#55FFFFFF" BorderThickness="0"
+                                             Height="12" Foreground="#FF0091F0" Margin="10,3" />
+                                <Grid Margin="10,0" TextBlock.FontFamily="8" TextBlock.FontSize="10">
+                                    <TextBlock Text="0" HorizontalAlignment="Left" Foreground="White" />
+                                    <TextBlock Text="100%" HorizontalAlignment="Right" Foreground="White" />
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+            <!--设备运行日志-->
+            <TextBlock Grid.Column="1" Text="设备运行日志记录" FontWeight="Bold" Foreground="#555" VerticalAlignment="Top"
+                           Margin="15,0" />
+            <DataGrid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Logs}" Margin="15,0,5,5"
+                      AutoGenerateColumns="False" CanUserAddRows="False"  ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="序号" Width="60" Binding="{Binding Number}" />
+                    <DataGridTextColumn Header="数据类型" Width="*" Binding="{Binding DataType}" />
+                    <DataGridTextColumn Header="记录时间" Width="*" Binding="{Binding RecordTime}" />
+                    <DataGridTextColumn Header="设备名称" Width="*" Binding="{Binding DeviceName}" />
+                    <DataGridTextColumn Header="监控值" Width="*" Binding="{Binding Value}" />
+                    <DataGridTextColumn Header="状态" Width="*" Binding="{Binding Status}" />
+                    <DataGridTemplateColumn Header="操作" Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>
+                                        <Hyperlink Command="{Binding DetailCommand}">详情</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="5,0">
+                                        <Hyperlink Command="{Binding}">解除</Hyperlink>
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>

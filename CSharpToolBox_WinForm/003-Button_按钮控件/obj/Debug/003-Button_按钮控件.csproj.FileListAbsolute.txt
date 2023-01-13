@@ -1,0 +1,12 @@
+C:\Users\华硕\Desktop\C#\CSharpToolBox\003-Button_按钮控件\obj\Debug\003-Button_按钮控件.csproj.AssemblyReference.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox\003-Button_按钮控件\obj\Debug\003-Button_按钮控件.csproj.SuggestedBindingRedirects.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox\003-Button_按钮控件\obj\Debug\_003_Button_按钮控件.MainForm.resources
+C:\Users\华硕\Desktop\C#\CSharpToolBox\003-Button_按钮控件\obj\Debug\_003_Button_按钮控件.RegForm.resources
+C:\Users\华硕\Desktop\C#\CSharpToolBox\003-Button_按钮控件\obj\Debug\_003_Button_按钮控件.Properties.Resources.resources
+C:\Users\华硕\Desktop\C#\CSharpToolBox\003-Button_按钮控件\obj\Debug\003-Button_按钮控件.csproj.GenerateResource.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox\003-Button_按钮控件\obj\Debug\003-Button_按钮控件.csproj.CoreCompileInputs.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox\003-Button_按钮控件\bin\Debug\003-Button_按钮控件.exe.config
+C:\Users\华硕\Desktop\C#\CSharpToolBox\003-Button_按钮控件\bin\Debug\003-Button_按钮控件.exe
+C:\Users\华硕\Desktop\C#\CSharpToolBox\003-Button_按钮控件\bin\Debug\003-Button_按钮控件.pdb
+C:\Users\华硕\Desktop\C#\CSharpToolBox\003-Button_按钮控件\obj\Debug\003-Button_按钮控件.exe
+C:\Users\华硕\Desktop\C#\CSharpToolBox\003-Button_按钮控件\obj\Debug\003-Button_按钮控件.pdb

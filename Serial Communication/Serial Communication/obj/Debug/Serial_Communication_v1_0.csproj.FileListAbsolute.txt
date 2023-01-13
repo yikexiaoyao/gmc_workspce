@@ -1,0 +1,11 @@
+C:\Users\华硕\Desktop\C#\Serial Communication\Serial Communication\bin\Debug\Serial Communication.exe.config
+C:\Users\华硕\Desktop\C#\Serial Communication\Serial Communication\bin\Debug\Serial Communication.exe
+C:\Users\华硕\Desktop\C#\Serial Communication\Serial Communication\bin\Debug\Serial Communication.pdb
+C:\Users\华硕\Desktop\C#\Serial Communication\Serial Communication\obj\Debug\Serial_Communication_v1_0.csproj.AssemblyReference.cache
+C:\Users\华硕\Desktop\C#\Serial Communication\Serial Communication\obj\Debug\Serial_Communication_v1_0.csproj.SuggestedBindingRedirects.cache
+C:\Users\华硕\Desktop\C#\Serial Communication\Serial Communication\obj\Debug\Serial_Communication.Form1.resources
+C:\Users\华硕\Desktop\C#\Serial Communication\Serial Communication\obj\Debug\Serial_Communication.Properties.Resources.resources
+C:\Users\华硕\Desktop\C#\Serial Communication\Serial Communication\obj\Debug\Serial_Communication_v1_0.csproj.GenerateResource.cache
+C:\Users\华硕\Desktop\C#\Serial Communication\Serial Communication\obj\Debug\Serial_Communication_v1_0.csproj.CoreCompileInputs.cache
+C:\Users\华硕\Desktop\C#\Serial Communication\Serial Communication\obj\Debug\Serial Communication.exe
+C:\Users\华硕\Desktop\C#\Serial Communication\Serial Communication\obj\Debug\Serial Communication.pdb

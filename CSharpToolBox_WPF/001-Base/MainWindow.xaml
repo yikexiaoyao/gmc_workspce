@@ -1,0 +1,46 @@
+﻿<Window x:Class="_001_Base.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_001_Base"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        Foreground="Orange" FontSize="12">
+    <Grid>
+        <Grid>
+            <!--文本-->
+            <TextBlock Background="Blue" Text="Hello World" Foreground="Red"
+                   FontSize="36" FontWeight="Bold" Opacity="0.185"
+                   MouseLeftButtonDown="TextBolck_MouseLeftDown"
+                   Visibility="Visible" Margin="0" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" Padding="0" Grid.Row="3"></TextBlock>
+            <!--标签-->
+            <Label Background="Blue" Foreground="Red"
+               FontSize="36" FontWeight="Bold" Opacity="0.185"
+               MouseLeftButtonDown="TextBolck_MouseLeftDown"
+               Visibility="Visible" Margin="0" VerticalAlignment="Center"
+               HorizontalAlignment="Center" Padding="0" Grid.Row="2"
+               Grid.Column="2">
+                <Label.Content>
+                    <Button Content="Button"></Button>
+                </Label.Content>
+            </Label>
+            <!--按钮-->
+            <Button Click="Button_Click" Content="Button"></Button>
+            <!--表格-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+        </Grid>
+    </Grid>
+</Window>

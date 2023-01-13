@@ -1,0 +1,16 @@
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\002-Layout\bin\Debug\002-Layout.exe.config
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\002-Layout\bin\Debug\002-Layout.exe
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\002-Layout\bin\Debug\002-Layout.pdb
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\002-Layout\obj\Debug\002-Layout.csproj.AssemblyReference.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\002-Layout\obj\Debug\002-Layout.csproj.SuggestedBindingRedirects.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\002-Layout\obj\Debug\MainWindow.g.cs
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\002-Layout\obj\Debug\App.g.cs
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\002-Layout\obj\Debug\002-Layout_MarkupCompile.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\002-Layout\obj\Debug\002-Layout_MarkupCompile.lref
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\002-Layout\obj\Debug\MainWindow.baml
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\002-Layout\obj\Debug\002-Layout.g.resources
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\002-Layout\obj\Debug\_002_Layout.Properties.Resources.resources
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\002-Layout\obj\Debug\002-Layout.csproj.GenerateResource.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\002-Layout\obj\Debug\002-Layout.csproj.CoreCompileInputs.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\002-Layout\obj\Debug\002-Layout.exe
+C:\Users\华硕\Desktop\C#\CSharpToolBox_WPF\002-Layout\obj\Debug\002-Layout.pdb

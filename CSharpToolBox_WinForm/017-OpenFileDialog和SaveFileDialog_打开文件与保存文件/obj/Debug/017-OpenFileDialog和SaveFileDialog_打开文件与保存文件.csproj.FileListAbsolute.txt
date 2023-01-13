@@ -1,0 +1,11 @@
+C:\Users\华硕\Desktop\C#\CSharpToolBox\017-OpenFileDialog和SaveFileDialog_打开文件与保存文件\bin\Debug\016-OpenFileDialog和SaveFileDialog_打开文件与保存文件.exe.config
+C:\Users\华硕\Desktop\C#\CSharpToolBox\017-OpenFileDialog和SaveFileDialog_打开文件与保存文件\bin\Debug\016-OpenFileDialog和SaveFileDialog_打开文件与保存文件.exe
+C:\Users\华硕\Desktop\C#\CSharpToolBox\017-OpenFileDialog和SaveFileDialog_打开文件与保存文件\bin\Debug\016-OpenFileDialog和SaveFileDialog_打开文件与保存文件.pdb
+C:\Users\华硕\Desktop\C#\CSharpToolBox\017-OpenFileDialog和SaveFileDialog_打开文件与保存文件\obj\Debug\017-OpenFileDialog和SaveFileDialog_打开文件与保存文件.csproj.AssemblyReference.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox\017-OpenFileDialog和SaveFileDialog_打开文件与保存文件\obj\Debug\017-OpenFileDialog和SaveFileDialog_打开文件与保存文件.csproj.SuggestedBindingRedirects.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox\017-OpenFileDialog和SaveFileDialog_打开文件与保存文件\obj\Debug\_016_OpenFileDialog和SaveFileDialog_打开文件与保存文件.Form1.resources
+C:\Users\华硕\Desktop\C#\CSharpToolBox\017-OpenFileDialog和SaveFileDialog_打开文件与保存文件\obj\Debug\_016_OpenFileDialog和SaveFileDialog_打开文件与保存文件.Properties.Resources.resources
+C:\Users\华硕\Desktop\C#\CSharpToolBox\017-OpenFileDialog和SaveFileDialog_打开文件与保存文件\obj\Debug\017-OpenFileDialog和SaveFileDialog_打开文件与保存文件.csproj.GenerateResource.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox\017-OpenFileDialog和SaveFileDialog_打开文件与保存文件\obj\Debug\017-OpenFileDialog和SaveFileDialog_打开文件与保存文件.csproj.CoreCompileInputs.cache
+C:\Users\华硕\Desktop\C#\CSharpToolBox\017-OpenFileDialog和SaveFileDialog_打开文件与保存文件\obj\Debug\016-OpenFileDialog和SaveFileDialog_打开文件与保存文件.exe
+C:\Users\华硕\Desktop\C#\CSharpToolBox\017-OpenFileDialog和SaveFileDialog_打开文件与保存文件\obj\Debug\016-OpenFileDialog和SaveFileDialog_打开文件与保存文件.pdb
