@@ -4,10 +4,6 @@ namespace gmc_v_2_0.Models
 {
     public class RecipeModel : NotifyBase
     {
-        public int _recipeId;
-
-        public string _recipeName;
-
         public int _stepNum;
 
         public string _stepTime;
@@ -44,25 +40,29 @@ namespace gmc_v_2_0.Models
 
         public string _waitType;
 
-        public int RecipeId
+        public RecipeModel( int stepNum, string stepTime, int waferRotatiorVal, int waferRotatiorAcc, string rinseArmDisp, string rinseArmSpeed, string rinseArmStartPos, string rinseArmEndPos, int rinseArmScan, string devArmDisp, string devArmTime, string devArmSpeed, string devArmStartPos, string devArmEndPos, int devArmScan, string autoDamp, string n2Dry, string waitType)
         {
-            get { return _recipeId; }
-            set
-            {
-                _recipeId = value;
-                this.NotifyChanged();
-            }
+            _stepNum = stepNum;
+            _stepTime = stepTime;
+            _waferRotatiorVal = waferRotatiorVal;
+            _waferRotatiorAcc = waferRotatiorAcc;
+            _rinseArmDisp = rinseArmDisp;
+            _rinseArmSpeed = rinseArmSpeed;
+            _rinseArmStartPos = rinseArmStartPos;
+            _rinseArmEndPos = rinseArmEndPos;
+            _rinseArmScan = rinseArmScan;
+            _devArmDisp = devArmDisp;
+            _devArmTime = devArmTime;
+            _devArmSpeed = devArmSpeed;
+            _devArmStartPos = devArmStartPos;
+            _devArmEndPos = devArmEndPos;
+            _devArmScan = devArmScan;
+            _autoDamp = autoDamp;
+            _n2Dry = n2Dry;
+            _waitType = waitType;
         }
 
-        public string RecipeName
-        {
-            get { return _recipeName; }
-            set
-            {
-                _recipeName = value;
-                this.NotifyChanged();
-            }
-        }
+
 
         public int StepNum
         {

@@ -4,38 +4,74 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:gmc_v_2_0.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:base="clr-namespace:gmc_v_2_0.Base"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
              d:DesignHeight="904" d:DesignWidth="1080">
+    <UserControl.Resources>
+        <!-- 表格样式 -->
+        <Style TargetType="DataGridCellsPresenter" x:Key="TableItems">
+            <Setter Property="Height" Value="50"></Setter>
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="3*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="1">
-                <DataGrid ScrollViewer.HorizontalScrollBarVisibility="Hidden">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Step Num" Width="60" Binding="{Binding StepNum}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Step Time" Width="*" Binding="{Binding StepTime}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Wafer Rotatior Val" Width="*" Binding="{Binding WaferRotatiorVal}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Wafer Rotatior Acc" Width="*" Binding="{Binding WaferRotatiorAcc}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Rinse Arm Disp" Width="*" Binding="{Binding RinseArmDisp}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Rinse Arm Speed" Width="*" Binding="{Binding RinseArmSpeed}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Rinse Arm Start Pos" Width="*" Binding="{Binding RinseArmStartPos}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Rinse Arm End Pos" Width="*" Binding="{Binding RinseArmEndPos}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Rinse Arm Scan" Width="*" Binding="{Binding RinseArmScan}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Dev Arm Disp" Width="*" Binding="{Binding DevArmDisp}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Dev Arm Time" Width="*" Binding="{Binding DevArmTime}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Dev Arm Speed" Width="*" Binding="{Binding DevArmSpeed}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Dev Arm Start Pos" Width="*" Binding="{Binding DevArmStartPos}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Dev Arm End Pos" Width="*" Binding="{Binding DevArmEndPos}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Dev Arm Scan" Width="*" Binding="{Binding DevArmScan}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Auto Damp" Width="*" Binding="{Binding AutoDamp}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="N2 Dry" Width="*" Binding="{Binding N2Dry}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Wait Type" Width="*" Binding="{Binding WaitType}"></DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!-- 右侧配方显示操作 -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <!-- 右上配方数据表格 -->
+            <DataGrid ScrollViewer.HorizontalScrollBarVisibility="auto" x:Name="RecipeData"
+                      ItemsSource="{Binding RecipeData}" BorderThickness="0" RowHeight="35" FontSize="16"
+                      FontWeight="Bold">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Step Num" Width="60" Binding="{Binding StepNum}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Step Time" Binding="{Binding StepTime}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Wafer Rotatior Val" Binding="{Binding WaferRotatiorVal}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Wafer Rotatior Acc" Binding="{Binding WaferRotatiorAcc}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Rinse Arm Disp" Binding="{Binding RinseArmDisp}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Rinse Arm Speed" Binding="{Binding RinseArmSpeed}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Rinse Arm Start Pos" Binding="{Binding RinseArmStartPos}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Rinse Arm End Pos" Binding="{Binding RinseArmEndPos}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Rinse Arm Scan" Binding="{Binding RinseArmScan}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Dev Arm Disp" Binding="{Binding DevArmDisp}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Dev Arm Time" Binding="{Binding DevArmTime}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Dev Arm Speed" Binding="{Binding DevArmSpeed}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Dev Arm Start Pos" Binding="{Binding DevArmStartPos}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Dev Arm End Pos" Binding="{Binding DevArmEndPos}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Dev Arm Scan" Binding="{Binding DevArmScan}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Auto Damp" Binding="{Binding AutoDamp}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="N2 Dry" Binding="{Binding N2Dry}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Wait Type" Binding="{Binding WaitType}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!-- 分页控件 -->
+            <local:PageHelper TotalPage="{Binding TotalPage}"
+                              CurrentPage="{Binding CurrentPage, Mode=TwoWay}"
+                              HorizontalAlignment="Center"
+                              Grid.Row="1">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="FirstPage">
+                        <b:InvokeCommandAction Command="{Binding FirstPageCommand}" />
+                    </b:EventTrigger>
+                    <b:EventTrigger EventName="PreviousPage">
+                        <b:InvokeCommandAction Command="{Binding PreviousPageCommand}"/>
+                    </b:EventTrigger>
+                    <b:EventTrigger EventName="NextPage">
+                        <b:InvokeCommandAction Command="{Binding NextPageCommand}" />
+                    </b:EventTrigger>
+                    <b:EventTrigger EventName="LastPage">
+                        <b:InvokeCommandAction Command="{Binding LastPageCommand}"/>
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </local:PageHelper>
         </Grid>
     </Grid>
 </UserControl>

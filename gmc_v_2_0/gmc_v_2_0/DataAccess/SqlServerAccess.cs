@@ -84,9 +84,9 @@ namespace gmc_v_2_0.DataAccess
                             "select * from users where user_name=@user_name and password=@password and is_validation=1";
                         adapter = new SqlDataAdapter(userSql, Conn);
                         adapter.SelectCommand.Parameters.Add(new SqlParameter("@user_name", SqlDbType.VarChar)
-                            { Value = userName });
+                            {Value = userName});
                         adapter.SelectCommand.Parameters.Add(new SqlParameter("@password", SqlDbType.VarChar)
-                            { Value = Md5Provider.GetMD5String(pwd + "@" + userName.ToLower()) });
+                            {Value = Md5Provider.GetMD5String(pwd + "@" + userName.ToLower())});
                         DataTable dataTable = new DataTable();
                         int count = adapter.Fill(dataTable);
 
@@ -115,72 +115,6 @@ namespace gmc_v_2_0.DataAccess
             }
 
             return false;
-        }
-
-        private DataTable GetDatas(string sql)
-        {
-            DataTable dt = new DataTable();
-            try
-            {
-                if (DBConnection())
-                {
-                    adapter = new SqlDataAdapter(sql, Conn);
-                    int count = adapter.Fill(dt);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                this.Dispose();
-            }
-
-            return dt;
-        }
-
-        // public DataTable GetDevices()
-        // {
-        //     string strSql = "select * from devices";
-        //     return GetDatas(strSql);
-        // }
-        //
-        // public DataTable GetProtocolSettings(string d_id, int type = 1)
-        // {
-        //     string strSql = "select * from P_Modbus";
-        //     if (type == 2)
-        //     {
-        //         strSql = "select * from P_S7";
-        //     }
-        //     strSql += " where d_id = '" + d_id + "'";
-        //
-        //     return GetDatas(strSql);
-        // }
-        //
-        // public DataTable GetMonitorValues(string d_id)
-        // {
-        //     string strSql = $"select * from monitor_values where d_id='{d_id}' order by v_id";
-        //     return GetDatas(strSql);
-        // }
-
-        public DataTable GetRecipeNamesById()
-        {
-            string strSql = $"select * from recipe_info";
-            return GetDatas(strSql);
-        }
-
-        public DataTable GetRecipeDataByName()
-        {
-            // string strSql = $"select * from recipes_data where recipe_info_id='{recipe_info_id}' order by step_num";
-            string strSql = $"select * from recipes_data where recipe_info_id=1";
-            return GetDatas(strSql);
-        }
-
-        public DataTable AddRecipeData()
-        {
-            string strSql = $"insert into recipes_data(recipe_data_id, step_num, step_time,wafer_rotatior_val,wafer_rotatior_acc,rinse_arm_disp,rinse_arm_speed,rinse_arm_start_pos,rinse_arm_end_pos,rinse_arm_scan,dev_arm_disp,dev_arm_time,dev_arm_speed,dev_arm_start_pos,dev_arm_end_pos,dev_arm_scan,auto_damp,n2_dry,wait_type,recipe_info_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            return GetDatas(strSql);
         }
     }
 }

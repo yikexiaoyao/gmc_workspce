@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="gmc01ModelStoreContainer" CdmEntityContainer="gmc01Entities">
+    <EntitySetMapping Name="recipes_data">
+      <EntityTypeMapping TypeName="gmc01Model.recipes_data">
+        <MappingFragment StoreEntitySet="recipes_data">
+          <ScalarProperty Name="recipe_data_id" ColumnName="recipe_data_id" />
+          <ScalarProperty Name="step_num" ColumnName="step_num" />
+          <ScalarProperty Name="step_time" ColumnName="step_time" />
+          <ScalarProperty Name="wafer_rotatior_val" ColumnName="wafer_rotatior_val" />
+          <ScalarProperty Name="wafer_rotatior_acc" ColumnName="wafer_rotatior_acc" />
+          <ScalarProperty Name="rinse_arm_disp" ColumnName="rinse_arm_disp" />
+          <ScalarProperty Name="rinse_arm_speed" ColumnName="rinse_arm_speed" />
+          <ScalarProperty Name="rinse_arm_start_pos" ColumnName="rinse_arm_start_pos" />
+          <ScalarProperty Name="rinse_arm_end_pos" ColumnName="rinse_arm_end_pos" />
+          <ScalarProperty Name="rinse_arm_scan" ColumnName="rinse_arm_scan" />
+          <ScalarProperty Name="dev_arm_disp" ColumnName="dev_arm_disp" />
+          <ScalarProperty Name="dev_arm_time" ColumnName="dev_arm_time" />
+          <ScalarProperty Name="dev_arm_speed" ColumnName="dev_arm_speed" />
+          <ScalarProperty Name="dev_arm_start_pos" ColumnName="dev_arm_start_pos" />
+          <ScalarProperty Name="dev_arm_end_pos" ColumnName="dev_arm_end_pos" />
+          <ScalarProperty Name="dev_arm_scan" ColumnName="dev_arm_scan" />
+          <ScalarProperty Name="auto_damp" ColumnName="auto_damp" />
+          <ScalarProperty Name="n2_dry" ColumnName="n2_dry" />
+          <ScalarProperty Name="wait_type" ColumnName="wait_type" />
+          <ScalarProperty Name="recipe_info_id" ColumnName="recipe_info_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="recipes_info">
+      <EntityTypeMapping TypeName="gmc01Model.recipes_info">
+        <MappingFragment StoreEntitySet="recipes_info">
+          <ScalarProperty Name="recipe_info_id" ColumnName="recipe_info_id" />
+          <ScalarProperty Name="recipe_info_name" ColumnName="recipe_info_name" />
+          <ScalarProperty Name="recipe_info_create_time" ColumnName="recipe_info_create_time" />
+          <ScalarProperty Name="recipe_info_edit_time" ColumnName="recipe_info_edit_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="gmc01Model.users">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="real_name" ColumnName="real_name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="avatar" ColumnName="avatar" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="is_validation" ColumnName="is_validation" />
+          <ScalarProperty Name="is_can_login" ColumnName="is_can_login" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

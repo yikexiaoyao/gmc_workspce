@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace gmc_v_2_0.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel : NotifyBase
     {
         //窗口关闭
         private CommandBase _closeCommand;
@@ -77,6 +77,7 @@ namespace gmc_v_2_0.ViewModels
                         }
                     });
                 }
+
                 return _maxCommand;
             }
         }
@@ -123,7 +124,7 @@ namespace gmc_v_2_0.ViewModels
         private void NavPage(string name)
         {
             Type type = Type.GetType(name);
-            this.MainModel.MainContent = (UIElement)Activator.CreateInstance(type);
+            this.MainModel.MainContent = (UIElement) Activator.CreateInstance(type);
         }
 
         //主体
