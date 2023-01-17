@@ -53,9 +53,7 @@ C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\bin\Debug\EntityFramewo
 C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\bin\Debug\zh-Hans\EntityFramework.resources.dll
 C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\gmc_v_2_0.csproj.CopyComplete
-C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\Views\PageHelper.g.cs
 C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\bin\Debug\Microsoft.Xaml.Behaviors.dll
 C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\bin\Debug\Microsoft.Xaml.Behaviors.pdb
 C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\bin\Debug\Microsoft.Xaml.Behaviors.xml
 C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
-C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\Views\PageHelper.baml

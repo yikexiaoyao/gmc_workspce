@@ -18,12 +18,11 @@ namespace gmc_v_2_0
         {
             base.OnStartup(e);
 
-            // if (new LoginWindow().ShowDialog() == true)
-            // {
-            //     new MainWindow().ShowDialog();
-            // }
+            if (new LoginWindow().ShowDialog() == true)
+            {
+                new MainWindow().ShowDialog();
+            }
 
-            new MainWindow().ShowDialog();
             Application.Current.Shutdown();
         }
     }

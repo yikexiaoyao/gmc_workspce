@@ -68,12 +68,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\CommonModel.cs" />
     <Compile Include="Models\RecipeModel.cs" />
     <Compile Include="Service\RecipeService.cs" />
     <Compile Include="ViewModels\RecipeViewModel.cs" />
-    <Compile Include="Views\PageHelper.xaml.cs">
-      <DependentUpon>PageHelper.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\RecipeUnitView.xaml.cs">
       <DependentUpon>RecipeUnitView.xaml</DependentUpon>
     </Compile>
@@ -110,7 +108,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\PageHelper.xaml" />
     <Page Include="Views\RecipeUnitView.xaml" />
   </ItemGroup>
   <ItemGroup>

@@ -9,13 +9,6 @@
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
              d:DesignHeight="904" d:DesignWidth="1080">
-    <UserControl.Resources>
-        <!-- 表格样式 -->
-        <Style TargetType="DataGridCellsPresenter" x:Key="TableItems">
-            <Setter Property="Height" Value="50"></Setter>
-        </Style>
-    </UserControl.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -28,11 +21,10 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <!-- 右上配方数据表格 -->
-            <DataGrid ScrollViewer.HorizontalScrollBarVisibility="auto" x:Name="RecipeData"
-                      ItemsSource="{Binding RecipeData}" BorderThickness="0" RowHeight="35" FontSize="16"
-                      FontWeight="Bold">
+            <DataGrid HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" x:Name="RecipeData"
+                      BorderThickness="0" RowHeight="35" FontSize="16" FontWeight="Bold" Height="820">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Step Num" Width="60" Binding="{Binding StepNum}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Step Num" Binding="{Binding StepNum}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Step Time" Binding="{Binding StepTime}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Wafer Rotatior Val" Binding="{Binding WaferRotatiorVal}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Wafer Rotatior Acc" Binding="{Binding WaferRotatiorAcc}"></DataGridTextColumn>
@@ -52,26 +44,9 @@
                     <DataGridTextColumn Header="Wait Type" Binding="{Binding WaitType}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <!-- 分页控件 -->
-            <local:PageHelper TotalPage="{Binding TotalPage}"
-                              CurrentPage="{Binding CurrentPage, Mode=TwoWay}"
-                              HorizontalAlignment="Center"
-                              Grid.Row="1">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="FirstPage">
-                        <b:InvokeCommandAction Command="{Binding FirstPageCommand}" />
-                    </b:EventTrigger>
-                    <b:EventTrigger EventName="PreviousPage">
-                        <b:InvokeCommandAction Command="{Binding PreviousPageCommand}"/>
-                    </b:EventTrigger>
-                    <b:EventTrigger EventName="NextPage">
-                        <b:InvokeCommandAction Command="{Binding NextPageCommand}" />
-                    </b:EventTrigger>
-                    <b:EventTrigger EventName="LastPage">
-                        <b:InvokeCommandAction Command="{Binding LastPageCommand}"/>
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
-            </local:PageHelper>
+            <Grid Grid.Row="1">
+                <TextBlock Text="" x:Name="RecipeDataNum"></TextBlock>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

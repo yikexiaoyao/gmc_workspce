@@ -4,43 +4,46 @@ namespace gmc_v_2_0.Models
 {
     public class RecipeModel : NotifyBase
     {
-        public int _stepNum;
+        private int _stepNum;
 
-        public string _stepTime;
+        private string _stepTime;
 
-        public int _waferRotatiorVal;
+        private int _waferRotatiorVal;
 
-        public int _waferRotatiorAcc;
+        private int _waferRotatiorAcc;
 
-        public string _rinseArmDisp;
+        private string _rinseArmDisp;
 
-        public string _rinseArmSpeed;
+        private string _rinseArmSpeed;
 
-        public string _rinseArmStartPos;
+        private string _rinseArmStartPos;
 
-        public string _rinseArmEndPos;
+        private string _rinseArmEndPos;
 
-        public int _rinseArmScan;
+        private int _rinseArmScan;
 
-        public string _devArmDisp;
+        private string _devArmDisp;
 
-        public string _devArmTime;
+        private string _devArmTime;
 
-        public string _devArmSpeed;
+        private string _devArmSpeed;
 
-        public string _devArmStartPos;
+        private string _devArmStartPos;
 
-        public string _devArmEndPos;
+        private string _devArmEndPos;
 
-        public int _devArmScan;
+        private int _devArmScan;
 
-        public string _autoDamp;
+        private string _autoDamp;
 
-        public string _n2Dry;
+        private string _n2Dry;
 
-        public string _waitType;
+        private string _waitType;
 
-        public RecipeModel( int stepNum, string stepTime, int waferRotatiorVal, int waferRotatiorAcc, string rinseArmDisp, string rinseArmSpeed, string rinseArmStartPos, string rinseArmEndPos, int rinseArmScan, string devArmDisp, string devArmTime, string devArmSpeed, string devArmStartPos, string devArmEndPos, int devArmScan, string autoDamp, string n2Dry, string waitType)
+        public RecipeModel(int stepNum, string stepTime, int waferRotatiorVal, int waferRotatiorAcc,
+            string rinseArmDisp, string rinseArmSpeed, string rinseArmStartPos, string rinseArmEndPos, int rinseArmScan,
+            string devArmDisp, string devArmTime, string devArmSpeed, string devArmStartPos, string devArmEndPos,
+            int devArmScan, string autoDamp, string n2Dry, string waitType)
         {
             _stepNum = stepNum;
             _stepTime = stepTime;
@@ -61,7 +64,6 @@ namespace gmc_v_2_0.Models
             _n2Dry = n2Dry;
             _waitType = waitType;
         }
-
 
 
         public int StepNum
