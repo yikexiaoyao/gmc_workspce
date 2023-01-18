@@ -14,6 +14,7 @@ namespace gmc_v_2_0.Views
         public RecipeUnitView()
         {
             InitializeComponent();
+            RecipeDataName.Text = CommonModel.RecipeDataName;
             // 数据文件路径
             RecipeData.ItemsSource = ReadCSV("../../DataAccess/recipe_data_qc");
             // 传值
