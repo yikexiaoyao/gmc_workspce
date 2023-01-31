@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using gmc_v_2_0.Models;
 
@@ -14,13 +12,27 @@ namespace gmc_v_2_0.Views
         public RecipeUnitView()
         {
             InitializeComponent();
-            RecipeDataName.Text = CommonModel.RecipeDataName;
-            // 数据文件路径
-            RecipeData.ItemsSource = ReadCSV("../../DataAccess/recipe_data_qc");
-            // 传值
+            // 数据内容
+            RecipeData.Items.Clear();
+            string recipeDataName = "recipe_data_qc";
+            RecipeData.ItemsSource = ReadCSV("../../DataAccess/" + recipeDataName);
+            // 数据条数
             RecipeDataNum.Text = CommonModel.RecipeDataNum.ToString();
             // RecipeDataNum.Text = Application.Current.Properties["RecipeDataNum"].ToString();
         }
+
+        // public void GetCSVFileName()
+        // {
+        //     // 指定路径
+        //     DirectoryInfo di = new DirectoryInfo("../../DataAccess");
+        //     // 创建数组存放文件名
+        //     DirectoryInfo[] diArr = di.GetDirectories();
+        //     // 遍历路径下文件名
+        //     foreach (DirectoryInfo nextFile in diArr)
+        //     {
+        //         RecipeDataName.ite
+        //     }
+        // }
 
         // 读取CSV数据
         public CommonModel CommonModel { get; set; } = new CommonModel();

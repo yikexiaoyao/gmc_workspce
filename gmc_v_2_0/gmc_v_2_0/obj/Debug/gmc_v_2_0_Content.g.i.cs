@@ -9,6 +9,5 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("dataaccess/recipe_data_qc.csv")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("dataaccess/recipe_name.csv")]
 
 
