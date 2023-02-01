@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E304BC73-0F34-4353-8042-ECCC084E31ED}</ProjectGuid>
+    <ProjectGuid>{1C5CA469-8C1D-47E6-B907-A4061C1D048C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>gmc_v_2_0</RootNamespace>
     <AssemblyName>gmc_v_2_0</AssemblyName>
@@ -35,21 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -68,17 +56,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\CommonModel.cs" />
-    <Compile Include="Models\RecipeModel.cs" />
-    <Compile Include="Service\RecipeService.cs" />
-    <Compile Include="ViewModels\RecipeViewModel.cs" />
+    <Compile Include="Views\DashboardView.xaml.cs">
+      <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RecipeUnitView.xaml.cs">
       <DependentUpon>RecipeUnitView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\DashboardView.xaml" />
-    <Page Include="Views\LoginWindow.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Views\DashboardView.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LoginWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -93,22 +86,23 @@
     <Compile Include="Base\NotifyBase.cs" />
     <Compile Include="Base\PasswordBoxHelper.cs" />
     <Compile Include="DataAccess\SqlServerAccess.cs" />
+    <Compile Include="Models\CommonModel.cs" />
     <Compile Include="Models\MainModel.cs" />
+    <Compile Include="Models\RecipeModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Service\LoginService.cs" />
+    <Compile Include="Service\RecipeService.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="Views\DashboardView.xaml.cs">
-      <DependentUpon>DashboardView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\LoginWindow.xaml.cs">
-      <DependentUpon>LoginWindow.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ViewModels\RecipeViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\RecipeUnitView.xaml" />
+    <Page Include="Views\RecipeUnitView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -129,7 +123,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="Assets\Fonts\iconfont.ttf" />
-    <None Include="packages.config" />
+    <None Include="DataAccess\recipe_data_qc.csv" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -138,19 +132,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\images\吉姆西半导体LOGO矢量图最新版.png" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Assets\images\avatar.jpg" />
     <Resource Include="Assets\images\login.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DataAccess\recipe_data_qc.csv" />
-    <Content Include="DataAccess\recipe_name.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Resource Include="Assets\images\吉姆西半导体LOGO矢量图最新版.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
