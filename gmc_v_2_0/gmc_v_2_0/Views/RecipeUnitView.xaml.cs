@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Controls;
@@ -12,8 +13,12 @@ namespace gmc_v_2_0.Views
         public RecipeUnitView()
         {
             InitializeComponent();
+            // 指定路径
+            string recipeDataPath = "../../DataAccess";
+            RecipeName.ItemsSource = GetCSVFileName(recipeDataPath);
             // 数据内容
             RecipeData.Items.Clear();
+            // 数据文件名
             string recipeDataName = "recipe_data_qc";
             RecipeData.ItemsSource = ReadCSV("../../DataAccess/" + recipeDataName);
             // 数据条数
@@ -21,18 +26,20 @@ namespace gmc_v_2_0.Views
             // RecipeDataNum.Text = Application.Current.Properties["RecipeDataNum"].ToString();
         }
 
-        // public void GetCSVFileName()
-        // {
-        //     // 指定路径
-        //     DirectoryInfo di = new DirectoryInfo("../../DataAccess");
-        //     // 创建数组存放文件名
-        //     DirectoryInfo[] diArr = di.GetDirectories();
-        //     // 遍历路径下文件名
-        //     foreach (DirectoryInfo nextFile in diArr)
-        //     {
-        //         RecipeDataName.ite
-        //     }
-        // }
+        public string GetCSVFileName(string recipeDataPath)
+        {
+            // 创建数组存放文件名
+            string[] paths = Directory.GetFiles(recipeDataPath,"*.csv");
+            // 遍历路径下文件名
+            string fileNameWithoutExtension = "";
+            foreach (string path in paths)
+            {
+                // 数据文件名去除后缀
+                fileNameWithoutExtension = Path.GetFileNameWithoutExtension(recipeDataPath);
+                return fileNameWithoutExtension;
+            }
+            return null;
+        }
 
         // 读取CSV数据
         public CommonModel CommonModel { get; set; } = new CommonModel();

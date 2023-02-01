@@ -10,8 +10,18 @@
              mc:Ignorable="d"
              d:DesignHeight="904" d:DesignWidth="1080">
     <UserControl.Resources>
+        <Style x:Key="RecipeNameStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!-- 方法三 -->
-        <Style x:Key="WaferRotatiorStyle" TargetType="DataGridColumnHeader">
+        <!--<Style x:Key="WaferRotatiorStyle" TargetType="DataGridColumnHeader">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
@@ -174,7 +184,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -183,9 +193,13 @@
         </Grid.ColumnDefinitions>
         <!-- 左侧配方目录 -->
         <Grid>
-            <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="" FontSize="16" FontWeight="Bold" x:Name="RecipeDataName"></TextBlock>
-            </StackPanel>
+            <ListView x:Name="RecipeName" Foreground="Black" FontSize="16" FontWeight="Bold">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Recipe Name" DisplayMemberBinding="{Binding RecipeName}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
         <!-- 右侧配方显示操作 -->
         <Grid Grid.Column="1">
@@ -221,11 +235,11 @@
                 </DataGrid>
             </Grid>-->
             <!-- 方法二 -->
-            <!--<Grid>
+            <Grid>
                 <ListView x:Name="RecipeData" BorderThickness="0" FontSize="16" FontWeight="Bold" Height="820">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Step Num" DisplayMemberBinding="{Binding StepNum}" HeaderContainerStyle=""></GridViewColumn>
+                        <GridViewColumn Header="Step Num" DisplayMemberBinding="{Binding StepNum}"></GridViewColumn>
                         <GridViewColumn Header="Step Time" DisplayMemberBinding="{Binding StepTime}"></GridViewColumn>
                         <GridViewColumn Header="Wafer Rotatior Val" DisplayMemberBinding="{Binding WaferRotatiorVal}"></GridViewColumn>
                         <GridViewColumn Header="Wafer Rotatior Acc" DisplayMemberBinding="{Binding WaferRotatiorAcc}"></GridViewColumn>
@@ -246,9 +260,9 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            </Grid>-->
+            </Grid>
             <!-- 方法三 -->
-            <Grid>
+            <!--<Grid>
                 <DataGrid HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" x:Name="RecipeData"
                           BorderThickness="0" RowHeight="35" FontSize="16" FontWeight="Bold" Height="820">
                     <DataGridTextColumn Binding="{Binding StepNum}">
@@ -427,7 +441,8 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
                 </DataGrid>
-            </Grid>
+            </Grid>-->
+
             <Grid Grid.Row="1">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal"
                             Margin="0,0,0,30">
