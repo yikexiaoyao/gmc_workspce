@@ -21,7 +21,7 @@ DEBUG;TRACE
 <<<<<<< Updated upstream
 C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\App.xaml
 41107373351
-1-1697089222
+21744020179
 22612003360
 20546299651
 =======
@@ -38,5 +38,5 @@ C:\Users\GMC\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\App.xaml
 >>>>>>> Stashed changes
 Views\DashboardView.xaml;Views\LoginWindow.xaml;Views\MainWindow.xaml;Views\RecipeUnitView.xaml;
 
-False
+True
 
