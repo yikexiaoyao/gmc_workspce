@@ -1,5 +1,9 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 ﻿#pragma checksum "..\..\..\Views\RecipeUnitView.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "1BA3DD12B59396BC3CE9D580765FCA321950B5F8289417867A2DCA7241CD4FB4"
+=======
+﻿#pragma checksum "..\..\..\Views\RecipeUnitView.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "DDF25162F8924839202CB45EECE31B1A42B8329A5F0EDB73D8300C0A14978D03"
+>>>>>>> Stashed changes
 =======
 ﻿#pragma checksum "..\..\..\Views\RecipeUnitView.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "DDF25162F8924839202CB45EECE31B1A42B8329A5F0EDB73D8300C0A14978D03"
 >>>>>>> Stashed changes
@@ -52,7 +56,11 @@ namespace gmc_v_2_0.Views {
         
         
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         #line 187 "..\..\..\Views\RecipeUnitView.xaml"
+=======
+        #line 20 "..\..\..\Views\RecipeUnitView.xaml"
+>>>>>>> Stashed changes
 =======
         #line 20 "..\..\..\Views\RecipeUnitView.xaml"
 >>>>>>> Stashed changes
@@ -64,7 +72,11 @@ namespace gmc_v_2_0.Views {
         
         
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         #line 252 "..\..\..\Views\RecipeUnitView.xaml"
+=======
+        #line 30 "..\..\..\Views\RecipeUnitView.xaml"
+>>>>>>> Stashed changes
 =======
         #line 30 "..\..\..\Views\RecipeUnitView.xaml"
 >>>>>>> Stashed changes
@@ -76,7 +88,11 @@ namespace gmc_v_2_0.Views {
         
         
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         #line 435 "..\..\..\Views\RecipeUnitView.xaml"
+=======
+        #line 57 "..\..\..\Views\RecipeUnitView.xaml"
+>>>>>>> Stashed changes
 =======
         #line 57 "..\..\..\Views\RecipeUnitView.xaml"
 >>>>>>> Stashed changes

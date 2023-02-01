@@ -104,4 +104,7 @@ C:\Users\GMC\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\gmc_v_2_0.csproj
 C:\Users\GMC\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\gmc_v_2_0.csproj.CopyComplete
 C:\Users\GMC\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\gmc_v_2_0.exe
 C:\Users\GMC\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\gmc_v_2_0.pdb
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
