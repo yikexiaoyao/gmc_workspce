@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1C5CA469-8C1D-47E6-B907-A4061C1D048C}</ProjectGuid>
+    <ProjectGuid>{E8221BE3-C3A3-4E00-81E0-DD1939DB4D1E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>gmc_v_2_0</RootNamespace>
     <AssemblyName>gmc_v_2_0</AssemblyName>
@@ -56,6 +56,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Service\LoginService.cs" />
+    <Compile Include="Service\RecipeService.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\RecipeViewModel.cs" />
     <Compile Include="Views\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
     </Compile>
@@ -65,14 +70,6 @@
     <Compile Include="Views\RecipeUnitView.xaml.cs">
       <DependentUpon>RecipeUnitView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\DashboardView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\LoginWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -86,25 +83,28 @@
     <Compile Include="Base\NotifyBase.cs" />
     <Compile Include="Base\PasswordBoxHelper.cs" />
     <Compile Include="DataAccess\SqlServerAccess.cs" />
-    <Compile Include="Models\CommonModel.cs" />
-    <Compile Include="Models\MainModel.cs" />
-    <Compile Include="Models\RecipeModel.cs" />
-    <Compile Include="Models\UserModel.cs" />
-    <Compile Include="Service\LoginService.cs" />
-    <Compile Include="Service\RecipeService.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\RecipeViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\DashboardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LoginWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\RecipeUnitView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CommonModel.cs" />
+    <Compile Include="Models\MainModel.cs" />
+    <Compile Include="Models\RecipeModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -132,7 +132,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Assets\images\avatar.jpg" />
     <Resource Include="Assets\images\login.jpeg" />

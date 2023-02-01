@@ -1,6 +1,7 @@
-﻿using gmc_v_2_0.ViewModels;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using gmc_v_2_0.ViewModels;
 
 namespace gmc_v_2_0.Views
 {
