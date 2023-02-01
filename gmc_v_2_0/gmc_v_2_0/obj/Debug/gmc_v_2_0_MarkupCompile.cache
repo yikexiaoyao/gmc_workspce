@@ -4,16 +4,38 @@
 winexe
 C#
 .cs
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\
+=======
+C:\Users\GMC\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\
+>>>>>>> Stashed changes
+=======
+C:\Users\GMC\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\
+>>>>>>> Stashed changes
 gmc_v_2_0
 none
 false
 DEBUG;TRACE
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\App.xaml
 41107373351
-1-1697089222
+21744020179
 22612003360
 20546299651
+=======
+=======
+>>>>>>> Stashed changes
+C:\Users\GMC\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\App.xaml
+41107373351
+21744020179
+22612003360
+20-403790409
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 Views\DashboardView.xaml;Views\LoginWindow.xaml;Views\MainWindow.xaml;Views\RecipeUnitView.xaml;
 
 True
