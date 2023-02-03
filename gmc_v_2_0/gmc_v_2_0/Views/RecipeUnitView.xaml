@@ -10,14 +10,13 @@
              mc:Ignorable="d"
              d:DesignHeight="904" d:DesignWidth="1080">
     <UserControl.Resources>
-        <Style x:Key="RecipeNameStyle" TargetType="DataGridColumnHeader">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate>
-
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+        <!-- 配方数据表头样式 -->
+        <Style x:Key="RecipeDataHeaderStyle" TargetType="GridViewColumnHeader">
+            <Setter Property="Height" Value="35"></Setter>
+        </Style>
+        <!-- 配方数据内容样式 -->
+        <Style x:Key="RecipeDataItemsStyle" TargetType="GridViewColumnHeader">
+            <Setter Property="Height" Value="35"></Setter>
         </Style>
 
         <!-- 方法三 -->
@@ -193,13 +192,16 @@
         </Grid.ColumnDefinitions>
         <!-- 左侧配方目录 -->
         <Grid>
-            <ListView x:Name="RecipeName" Foreground="Black" FontSize="16" FontWeight="Bold">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Recipe Name" DisplayMemberBinding="{Binding RecipeName}"></GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <StackPanel>
+                <Grid Background="#EEE" Height="35">
+                    <TextBlock Text="Recipe Name" Foreground="Black" FontSize="16" FontWeight="Bold"
+                               HorizontalAlignment="Center" VerticalAlignment="Center">
+                    </TextBlock>
+                </Grid>
+                <ListBox x:Name="RecipeName" Foreground="Black" FontSize="16" FontWeight="Bold" Height="785"
+                         BorderBrush="#EEE" BorderThickness="1">
+                </ListBox>
+            </StackPanel>
         </Grid>
         <!-- 右侧配方显示操作 -->
         <Grid Grid.Column="1">
@@ -236,30 +238,37 @@
             </Grid>-->
             <!-- 方法二 -->
             <Grid>
-                <ListView x:Name="RecipeData" BorderThickness="0" FontSize="16" FontWeight="Bold" Height="820">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Step Num" DisplayMemberBinding="{Binding StepNum}"></GridViewColumn>
-                        <GridViewColumn Header="Step Time" DisplayMemberBinding="{Binding StepTime}"></GridViewColumn>
-                        <GridViewColumn Header="Wafer Rotatior Val" DisplayMemberBinding="{Binding WaferRotatiorVal}"></GridViewColumn>
-                        <GridViewColumn Header="Wafer Rotatior Acc" DisplayMemberBinding="{Binding WaferRotatiorAcc}"></GridViewColumn>
-                        <GridViewColumn Header="Rinse Arm Disp" DisplayMemberBinding="{Binding RinseArmDisp}"></GridViewColumn>
-                        <GridViewColumn Header="Rinse Arm Speed" DisplayMemberBinding="{Binding RinseArmSpeed}"></GridViewColumn>
-                        <GridViewColumn Header="Rinse Arm Start Pos" DisplayMemberBinding="{Binding RinseArmStartPos}"></GridViewColumn>
-                        <GridViewColumn Header="Rinse Arm End Pos" DisplayMemberBinding="{Binding RinseArmEndPos}"></GridViewColumn>
-                        <GridViewColumn Header="Rinse Arm Scan" DisplayMemberBinding="{Binding RinseArmScan}"></GridViewColumn>
-                        <GridViewColumn Header="Dev Arm Disp" DisplayMemberBinding="{Binding DevArmDisp}"></GridViewColumn>
-                        <GridViewColumn Header="Dev Arm Time" DisplayMemberBinding="{Binding DevArmTime}"></GridViewColumn>
-                        <GridViewColumn Header="Dev Arm Speed" DisplayMemberBinding="{Binding DevArmSpeed}"></GridViewColumn>
-                        <GridViewColumn Header="Dev Arm Start Pos" DisplayMemberBinding="{Binding DevArmStartPos}"></GridViewColumn>
-                        <GridViewColumn Header="Dev Arm End Pos" DisplayMemberBinding="{Binding DevArmEndPos}"></GridViewColumn>
-                        <GridViewColumn Header="Dev Arm Scan" DisplayMemberBinding="{Binding DevArmScan}"></GridViewColumn>
-                        <GridViewColumn Header="Auto Damp" DisplayMemberBinding="{Binding AutoDamp}"></GridViewColumn>
-                        <GridViewColumn Header="N2 Dry" DisplayMemberBinding="{Binding N2Dry}"></GridViewColumn>
-                        <GridViewColumn Header="Wait Type" DisplayMemberBinding="{Binding WaitType}"></GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+                <ListView x:Name="RecipeData" BorderThickness="0" FontSize="16" FontWeight="Bold" Height="820"
+                          VerticalContentAlignment="Stretch">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource RecipeDataHeaderStyle}">
+                            <GridViewColumn Header="Step Num" DisplayMemberBinding="{Binding StepNum}"></GridViewColumn>
+                            <GridViewColumn Header="Step Time" DisplayMemberBinding="{Binding StepTime}"></GridViewColumn>
+                            <GridViewColumn Header="Wafer Rotatior Val"
+                                            DisplayMemberBinding="{Binding WaferRotatiorVal}">
+                            </GridViewColumn>
+                            <GridViewColumn Header="Wafer Rotatior Acc"
+                                            DisplayMemberBinding="{Binding WaferRotatiorAcc}">
+                            </GridViewColumn>
+                            <GridViewColumn Header="Rinse Arm Disp" DisplayMemberBinding="{Binding RinseArmDisp}"></GridViewColumn>
+                            <GridViewColumn Header="Rinse Arm Speed" DisplayMemberBinding="{Binding RinseArmSpeed}"></GridViewColumn>
+                            <GridViewColumn Header="Rinse Arm Start Pos"
+                                            DisplayMemberBinding="{Binding RinseArmStartPos}">
+                            </GridViewColumn>
+                            <GridViewColumn Header="Rinse Arm End Pos" DisplayMemberBinding="{Binding RinseArmEndPos}"></GridViewColumn>
+                            <GridViewColumn Header="Rinse Arm Scan" DisplayMemberBinding="{Binding RinseArmScan}"></GridViewColumn>
+                            <GridViewColumn Header="Dev Arm Disp" DisplayMemberBinding="{Binding DevArmDisp}"></GridViewColumn>
+                            <GridViewColumn Header="Dev Arm Time" DisplayMemberBinding="{Binding DevArmTime}"></GridViewColumn>
+                            <GridViewColumn Header="Dev Arm Speed" DisplayMemberBinding="{Binding DevArmSpeed}"></GridViewColumn>
+                            <GridViewColumn Header="Dev Arm Start Pos" DisplayMemberBinding="{Binding DevArmStartPos}"></GridViewColumn>
+                            <GridViewColumn Header="Dev Arm End Pos" DisplayMemberBinding="{Binding DevArmEndPos}"></GridViewColumn>
+                            <GridViewColumn Header="Dev Arm Scan" DisplayMemberBinding="{Binding DevArmScan}"></GridViewColumn>
+                            <GridViewColumn Header="Auto Damp" DisplayMemberBinding="{Binding AutoDamp}"></GridViewColumn>
+                            <GridViewColumn Header="N2 Dry" DisplayMemberBinding="{Binding N2Dry}"></GridViewColumn>
+                            <GridViewColumn Header="Wait Type" DisplayMemberBinding="{Binding WaitType}"></GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
             <!-- 方法三 -->
             <!--<Grid>

@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using gmc_v_2_0.Models;
 
 namespace gmc_v_2_0.Views
@@ -13,37 +15,81 @@ namespace gmc_v_2_0.Views
         public RecipeUnitView()
         {
             InitializeComponent();
-            // 指定路径
-            string recipeDataPath = "../../DataAccess";
-            RecipeName.ItemsSource = GetCSVFileName(recipeDataPath);
-            // 数据内容
+
+            // 指定数据文件路径
+            string recipePath = "../../DataAccess";
+            // 获取路径下文件名
+            RecipeName.Items.Clear();
+            RecipeName.ItemsSource = GetCSVFileName(recipePath);
+
+            // 获取数据内容，初始化显示
             RecipeData.Items.Clear();
-            // 数据文件名
-            string recipeDataName = "recipe_data_qc";
-            RecipeData.ItemsSource = ReadCSV("../../DataAccess/" + recipeDataName);
+            RecipeData.ItemsSource = ReadCSV(recipePath + "/recipe_data_dd");
+            // 遍历文件名
+            foreach (string recipeName in GetCSVFileName(recipePath))
+            {
+                /*foreach (ListBoxItem listBoxItem in RecipeName.SelectedItems)
+                {
+                    if (listBoxItem != null)
+                    {
+                        string str = listBoxItem.Content.ToString();
+                        // 判断文件是否被选中
+                        if (str.Equals(recipeName))
+                        {
+                            // 数据文件名
+                            // string recipeName = "qc";
+                            // 获取数据内容
+                            RecipeData.Items.Clear();
+                            RecipeData.ItemsSource = ReadCSV(recipePath + "/recipe_data_" + recipeName);
+                        }
+                    }
+                }*/
+                var item = RecipeName.ItemContainerGenerator.ContainerFromIndex(GetCSVFileName(recipePath)
+                    .IndexOf(recipeName)) as ListBoxItem;
+                // 判断文件是否被选中
+                // if (RecipeName.SelectedItem.Equals(recipeName))
+                if (RecipeName.SelectedIndex == GetCSVFileName(recipePath).IndexOf(recipeName))
+                {
+                    // 数据文件名
+                    // string recipeName = "qc";
+                    // 获取数据内容
+                    RecipeData.Items.Clear();
+                    RecipeData.ItemsSource = ReadCSV(recipePath + "/recipe_data_" + recipeName);
+                }
+            }
+
             // 数据条数
             RecipeDataNum.Text = CommonModel.RecipeDataNum.ToString();
             // RecipeDataNum.Text = Application.Current.Properties["RecipeDataNum"].ToString();
         }
 
-        public string GetCSVFileName(string recipeDataPath)
+        public CommonModel CommonModel { get; set; } = new CommonModel();
+
+        // 获取无前后缀文件名
+        public List<string> GetCSVFileName(string recipePath)
         {
-            // 创建数组存放文件名
-            string[] paths = Directory.GetFiles(recipeDataPath,"*.csv");
-            // 遍历路径下文件名
+            // 获取文件名
+            string[] fileNames = Directory.GetFiles(recipePath, "*.csv");
+            // 定义临时数组存放处理后的文件名
+            string[] temp;
+            // 定义无后缀文件名变量
             string fileNameWithoutExtension = "";
-            foreach (string path in paths)
+            // 定义文件名集合
+            List<string> list = new List<string>();
+            // 遍历路径下文件名
+            foreach (string fileName in fileNames)
             {
-                // 数据文件名去除后缀
-                fileNameWithoutExtension = Path.GetFileNameWithoutExtension(recipeDataPath);
-                return fileNameWithoutExtension;
+                // 截取文件名
+                temp = fileName.Split('_');
+                // 数据文件名去除前后缀
+                fileNameWithoutExtension = Path.GetFileNameWithoutExtension(temp[temp.Length - 1]);
+                // 添加到文件名集合中
+                list.Add(fileNameWithoutExtension);
             }
-            return null;
+            return list;
         }
 
         // 读取CSV数据
-        public CommonModel CommonModel { get; set; } = new CommonModel();
-
         public IEnumerable<RecipeModel> ReadCSV(string fileName)
         {
             // 逐行读取数据，存入数组
