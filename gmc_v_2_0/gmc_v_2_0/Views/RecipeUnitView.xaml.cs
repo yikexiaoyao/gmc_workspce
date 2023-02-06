@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using gmc_v_2_0.Models;
 
 namespace gmc_v_2_0.Views
@@ -18,45 +15,14 @@ namespace gmc_v_2_0.Views
 
             // 指定数据文件路径
             string recipePath = "../../DataAccess";
+
             // 获取路径下文件名
             RecipeName.Items.Clear();
             RecipeName.ItemsSource = GetCSVFileName(recipePath);
 
             // 获取数据内容，初始化显示
             RecipeData.Items.Clear();
-            RecipeData.ItemsSource = ReadCSV(recipePath + "/recipe_data_dd");
-            // 遍历文件名
-            foreach (string recipeName in GetCSVFileName(recipePath))
-            {
-                /*foreach (ListBoxItem listBoxItem in RecipeName.SelectedItems)
-                {
-                    if (listBoxItem != null)
-                    {
-                        string str = listBoxItem.Content.ToString();
-                        // 判断文件是否被选中
-                        if (str.Equals(recipeName))
-                        {
-                            // 数据文件名
-                            // string recipeName = "qc";
-                            // 获取数据内容
-                            RecipeData.Items.Clear();
-                            RecipeData.ItemsSource = ReadCSV(recipePath + "/recipe_data_" + recipeName);
-                        }
-                    }
-                }*/
-                var item = RecipeName.ItemContainerGenerator.ContainerFromIndex(GetCSVFileName(recipePath)
-                    .IndexOf(recipeName)) as ListBoxItem;
-                // 判断文件是否被选中
-                // if (RecipeName.SelectedItem.Equals(recipeName))
-                if (RecipeName.SelectedIndex == GetCSVFileName(recipePath).IndexOf(recipeName))
-                {
-                    // 数据文件名
-                    // string recipeName = "qc";
-                    // 获取数据内容
-                    RecipeData.Items.Clear();
-                    RecipeData.ItemsSource = ReadCSV(recipePath + "/recipe_data_" + recipeName);
-                }
-            }
+            RecipeData.ItemsSource = ReadCSV(recipePath + "/recipe_data_" + GetCSVFileName(recipePath)[0]);
 
             // 数据条数
             RecipeDataNum.Text = CommonModel.RecipeDataNum.ToString();
@@ -86,6 +52,7 @@ namespace gmc_v_2_0.Views
                 // 添加到文件名集合中
                 list.Add(fileNameWithoutExtension);
             }
+
             return list;
         }
 
@@ -110,6 +77,22 @@ namespace gmc_v_2_0.Views
                     Convert.ToInt32(data[8]), data[9], data[10], data[11], data[12],
                     data[13], Convert.ToInt32(data[14]), data[15], data[16], data[17]);
             });
+        }
+
+        // 获取选中文件名，显示文件名对应数据
+        private void RecipeName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (RecipeName.SelectedItem != null)
+            {
+                // MessageBox.Show(RecipeName.SelectedValue.ToString());
+                // 获取数据内容
+                string recipePath = "../../DataAccess";
+                RecipeData.ItemsSource = ReadCSV(recipePath + "/recipe_data_" + RecipeName.SelectedValue);
+
+                // 数据条数
+                RecipeDataNum.Text = CommonModel.RecipeDataNum.ToString();
+                // RecipeDataNum.Text = Application.Current.Properties["RecipeDataNum"].ToString();
+            }
         }
     }
 }

@@ -199,7 +199,7 @@
                     </TextBlock>
                 </Grid>
                 <ListBox x:Name="RecipeName" Foreground="Black" FontSize="16" FontWeight="Bold" Height="785"
-                         BorderBrush="#EEE" BorderThickness="1">
+                         BorderBrush="#EEE" BorderThickness="1" SelectionChanged="RecipeName_SelectionChanged">
                 </ListBox>
             </StackPanel>
         </Grid>
