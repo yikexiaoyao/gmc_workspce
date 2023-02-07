@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using System.Windows.Documents;
 using gmc_v_2_0.Base;
 
 /*
@@ -115,6 +116,42 @@ namespace gmc_v_2_0.DataAccess
             }
 
             return false;
+        }
+
+        public DataTable GetData(string sql)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                if (DBConnection())
+                {
+                    adapter = new SqlDataAdapter(sql, Conn);
+                    int count = adapter.Fill(dt);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.Dispose();
+            }
+            return dt;
+        }
+
+        // 获取配方名称
+        public DataTable GetRecipeName()
+        {
+            string sql = $"select distinct recipe_name from recipes";
+            return GetData(sql);
+        }
+
+        // 获取配方数据
+        public DataTable GetRecipeData(string recipe_name)
+        {
+            string sql = $"select * from recipes where recipe_name='{recipe_name}' order by step_num asc";
+            return GetData(sql);
         }
     }
 }

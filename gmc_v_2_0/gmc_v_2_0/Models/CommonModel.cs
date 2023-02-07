@@ -15,5 +15,17 @@ namespace gmc_v_2_0.Models
                 this.NotifyChanged();
             }
         }
+
+        private string _recipeName;
+
+        public string RecipeName
+        {
+            get { return _recipeName; }
+            set
+            {
+                _recipeName = value;
+                this.NotifyChanged();
+            }
+        }
     }
 }

@@ -121,10 +121,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="Assets\Fonts\iconfont.ttf" />
-    <None Include="DataAccess\recipe_data_dd.csv" />
-    <None Include="DataAccess\recipe_data_dry run.csv" />
-    <None Include="DataAccess\recipe_data_qc.csv" />
-    <None Include="DataAccess\recipe_data_qc1.csv" />
+    <None Include="DataAccess\CSV\recipe_data_dd.csv" />
+    <None Include="DataAccess\CSV\recipe_data_dry run.csv" />
+    <None Include="DataAccess\CSV\recipe_data_qc.csv" />
+    <None Include="DataAccess\CSV\recipe_data_qc1.csv" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
