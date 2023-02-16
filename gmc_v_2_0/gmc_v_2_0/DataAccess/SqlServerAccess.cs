@@ -21,8 +21,6 @@ namespace gmc_v_2_0.DataAccess
     {
         public SqlConnection Conn { get; set; }
         public SqlCommand Comm { get; set; }
-
-        public SqlCommandBuilder CommBd { get; set; }
         public SqlDataAdapter adapter { get; set; }
 
         //释放连接
@@ -130,7 +128,6 @@ namespace gmc_v_2_0.DataAccess
                 if (DBConnection())
                 {
                     adapter = new SqlDataAdapter(sql, Conn);
-                    CommBd = new SqlCommandBuilder(adapter);
                     int count = adapter.Fill(dt);
                 }
             }
