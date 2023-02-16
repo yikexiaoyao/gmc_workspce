@@ -7,20 +7,35 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:base="clr-namespace:gmc_v_2_0.Base"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="904" d:DesignWidth="1080">
     <UserControl.Resources>
+        <!-- 配方目录样式 -->
+        <Style x:Key="RecipeNameItemsStyle" TargetType="ListBoxItem">
+            <Setter Property="Height" Value="35"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Foreground" Value="Red"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <!-- 配方数据表头样式 -->
-        <Style x:Key="RecipeDataHeaderStyle" TargetType="GridViewColumnHeader">
+        <!--<Style x:Key="RecipeDataHeaderStyle" TargetType="GridViewColumnHeader">
             <Setter Property="Height" Value="35"></Setter>
-        </Style>
+        </Style>-->
         <!-- 配方数据内容样式 -->
-        <Style x:Key="RecipeDataItemsStyle" TargetType="GridViewColumnHeader">
+        <!--<Style x:Key="RecipeDataItemsStyle" TargetType="ListViewItem">
             <Setter Property="Height" Value="35"></Setter>
-        </Style>
-
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Foreground" Value="Red"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>-->
         <!-- 方法三 -->
-        <!--<Style x:Key="WaferRotatiorStyle" TargetType="DataGridColumnHeader">
+        <Style x:Key="WaferRotatiorStyle" TargetType="DataGridColumnHeader">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
@@ -32,25 +47,36 @@
                                 <RowDefinition Height="35"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ContentPresenter Grid.ColumnSpan="3" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" Content="Wafer Rotatior">
+                            <!-- 第一表头 -->
+                            <ContentPresenter Grid.ColumnSpan="4" HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" Content="Wafer Rotatior" Margin="10,5,10,0">
                             </ContentPresenter>
-                            <Rectangle Grid.Row="1" VerticalAlignment="Stretch" Height="1" Fill="#EEE"
+                            <Rectangle Grid.Column="3" VerticalAlignment="Stretch" Width="1" Fill="LightGray"
                                        Visibility="Visible">
                             </Rectangle>
+                            <!-- 分隔线 -->
+                            <Rectangle Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Stretch" Height="1"
+                                       Fill="LightGray"
+                                       Visibility="Visible">
+                            </Rectangle>
+                            <!-- 第二表头 -->
                             <ContentPresenter Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                              Content="Val">
+                                              Content="Val" Margin="10,5,10,0">
                             </ContentPresenter>
-                            <Rectangle Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" Height="1"
-                                       Fill="#EEE" Visibility="Visible">
+                            <Rectangle Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" Width="1"
+                                       Fill="LightGray" Visibility="Visible">
                             </Rectangle>
                             <ContentPresenter Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" Content="Acc">
+                                              VerticalAlignment="Center" Content="Acc" Margin="10,5,10,0">
                             </ContentPresenter>
+                            <Rectangle Grid.Row="2" Grid.Column="3" VerticalAlignment="Stretch" Width="1"
+                                       Fill="LightGray" Visibility="Visible">
+                            </Rectangle>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -68,49 +94,56 @@
                                 <RowDefinition Height="35"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ContentPresenter Grid.ColumnSpan="5" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" Content="Rinse Arm">
+                            <ContentPresenter Grid.ColumnSpan="10" HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" Content="Rinse Arm" Margin="10,5,10,0">
                             </ContentPresenter>
-                            <Rectangle Grid.Row="1" VerticalAlignment="Stretch" Height="1" Fill="#EEE"
+                            <Rectangle Grid.Column="9" VerticalAlignment="Stretch" Width="1" Fill="LightGray"
                                        Visibility="Visible">
                             </Rectangle>
+                            <Rectangle Grid.Row="1" Grid.ColumnSpan="10" VerticalAlignment="Stretch" Height="1"
+                                       Fill="LightGray" Visibility="Visible">
+                            </Rectangle>
                             <ContentPresenter Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                              Content="Disp">
+                                              Content="Disp" Margin="10,5,10,0">
                             </ContentPresenter>
-                            <Rectangle Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" Height="1"
-                                       Fill="#EEE" Visibility="Visible">
+                            <Rectangle Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" Width="1"
+                                       Fill="LightGray" Visibility="Visible">
                             </Rectangle>
                             <ContentPresenter Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" Content="Speed">
+                                              VerticalAlignment="Center" Content="Speed" Margin="10,5,10,0">
                             </ContentPresenter>
-                            <Rectangle Grid.Row="2" Grid.Column="3" VerticalAlignment="Stretch" Height="1"
-                                       Fill="#EEE" Visibility="Visible">
+                            <Rectangle Grid.Row="2" Grid.Column="3" VerticalAlignment="Stretch" Width="1"
+                                       Fill="LightGray" Visibility="Visible">
                             </Rectangle>
                             <ContentPresenter Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" Content="Start Pos">
+                                              VerticalAlignment="Center" Content="Start Pos" Margin="10,5,10,0">
                             </ContentPresenter>
-                            <Rectangle Grid.Row="2" Grid.Column="5" VerticalAlignment="Stretch" Height="1"
-                                       Fill="#EEE" Visibility="Visible">
+                            <Rectangle Grid.Row="2" Grid.Column="5" VerticalAlignment="Stretch" Width="1"
+                                       Fill="LightGray" Visibility="Visible">
                             </Rectangle>
                             <ContentPresenter Grid.Row="2" Grid.Column="6" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" Content="End Pos">
+                                              VerticalAlignment="Center" Content="End Pos" Margin="10,5,10,0">
                             </ContentPresenter>
-                            <Rectangle Grid.Row="2" Grid.Column="7" VerticalAlignment="Stretch" Height="1"
-                                       Fill="#EEE" Visibility="Visible">
+                            <Rectangle Grid.Row="2" Grid.Column="7" VerticalAlignment="Stretch" Width="1"
+                                       Fill="LightGray" Visibility="Visible">
                             </Rectangle>
                             <ContentPresenter Grid.Row="2" Grid.Column="8" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" Content="Scan">
+                                              VerticalAlignment="Center" Content="Scan" Margin="10,5,10,0">
                             </ContentPresenter>
+                            <Rectangle Grid.Row="2" Grid.Column="9" VerticalAlignment="Stretch" Width="1"
+                                       Fill="LightGray" Visibility="Visible">
+                            </Rectangle>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -128,62 +161,71 @@
                                 <RowDefinition Height="35"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ContentPresenter Grid.ColumnSpan="5" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" Content="Rinse Arm">
+                            <ContentPresenter Grid.ColumnSpan="11" HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" Content="Dev Arm" Margin="10,5,10,0">
                             </ContentPresenter>
-                            <Rectangle Grid.Row="1" VerticalAlignment="Stretch" Height="1" Fill="#EEE"
+                            <Rectangle Grid.Row="1" Grid.ColumnSpan="11" VerticalAlignment="Stretch" Height="1"
+                                       Fill="LightGray"
                                        Visibility="Visible">
                             </Rectangle>
                             <ContentPresenter Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                              Content="Disp">
+                                              Content="Disp" Margin="10,5,10,0">
                             </ContentPresenter>
-                            <Rectangle Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" Height="1"
-                                       Fill="#EEE" Visibility="Visible">
+                            <Rectangle Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" Width="1"
+                                       Fill="LightGray" Visibility="Visible">
                             </Rectangle>
                             <ContentPresenter Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" Content="Time">
+                                              VerticalAlignment="Center" Content="Time" Margin="10,5,10,0">
                             </ContentPresenter>
-                            <Rectangle Grid.Row="2" Grid.Column="3" VerticalAlignment="Stretch" Height="1"
-                                       Fill="#EEE" Visibility="Visible">
+                            <Rectangle Grid.Row="2" Grid.Column="3" VerticalAlignment="Stretch" Width="1"
+                                       Fill="LightGray" Visibility="Visible">
                             </Rectangle>
                             <ContentPresenter Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" Content="Speed">
+                                              VerticalAlignment="Center" Content="Speed" Margin="10,5,10,0">
                             </ContentPresenter>
-                            <Rectangle Grid.Row="2" Grid.Column="5" VerticalAlignment="Stretch" Height="1"
-                                       Fill="#EEE" Visibility="Visible">
+                            <Rectangle Grid.Row="2" Grid.Column="5" VerticalAlignment="Stretch" Width="1"
+                                       Fill="LightGray" Visibility="Visible">
                             </Rectangle>
                             <ContentPresenter Grid.Row="2" Grid.Column="6" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" Content="Start Pos">
+                                              VerticalAlignment="Center" Content="Start Pos" Margin="10,5,10,0">
                             </ContentPresenter>
-                            <Rectangle Grid.Row="2" Grid.Column="7" VerticalAlignment="Stretch" Height="1"
-                                       Fill="#EEE" Visibility="Visible">
+                            <Rectangle Grid.Row="2" Grid.Column="7" VerticalAlignment="Stretch" Width="1"
+                                       Fill="LightGray" Visibility="Visible">
                             </Rectangle>
                             <ContentPresenter Grid.Row="2" Grid.Column="8" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" Content="End Pos">
+                                              VerticalAlignment="Center" Content="End Pos" Margin="10,5,10,0">
                             </ContentPresenter>
-                            <Rectangle Grid.Row="2" Grid.Column="9" VerticalAlignment="Stretch" Height="1"
-                                       Fill="#EEE" Visibility="Visible">
+                            <Rectangle Grid.Row="2" Grid.Column="9" VerticalAlignment="Stretch" Width="1"
+                                       Fill="LightGray" Visibility="Visible">
                             </Rectangle>
                             <ContentPresenter Grid.Row="2" Grid.Column="10" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" Content="Scan">
+                                              VerticalAlignment="Center" Content="Scan" Margin="10,5,10,0">
                             </ContentPresenter>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>-->
+        </Style>
+        <!-- 操作按钮样式 -->
+        <Style x:Key="OperationButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="100"></Setter>
+            <Setter Property="Height" Value="40"></Setter>
+            <Setter Property="Margin" Value="10,10,10,10"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -192,16 +234,36 @@
         </Grid.ColumnDefinitions>
         <!-- 左侧配方目录 -->
         <Grid>
-            <StackPanel>
-                <Grid Background="#EEE" Height="35">
-                    <TextBlock Text="Recipe Name" Foreground="Black" FontSize="16" FontWeight="Bold"
-                               HorizontalAlignment="Center" VerticalAlignment="Center">
-                    </TextBlock>
-                </Grid>
-                <ListBox x:Name="RecipeName" Foreground="Black" FontSize="16" FontWeight="Bold" Height="785"
-                         BorderBrush="#EEE" BorderThickness="1" SelectionChanged="RecipeName_SelectionChanged">
-                </ListBox>
-            </StackPanel>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid>
+                <StackPanel>
+                    <Grid Background="White" Height="35">
+                        <TextBlock Text="Recipe Name" Foreground="Black" FontSize="16" FontWeight="Bold"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center">
+                        </TextBlock>
+                    </Grid>
+                    <ListBox x:Name="RecipeName" Foreground="Black" FontSize="16" FontWeight="Bold" Height="650"
+                             ItemContainerStyle="{DynamicResource RecipeNameItemsStyle}"
+                             BorderBrush="#EEE" BorderThickness="1" SelectionChanged="RecipeName_SelectionChanged">
+                    </ListBox>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <UniformGrid VerticalAlignment="Bottom" Margin="0,0,0,85" Background="White">
+                    <Button Content="New" Style="{StaticResource OperationButtonStyle}" Command="{Binding}"
+                            CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
+                    </Button>
+                    <Button Content="Edit" Style="{StaticResource OperationButtonStyle}" Command="{Binding EditCommand}"
+                            CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
+                    </Button>
+                    <Button Content="Delete" Style="{StaticResource OperationButtonStyle}" Command="{Binding}"
+                            CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
+                    </Button>
+                </UniformGrid>
+            </Grid>
         </Grid>
         <!-- 右侧配方显示操作 -->
         <Grid Grid.Column="1">
@@ -212,7 +274,7 @@
             <!-- 右上配方数据表格 -->
             <!-- 方法一 -->
             <!--<Grid>
-                <DataGrid HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" x:Name="RecipeData"
+                <DataGrid HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" x:Name="RecipeData" AutoGenerateColumns="False"
                           BorderThickness="0" RowHeight="35" FontSize="16" FontWeight="Bold" Height="820">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Step Num" Binding="{Binding StepNum}"></DataGridTextColumn>
@@ -237,9 +299,9 @@
                 </DataGrid>
             </Grid>-->
             <!-- 方法二 -->
-            <Grid>
+            <!--<Grid>
                 <ListView x:Name="RecipeData" BorderThickness="0" FontSize="16" FontWeight="Bold" Height="820"
-                          VerticalContentAlignment="Stretch">
+                          ItemContainerStyle="{DynamicResource RecipeDataItemsStyle}">
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{StaticResource RecipeDataHeaderStyle}">
                             <GridViewColumn Header="Step Num" DisplayMemberBinding="{Binding StepNum}"></GridViewColumn>
@@ -269,195 +331,208 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </Grid>
-            <!-- 方法三 -->
-            <!--<Grid>
-                <DataGrid HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" x:Name="RecipeData"
-                          BorderThickness="0" RowHeight="35" FontSize="16" FontWeight="Bold" Height="820">
-                    <DataGridTextColumn Binding="{Binding StepNum}">
-                        <DataGridTextColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <TextBlock Margin="5,0,5,0" Text="Step Num" TextAlignment="Center"
-                                               TextWrapping="Wrap">
-                                    </TextBlock>
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTextColumn.HeaderTemplate>
-                        <DataGridTextColumn.ElementStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
-                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                <Setter Property="TextBlock.HorizontalAlignment" Value="Center"></Setter>
-                                <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-
-                    <DataGridTextColumn Binding="{Binding StepTime}">
-                        <DataGridTextColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <TextBlock Margin="5,0,5,0" Text="Step Time" TextAlignment="Center"
-                                               TextWrapping="Wrap">
-                                    </TextBlock>
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTextColumn.HeaderTemplate>
-                        <DataGridTextColumn.ElementStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
-                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                <Setter Property="TextBlock.HorizontalAlignment" Value="Center"></Setter>
-                                <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-
-                    <DataGridTemplateColumn HeaderStyle="{StaticResource WaferRotatiorStyle}">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                               Text="{Binding WaferRotatiorVal}" TextAlignment="Center">
-                                    </TextBlock>
-                                    <Rectangle Width="1" Fill="#EEE"></Rectangle>
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                               Text="{Binding WaferRotatiorAcc}" TextAlignment="Center">
-                                    </TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <DataGridTemplateColumn HeaderStyle="{StaticResource RinseArmStyle}">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                               Text="{Binding RinseArmDisp}" TextAlignment="Center">
-                                    </TextBlock>
-                                    <Rectangle Width="1" Fill="#EEE"></Rectangle>
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                               Text="{Binding RinseArmSpeed}" TextAlignment="Center">
-                                    </TextBlock>
-                                    <Rectangle Width="1" Fill="#EEE"></Rectangle>
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                               Text="{Binding RinseArmStartPos}" TextAlignment="Center">
-                                    </TextBlock>
-                                    <Rectangle Width="1" Fill="#EEE"></Rectangle>
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                               Text="{Binding RinseArmEndPos}" TextAlignment="Center">
-                                    </TextBlock>
-                                    <Rectangle Width="1" Fill="#EEE"></Rectangle>
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                               Text="{Binding RinseArmScan}" TextAlignment="Center">
-                                    </TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <DataGridTemplateColumn HeaderStyle="{StaticResource DevArmStyle}">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                               Text="{Binding DevArmDisp}" TextAlignment="Center">
-                                    </TextBlock>
-                                    <Rectangle Width="1" Fill="#EEE"></Rectangle>
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                               Text="{Binding DevArmTime}" TextAlignment="Center">
-                                    </TextBlock>
-                                    <Rectangle Width="1" Fill="#EEE"></Rectangle>
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                               Text="{Binding DevArmSpeed}" TextAlignment="Center">
-                                    </TextBlock>
-                                    <Rectangle Width="1" Fill="#EEE"></Rectangle>
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                               Text="{Binding DevArmStartPos}" TextAlignment="Center">
-                                    </TextBlock>
-                                    <Rectangle Width="1" Fill="#EEE"></Rectangle>
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                               Text="{Binding DevArmEndPos}" TextAlignment="Center">
-                                    </TextBlock>
-                                    <Rectangle Width="1" Fill="#EEE"></Rectangle>
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                                               Text="{Binding DevArmScan}" TextAlignment="Center">
-                                    </TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <DataGridTextColumn Binding="{Binding AutoDamp}">
-                        <DataGridTextColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <TextBlock Margin="5,0,5,0" Text="Auto Damp" TextAlignment="Center"
-                                               TextWrapping="Wrap">
-                                    </TextBlock>
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTextColumn.HeaderTemplate>
-                        <DataGridTextColumn.ElementStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
-                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                <Setter Property="TextBlock.HorizontalAlignment" Value="Center"></Setter>
-                                <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-
-                    <DataGridTextColumn Binding="{Binding N2Dry}">
-                        <DataGridTextColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <TextBlock Margin="5,0,5,0" Text="N2 Dry" TextAlignment="Center"
-                                               TextWrapping="Wrap">
-                                    </TextBlock>
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTextColumn.HeaderTemplate>
-                        <DataGridTextColumn.ElementStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
-                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                <Setter Property="TextBlock.HorizontalAlignment" Value="Center"></Setter>
-                                <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-
-                    <DataGridTextColumn Binding="{Binding WaitType}">
-                        <DataGridTextColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <TextBlock Margin="5,0,5,0" Text="Wait Type" TextAlignment="Center"
-                                               TextWrapping="Wrap">
-                                    </TextBlock>
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTextColumn.HeaderTemplate>
-                        <DataGridTextColumn.ElementStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
-                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                <Setter Property="TextBlock.HorizontalAlignment" Value="Center"></Setter>
-                                <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                </DataGrid>
             </Grid>-->
+            <!-- 方法三 -->
+            <Grid>
+                <DataGrid HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" x:Name="RecipeData" IsReadOnly="True"
+                          BorderThickness="0" RowHeight="35" FontSize="16" FontWeight="Bold" Height="820" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding StepNum}">
+                            <DataGridTextColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Margin="10,0,10,0" Text="Step Num" TextAlignment="Center"
+                                                   TextWrapping="Wrap">
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTextColumn.HeaderTemplate>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                    <Setter Property="TextBlock.HorizontalAlignment" Value="Center"></Setter>
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
 
+                        <DataGridTextColumn Binding="{Binding StepTime}">
+                            <DataGridTextColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Margin="5,0,5,0" Text="Step Time" TextAlignment="Center"
+                                                   TextWrapping="Wrap">
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTextColumn.HeaderTemplate>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                    <Setter Property="TextBlock.HorizontalAlignment" Value="Center"></Setter>
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTemplateColumn HeaderStyle="{StaticResource WaferRotatiorStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Width="47"
+                                                   Margin="10,0,10,0"
+                                                   Text="{Binding WaferRotatiorVal}" TextAlignment="Center">
+                                        </TextBlock>
+                                        <Rectangle VerticalAlignment="Stretch" Width="1" Fill="Black"></Rectangle>
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                   Margin="10,0,10,0"
+                                                   Text="{Binding WaferRotatiorAcc}" TextAlignment="Center">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn HeaderStyle="{StaticResource RinseArmStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Width="45"
+                                                   Margin="5,0,5,0"
+                                                   Text="{Binding RinseArmDisp}" TextAlignment="Center">
+                                        </TextBlock>
+                                        <Rectangle Width="1" Fill="Black"></Rectangle>
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Width="50"
+                                                   Margin="10,0,10,0"
+                                                   Text="{Binding RinseArmSpeed}" TextAlignment="Center">
+                                        </TextBlock>
+                                        <Rectangle Width="1" Fill="Black"></Rectangle>
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Width="72"
+                                                   Margin="10,0,10,0"
+                                                   Text="{Binding RinseArmStartPos}" TextAlignment="Center">
+                                        </TextBlock>
+                                        <Rectangle Width="1" Fill="Black"></Rectangle>
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Width="64"
+                                                   Margin="10,0,10,0"
+                                                   Text="{Binding RinseArmEndPos}" TextAlignment="Center">
+                                        </TextBlock>
+                                        <Rectangle Width="1" Fill="Black"></Rectangle>
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                   Margin="10,0,10,0"
+                                                   Text="{Binding RinseArmScan}" TextAlignment="Center">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn HeaderStyle="{StaticResource DevArmStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Width="45"
+                                                   Margin="5,0,5,0"
+                                                   Text="{Binding DevArmDisp}" TextAlignment="Center">
+                                        </TextBlock>
+                                        <Rectangle Width="1" Fill="Black"></Rectangle>
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Width="40"
+                                                   Margin="10,0,10,0"
+                                                   Text="{Binding DevArmTime}" TextAlignment="Center">
+                                        </TextBlock>
+                                        <Rectangle Width="1" Fill="Black"></Rectangle>
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Width="50"
+                                                   Margin="10,0,10,0"
+                                                   Text="{Binding DevArmSpeed}" TextAlignment="Center">
+                                        </TextBlock>
+                                        <Rectangle Width="1" Fill="Black"></Rectangle>
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Width="72"
+                                                   Margin="10,0,10,0"
+                                                   Text="{Binding DevArmStartPos}" TextAlignment="Center">
+                                        </TextBlock>
+                                        <Rectangle Width="1" Fill="Black"></Rectangle>
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Width="65"
+                                                   Margin="10,0,10,0"
+                                                   Text="{Binding DevArmEndPos}" TextAlignment="Center">
+                                        </TextBlock>
+                                        <Rectangle Width="1" Fill="Black"></Rectangle>
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                   Margin="10,0,10,0"
+                                                   Text="{Binding DevArmScan}" TextAlignment="Center">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Binding="{Binding AutoDamp}">
+                            <DataGridTextColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Margin="5,0,5,0" Text="Auto Damp" TextAlignment="Center"
+                                                   TextWrapping="Wrap">
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTextColumn.HeaderTemplate>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                    <Setter Property="TextBlock.HorizontalAlignment" Value="Center"></Setter>
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Binding="{Binding N2Dry}">
+                            <DataGridTextColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Margin="5,0,5,0" Text="N2 Dry" TextAlignment="Center"
+                                                   TextWrapping="Wrap">
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTextColumn.HeaderTemplate>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                    <Setter Property="TextBlock.HorizontalAlignment" Value="Center"></Setter>
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Binding="{Binding WaitType}">
+                            <DataGridTextColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Margin="5,0,5,0" Text="Wait Type" TextAlignment="Center"
+                                                   TextWrapping="Wrap">
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTextColumn.HeaderTemplate>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                    <Setter Property="TextBlock.HorizontalAlignment" Value="Center"></Setter>
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
             <Grid Grid.Row="1">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal"
                             Margin="0,0,0,30">
-                    <TextBlock Text="共" FontSize="16" FontWeight="Bold"></TextBlock>
+                    <TextBlock Text="Total:" FontSize="16" FontWeight="Bold"></TextBlock>
                     <TextBlock Text="" FontSize="16" FontWeight="Bold" x:Name="RecipeDataNum"></TextBlock>
-                    <TextBlock Text="条" FontSize="16" FontWeight="Bold"></TextBlock>
                 </StackPanel>
             </Grid>
         </Grid>

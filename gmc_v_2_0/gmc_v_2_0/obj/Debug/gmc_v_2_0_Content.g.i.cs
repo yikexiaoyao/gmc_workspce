@@ -8,9 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/images/avatar.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/images/login.jpeg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/images/%e5%90%89%e5%a7%86%e8%a5%bf%e5%8d%8a%e5%af%bc%e4%bd%93logo%e7%9f%a2" +
-    "%e9%87%8f%e5%9b%be%e6%9c%80%e6%96%b0%e7%89%88.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/images/lego.png")]
 
 

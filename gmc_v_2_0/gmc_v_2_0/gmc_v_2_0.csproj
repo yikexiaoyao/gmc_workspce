@@ -56,14 +56,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Base\CommonBase.cs" />
+    <Compile Include="Base\WindowManager.cs" />
     <Compile Include="Service\LoginService.cs" />
+    <Compile Include="Service\RecipeService.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\RecipeViewModel.cs" />
     <Compile Include="Views\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecipeEditWindow.xaml.cs">
+      <DependentUpon>RecipeEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RecipeUnitView.xaml.cs">
       <DependentUpon>RecipeUnitView.xaml</DependentUpon>
@@ -93,6 +100,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\RecipeEditWindow.xaml" />
     <Page Include="Views\RecipeUnitView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -134,9 +142,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\images\avatar.jpg" />
-    <Resource Include="Assets\images\login.jpeg" />
-    <Resource Include="Assets\images\吉姆西半导体LOGO矢量图最新版.png" />
+    <Resource Include="Assets\Images\avatar.jpg" />
+    <Resource Include="Assets\Images\login.jpeg" />
+    <Resource Include="Assets\Images\吉姆西半导体LOGO矢量图最新版.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

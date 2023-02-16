@@ -4,9 +4,12 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using gmc_v_2_0.DataAccess;
 using gmc_v_2_0.Models;
+using gmc_v_2_0.Service;
+using gmc_v_2_0.ViewModels;
 
 namespace gmc_v_2_0.Views
 {
@@ -15,6 +18,8 @@ namespace gmc_v_2_0.Views
         public RecipeUnitView()
         {
             InitializeComponent();
+            //窗口数据绑定
+            this.DataContext = new RecipeViewModel();
 
             /*// 指定数据文件路径
             string recipePath = "../../DataAccess/CSV";
@@ -28,37 +33,15 @@ namespace gmc_v_2_0.Views
 
             // 显示配方名称
             RecipeName.ItemsSource = GetRecipeName();
-            // 显示配方数据
+            // 显示配方数据，初始化
+            RecipeName.SelectedIndex = 0;
             string recipeName = GetRecipeName()[0];
-            var dt = sqlServerAccess.GetRecipeData(recipeName);
-            if (dt != null)
-            {
-                string tempPath = "../../DataAccess/temp.csv";
-                if (File.Exists(tempPath))
-                {
-                    StreamWriter sw = new StreamWriter(tempPath, false, System.Text.Encoding.UTF8);
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        List<string> list = new List<string>();
-                        for (int j = 3; j < dt.Columns.Count; j++)
-                        {
-                            string cell = dt.Rows[i][j].ToString();
-                            list.Add(cell);
-                        }
-
-                        sw.WriteLine(string.Join(",", list));
-                    }
-
-                    sw.Close();
-                }
-            }
-
-            string recipePath = "../../DataAccess/temp.csv";
-            RecipeData.ItemsSource = ReadCSV(recipePath);
+            // 获取数据内容
+            RecipeData.ItemsSource = service.GetRecipeData(recipeName);
 
             // 数据条数
-            RecipeDataNum.Text = CommonModel.RecipeDataNum.ToString();
-            // RecipeDataNum.Text = Application.Current.Properties["RecipeDataNum"].ToString();
+            // RecipeDataNum.Text = CommonModel.RecipeDataNum.ToString();
+            RecipeDataNum.Text = Application.Current.Properties["RecipeDataNum"].ToString();
         }
 
         private CommonModel CommonModel { get; set; } = new CommonModel();
@@ -142,58 +125,7 @@ namespace gmc_v_2_0.Views
             return recipeName;
         }
 
-        // 读取CSV数据
-        private IEnumerable<RecipeModel> ReadCSV(string fileName)
-        {
-            // 逐行读取数据，存入数组
-            string[] lines = File.ReadAllLines(Path.ChangeExtension(fileName, ".csv"));
-            // 数据条数
-            // 方法一：获取全局变量
-            CommonModel.RecipeDataNum = lines.Length;
-            // 方法二：获取应用范围的属性
-            // Application.Current.Properties["RecipeDataNum"] = lines.Length.ToString();
-            // 逐行返回数据
-            return lines.Select(line =>
-            {
-                // 根据“,”切割数据，获取对应数值
-                string[] data = line.Split(',');
-                // 返回对应数值
-                return new RecipeModel(Convert.ToInt32(data[0]), data[1], Convert.ToInt32(data[2]),
-                    Convert.ToInt32(data[3]), data[4], data[5], data[6], data[7],
-                    Convert.ToInt32(data[8]), data[9], data[10], data[11], data[12],
-                    data[13], Convert.ToInt32(data[14]), data[15], data[16], data[17]);
-            });
-        }
-
-        // 获取配方数据
-        private void DataTableToCSV()
-        {
-            string recipeName = RecipeName.SelectedValue.ToString();
-            var dt = sqlServerAccess.GetRecipeData(recipeName);
-            if (dt != null)
-            {
-                // 指定临时文件路径
-                string tempPath = "../../DataAccess/temp.csv";
-                // 如果文件存在
-                if (File.Exists(tempPath))
-                {
-                    StreamWriter sw = new StreamWriter(tempPath, false, System.Text.Encoding.UTF8);
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        List<string> list = new List<string>();
-                        for (int j = 3; j < dt.Columns.Count; j++)
-                        {
-                            string cell = dt.Rows[i][j].ToString();
-                            list.Add(cell);
-                        }
-
-                        sw.WriteLine(string.Join(",", list));
-                    }
-
-                    sw.Close();
-                }
-            }
-        }
+        RecipeService service = new RecipeService();
 
         // 获取选中文件名，显示文件名对应数据
         private void RecipeName_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -202,13 +134,13 @@ namespace gmc_v_2_0.Views
             {
                 // MessageBox.Show(RecipeName.SelectedValue.ToString());
                 // 获取数据内容
-                DataTableToCSV();
-                string recipePath = "../../DataAccess/temp.csv";
-                RecipeData.ItemsSource = ReadCSV(recipePath);
+                RecipeData.ClearValue(ItemsControl.ItemsSourceProperty);
+                RecipeData.Items.Clear();
+                RecipeData.ItemsSource = service.GetRecipeData(RecipeName.SelectedValue.ToString());
 
                 // 数据条数
-                RecipeDataNum.Text = CommonModel.RecipeDataNum.ToString();
-                // RecipeDataNum.Text = Application.Current.Properties["RecipeDataNum"].ToString();
+                // RecipeDataNum.Text = CommonModel.RecipeDataNum.ToString();
+                RecipeDataNum.Text = Application.Current.Properties["RecipeDataNum"].ToString();
             }
         }
     }

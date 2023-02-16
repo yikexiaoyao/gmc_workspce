@@ -6,7 +6,7 @@ namespace gmc_v_2_0.Models
     {
         private int _stepNum;
 
-        private string _stepTime;
+        private double _stepTime;
 
         private int _waferRotatiorVal;
 
@@ -24,7 +24,7 @@ namespace gmc_v_2_0.Models
 
         private string _devArmDisp;
 
-        private string _devArmTime;
+        private double _devArmTime;
 
         private string _devArmSpeed;
 
@@ -40,9 +40,13 @@ namespace gmc_v_2_0.Models
 
         private string _waitType;
 
-        public RecipeModel(int stepNum, string stepTime, int waferRotatiorVal, int waferRotatiorAcc,
+        public RecipeModel()
+        {
+        }
+
+        public RecipeModel(int stepNum, double stepTime, int waferRotatiorVal, int waferRotatiorAcc,
             string rinseArmDisp, string rinseArmSpeed, string rinseArmStartPos, string rinseArmEndPos, int rinseArmScan,
-            string devArmDisp, string devArmTime, string devArmSpeed, string devArmStartPos, string devArmEndPos,
+            string devArmDisp, double devArmTime, string devArmSpeed, string devArmStartPos, string devArmEndPos,
             int devArmScan, string autoDamp, string n2Dry, string waitType)
         {
             _stepNum = stepNum;
@@ -76,7 +80,7 @@ namespace gmc_v_2_0.Models
             }
         }
 
-        public string StepTime
+        public double StepTime
         {
             get { return _stepTime; }
             set
@@ -166,7 +170,7 @@ namespace gmc_v_2_0.Models
             }
         }
 
-        public string DevArmTime
+        public double DevArmTime
         {
             get { return _devArmTime; }
             set

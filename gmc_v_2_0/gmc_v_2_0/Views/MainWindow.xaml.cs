@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using gmc_v_2_0.ViewModels;
+using gmc_v_2_0.Base;
 
 namespace gmc_v_2_0.Views
 {
