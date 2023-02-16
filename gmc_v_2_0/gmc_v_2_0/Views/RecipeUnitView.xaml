@@ -233,31 +233,31 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <!-- 左侧配方目录 -->
-        <Grid>
+        <Grid Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid>
                 <StackPanel>
-                    <Grid Background="White" Height="35">
+                    <Grid Height="35">
                         <TextBlock Text="Recipe Name" Foreground="Black" FontSize="16" FontWeight="Bold"
                                    HorizontalAlignment="Center" VerticalAlignment="Center">
                         </TextBlock>
                     </Grid>
-                    <Grid Background="White">
+                    <Grid Height="35">
                         <TextBox Text="Recipe Name" Foreground="Black" FontSize="16" Width="220" BorderBrush="#EEE"
-                                   HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">
+                                   HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,10">
                         </TextBox>
                     </Grid>
                     <ListBox x:Name="RecipeName" Foreground="Black" FontSize="16" FontWeight="Bold" Height="615"
                              ItemContainerStyle="{DynamicResource RecipeNameItemsStyle}"
-                             BorderBrush="#EEE" BorderThickness="1" SelectionChanged="RecipeName_SelectionChanged">
+                             BorderBrush="red" BorderThickness="1" SelectionChanged="RecipeName_SelectionChanged">
                     </ListBox>
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1">
-                <UniformGrid VerticalAlignment="Bottom" Margin="0,0,0,85" Background="White">
+                <UniformGrid VerticalAlignment="Bottom" Margin="0,0,0,45">
                     <Button Content="New" Style="{StaticResource OperationButtonStyle}" Command="{Binding}"
                             CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
                     </Button>
