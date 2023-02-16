@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using gmc_v_2_0.DataAccess;
@@ -32,19 +28,19 @@ namespace gmc_v_2_0.Views
             RecipeData.ItemsSource = ReadCSV(recipePath + "/recipe_data_" + GetCSVFileName(recipePath)[0]);*/
 
             // 显示配方名称
-            RecipeName.ItemsSource = GetRecipeName();
+            RecipeName.ItemsSource = service.GetRecipeName();
             // 显示配方数据，初始化
             RecipeName.SelectedIndex = 0;
-            string recipeName = GetRecipeName()[0];
+            string recipeName = service.GetRecipeName()[0];
             // 获取数据内容
             RecipeData.ItemsSource = service.GetRecipeData(recipeName);
 
             // 数据条数
             // RecipeDataNum.Text = CommonModel.RecipeDataNum.ToString();
             RecipeDataNum.Text = Application.Current.Properties["RecipeDataNum"].ToString();
-        }
 
-        private CommonModel CommonModel { get; set; } = new CommonModel();
+            Application.Current.Properties["RecipeName"] = RecipeName.SelectedItem;
+        }
 
         /*// 获取无前后缀文件名
         public List<string> GetCSVFileName(string recipePath)
@@ -110,21 +106,6 @@ namespace gmc_v_2_0.Views
             }
         }*/
 
-        private SqlServerAccess sqlServerAccess = new SqlServerAccess();
-
-        // 获取配方名称
-        private List<string> GetRecipeName()
-        {
-            List<string> recipeName = new List<string>();
-            var dt = sqlServerAccess.GetRecipeName();
-            foreach (var item in dt.AsEnumerable())
-            {
-                recipeName.Add(item.Field<string>("recipe_name"));
-            }
-
-            return recipeName;
-        }
-
         RecipeService service = new RecipeService();
 
         // 获取选中文件名，显示文件名对应数据
@@ -141,6 +122,8 @@ namespace gmc_v_2_0.Views
                 // 数据条数
                 // RecipeDataNum.Text = CommonModel.RecipeDataNum.ToString();
                 RecipeDataNum.Text = Application.Current.Properties["RecipeDataNum"].ToString();
+
+                Application.Current.Properties["RecipeName"] = RecipeName.SelectedItem;
             }
         }
     }

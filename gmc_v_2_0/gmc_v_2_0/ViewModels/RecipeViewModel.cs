@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using gmc_v_2_0.Base;
 using gmc_v_2_0.DataAccess;
 using gmc_v_2_0.Models;
+using gmc_v_2_0.Service;
 using gmc_v_2_0.Views;
 
 namespace gmc_v_2_0.ViewModels
@@ -56,9 +57,7 @@ namespace gmc_v_2_0.ViewModels
             }
         }
 
-        private SqlServerAccess sqlServerAccess = new SqlServerAccess();
-
-        RecipeModel RecipeModel { get; set; }
+        RecipeService service = new RecipeService();
 
         // 保存配方数据
         private CommandBase _saveCommand;
@@ -72,25 +71,7 @@ namespace gmc_v_2_0.ViewModels
                     _saveCommand = new CommandBase();
                     _saveCommand.DoExecute = new Action<object>(obj =>
                     {
-                        /*sqlServerAccess.UpdateRecipeData(Application.Current.Properties["RecipeName"].ToString(),
-                            RecipeModel);*/
-                        RecipeEditWindow rew = new RecipeEditWindow();
-                        DataTable dt = new DataTable();
-                        dt = (DataTable)rew.RecipeData.ItemsSource;
-                        if (dt != null)
-                        {
-                            // 将修改的数据更新到数据库
-                            try
-                            {
-                                sqlServerAccess.Update(dt);
-                                rew.RecipeData.ItemsSource = dt.DefaultView;
-                            }
-                            catch (Exception e)
-                            {
-                                dt.RejectChanges();
-                                MessageBox.Show(e.Message);
-                            }
-                        }
+                        service.UpdateRecipeData(Application.Current.Properties["RecipeName"].ToString());
                         // 如果配方数据更新成功
                         if (true)
                         {
