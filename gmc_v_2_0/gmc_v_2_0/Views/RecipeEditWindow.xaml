@@ -645,18 +645,38 @@
                         <Button Content="Add" Style="{StaticResource OperationButtonStyle}"
                                 Command="{Binding AddCommand}"
                                 CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"></Setter>
+                                </Style>
+                            </Button.Resources>
                         </Button>
                         <Button Content="Delete" Style="{StaticResource OperationButtonStyle}"
                                 Command="{Binding DeleteCommand}"
                                 CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"></Setter>
+                                </Style>
+                            </Button.Resources>
                         </Button>
                         <Button Content="Save" Style="{StaticResource OperationButtonStyle}"
                                 Command="{Binding SaveCommand}"
                                 CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"></Setter>
+                                </Style>
+                            </Button.Resources>
                         </Button>
                         <Button Content="Cancel" Style="{StaticResource OperationButtonStyle}"
                                 Command="{Binding CloseCommand}"
                                 CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"></Setter>
+                                </Style>
+                            </Button.Resources>
                         </Button>
                     </WrapPanel>
                 </Grid>

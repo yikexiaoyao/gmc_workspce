@@ -15,5 +15,17 @@ namespace gmc_v_2_0.Models
                 this.NotifyChanged();
             }
         }
+
+        private bool _isChecked;
+
+        public bool IsChecked
+        {
+            get { return _isChecked; }
+            set
+            {
+                _isChecked = value;
+                this.NotifyChanged();
+            }
+        }
     }
 }

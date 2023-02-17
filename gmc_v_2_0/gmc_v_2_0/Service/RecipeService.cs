@@ -78,20 +78,8 @@ namespace gmc_v_2_0.Service
         private SqlCommand comm { get; set; }
         private SqlDataAdapter adapter { get; set; }
 
-        // 更新配方数据
-        public void UpdateRecipeData(string recipe_name)
-        {
-            string sql = $"select * from recipes where recipe_name='{recipe_name}' order by step_num asc";
-            comm = new SqlCommand(sql, conn);
-            adapter = new SqlDataAdapter(comm);
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-            RecipeEditWindow rew = new RecipeEditWindow();
-            rew.RecipeData.ItemsSource = dt.DefaultView;
-        }
-
         // 新建配方
-        public void AddRecipe(RecipeModel recipeModel)
+        public void NewRecipe(RecipeModel recipeModel)
         {
             string sql = $"insert into recipes(step_num,step_time," +
                          $"wafer_rotatior_val,wafer_rotatior_acc," +
@@ -109,7 +97,41 @@ namespace gmc_v_2_0.Service
         // 删除配方
         public void DeleteRecipe(string recipe_name)
         {
-            string sql = $"delete from recipes where recipe_name='{recipe_name}'";
+            string sql = $"";
+        }
+
+        // 新增配方数据
+        public void AddRecipe(RecipeModel recipeModel)
+        {
+            string sql = $"insert into recipes(step_num,step_time," +
+                         $"wafer_rotatior_val,wafer_rotatior_acc," +
+                         $"rinse_arm_disp,rinse_arm_speed,rinse_arm_start_pos,rinse_arm_end_pos,rinse_arm_scan," +
+                         $"dev_arm_disp,dev_arm_time,dev_arm_speed,dev_arm_start_pos,dev_arm_end_pos,dev_arm_scan," +
+                         $"auto_damp,n2_dry,wait_type)" +
+                         $" values" +
+                         $" ({recipeModel.StepNum},{recipeModel.StepTime}," +
+                         $"{recipeModel.WaferRotatiorVal},{recipeModel.WaferRotatiorAcc}," +
+                         $"'{recipeModel.RinseArmDisp}','{recipeModel.RinseArmSpeed}','{recipeModel.RinseArmStartPos}','{recipeModel.RinseArmEndPos}',{recipeModel.RinseArmScan}," +
+                         $"'{recipeModel.DevArmDisp}',{recipeModel.DevArmTime},'{recipeModel.DevArmSpeed}','{recipeModel.DevArmStartPos}','{recipeModel.DevArmEndPos}',{recipeModel.DevArmScan}," +
+                         $"'{recipeModel.AutoDamp}','{recipeModel.N2Dry}','{recipeModel.WaitType}')";
+        }
+
+        // 修改配方数据
+        public void UpdateRecipeData(string recipe_name)
+        {
+            string sql = $"select * from recipes where recipe_name='{recipe_name}' order by step_num asc";
+            comm = new SqlCommand(sql, conn);
+            adapter = new SqlDataAdapter(comm);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            RecipeEditWindow rew = new RecipeEditWindow();
+            rew.RecipeData.ItemsSource = dt.DefaultView;
+        }
+
+        // 删除配方数据
+        public void DeleteRecipe(string recipe_name, int step_num)
+        {
+            string sql = $"delete from recipes where recipe_name='{recipe_name}' and step_num='{step_num}'";
         }
 
         // 查询配方

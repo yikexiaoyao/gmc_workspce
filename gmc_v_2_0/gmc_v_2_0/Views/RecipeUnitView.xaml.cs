@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using gmc_v_2_0.DataAccess;
-using gmc_v_2_0.Models;
 using gmc_v_2_0.Service;
 using gmc_v_2_0.ViewModels;
 

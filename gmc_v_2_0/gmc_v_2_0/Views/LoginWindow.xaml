@@ -16,7 +16,8 @@
             <Grid Background="Transparent" Name="back">
                 <TextBlock Text="&#xe69a;" FontFamily="{StaticResource iconfont}"
                            VerticalAlignment="Center" HorizontalAlignment="Center"
-                           FontSize="16"></TextBlock>
+                           FontSize="16">
+                </TextBlock>
             </Grid>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="true">
@@ -49,7 +50,8 @@
                                 <TextBlock Text="&#xe7ae;" FontFamily="{StaticResource iconfont}"
                                            FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"
                                            Foreground="#DDD" />
-                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden"
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false"
+                                              HorizontalScrollBarVisibility="Hidden"
                                               VerticalScrollBarVisibility="Hidden" Grid.Column="1"
                                               VerticalAlignment="Center" MinHeight="20" />
                             </Grid>
@@ -64,7 +66,8 @@
                             <Trigger Property="IsKeyboardFocused" Value="true">
                                 <Setter Property="BorderBrush" TargetName="border" Value="#FF569DE5" />
                             </Trigger>
-                            <DataTrigger Binding="{Binding Path=Text,RelativeSource={RelativeSource Mode=Self}}" Value="">
+                            <DataTrigger Binding="{Binding Path=Text,RelativeSource={RelativeSource Mode=Self}}"
+                                         Value="">
                                 <Setter Property="Visibility" TargetName="markText" Value="Visible" />
                             </DataTrigger>
                         </ControlTemplate.Triggers>
@@ -81,10 +84,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="PasswordBox">
                         <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    Background="{TemplateBinding Background}"
-                                    SnapsToDevicePixels="True"
-                                    CornerRadius="5">
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True"
+                                CornerRadius="5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="40" />
@@ -95,7 +98,8 @@
                                            Name="markText" Visibility="Collapsed" FontSize="16" Margin="2,0" />
                                 <TextBlock Text="&#xe61d;" FontFamily="{StaticResource iconfont}" FontSize="16"
                                            VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#DDD" />
-                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden"
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false"
+                                              HorizontalScrollBarVisibility="Hidden"
                                               VerticalScrollBarVisibility="Hidden" Grid.Column="1"
                                               VerticalAlignment="Center" MinHeight="20" />
                             </Grid>
@@ -156,23 +160,31 @@
                 <!--操作按钮-->
                 <Button HorizontalAlignment="Right" Content="X" Margin="0,0,-10,0"
                         Width="40" Height="30" Template="{StaticResource CloseButtonTemplate}"
-                        Command="{Binding CloseCommand}" CommandParameter="{Binding .,RelativeSource={RelativeSource AncestorType=Window}}"></Button>
+                        Command="{Binding CloseCommand}"
+                        CommandParameter="{Binding .,RelativeSource={RelativeSource AncestorType=Window}}">
+                </Button>
 
                 <!--头部-->
                 <StackPanel Grid.Row="1">
-                    <TextBlock Text="吉姆西半导体科技（无锡）有限公司" Foreground="#333" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="GMC Semitech Co., Ltd" FontSize="16" Margin="0,10,0,0" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Text="吉姆西半导体科技（无锡）有限公司" Foreground="#333" FontSize="16" FontWeight="Bold"
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <TextBlock Text="GMC Semitech Co., Ltd" FontSize="16" Margin="0,10,0,0"
+                               HorizontalAlignment="Center">
+                    </TextBlock>
                     <TextBlock Text="研究院湿法单片清洗系统模板01" Foreground="#888" Margin="0,10,0,0" HorizontalAlignment="Center"></TextBlock>
                 </StackPanel>
 
                 <!--用户名-->
                 <TextBox Grid.Row="3" Style="{StaticResource UserNameTextBoxStyle}"
-                         Text="{Binding UserModel.UserName,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                         Text="{Binding UserModel.UserName,UpdateSourceTrigger=PropertyChanged}">
+                </TextBox>
 
                 <!--密码-->
                 <PasswordBox Grid.Row="4" Style="{StaticResource PasswordBoxStyle}"
                              base:PasswordBoxHelper.Password="{Binding UserModel.Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                             base:PasswordBoxHelper.Attach="true"></PasswordBox>
+                             base:PasswordBoxHelper.Attach="true">
+                </PasswordBox>
 
                 <!--记住我-->
                 <!--<CheckBox Grid.Row="5" Content="记住我" HorizontalAlignment="Left" VerticalAlignment="Center"></CheckBox>-->
@@ -183,22 +195,35 @@
                 </TextBlock>-->
 
                 <!--登录按钮-->
-                <Button Content="登      录" Grid.Row="6" Background="#FF104991" Foreground="White" Height="30" Margin="0,8" BorderThickness="0" VerticalAlignment="Top"
-                        Command="{Binding LoginCommand}" CommandParameter="{Binding .,RelativeSource={RelativeSource AncestorType=Window}}"></Button>
+                <Button Content="登      录" Grid.Row="6" Background="#FF104991" Foreground="White" Height="30"
+                        Margin="0,8" BorderThickness="0" VerticalAlignment="Top"
+                        Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding .,RelativeSource={RelativeSource AncestorType=Window}}">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"></Setter>
+                        </Style>
+                    </Button.Resources>
+                </Button>
 
                 <!--错误提示-->
-                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" Grid.Row="7" TextWrapping="Wrap" LineHeight="23" TextAlignment="Center"></TextBlock>
+                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" Grid.Row="7" TextWrapping="Wrap"
+                           LineHeight="23" TextAlignment="Center">
+                </TextBlock>
             </Grid>
         </Border>
 
         <!--插图-->
         <Polygon Points="0 0,420,0,450 200 420 400 0 400" HorizontalAlignment="Left">
             <Polygon.Fill>
-                <ImageBrush ImageSource="pack://application:,,,/gmc_v_2_0;component/Assets/images/login.jpeg" Stretch="UniformToFill" Viewbox="0,0,0.6,1"></ImageBrush>
+                <ImageBrush ImageSource="pack://application:,,,/gmc_v_2_0;component/Assets/images/login.jpeg"
+                            Stretch="UniformToFill" Viewbox="0,0,0.6,1">
+                </ImageBrush>
             </Polygon.Fill>
             <Polygon.Effect>
                 <DropShadowEffect Color="Black" ShadowDepth="0" Direction="0" BlurRadius="10"
-                                  Opacity="0.5"></DropShadowEffect>
+                                  Opacity="0.5">
+                </DropShadowEffect>
             </Polygon.Effect>
         </Polygon>
     </Grid>

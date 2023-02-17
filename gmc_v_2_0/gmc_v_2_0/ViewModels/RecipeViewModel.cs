@@ -1,13 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using gmc_v_2_0.Base;
-using gmc_v_2_0.DataAccess;
-using gmc_v_2_0.Models;
 using gmc_v_2_0.Service;
 using gmc_v_2_0.Views;
 
@@ -149,6 +142,33 @@ namespace gmc_v_2_0.ViewModels
                 }
 
                 return _deleteCommand;
+            }
+        }
+
+        private CommandBase _searchCommand;
+
+        public CommandBase SearchCommand
+        {
+            get
+            {
+                if (_searchCommand == null)
+                {
+                    _searchCommand = new CommandBase();
+                    _searchCommand.DoExecute = new Action<object>(obj =>
+                    {
+                        if (true)
+                        {
+                            // 提示
+                            MessageBox.Show("Search Completed");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Delete Failed");
+                        }
+                    });
+                }
+
+                return _searchCommand;
             }
         }
     }
