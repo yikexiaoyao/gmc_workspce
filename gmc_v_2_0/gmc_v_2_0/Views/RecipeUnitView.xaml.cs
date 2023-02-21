@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System.Data;
+using System.Windows;
 using System.Windows.Controls;
+using gmc_v_2_0.Models;
 using gmc_v_2_0.Service;
 using gmc_v_2_0.ViewModels;
 
@@ -120,6 +122,15 @@ namespace gmc_v_2_0.Views
                 RecipeDataNum.Text = Application.Current.Properties["RecipeDataNum"].ToString();
 
                 Application.Current.Properties["RecipeName"] = RecipeName.SelectedItem;
+            }
+        }
+
+        // 获取选中配方数据
+        private void RecipeData_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (RecipeData.SelectedItem != null)
+            {
+                Application.Current.Properties["selectedRecipeDataItem"] = RecipeData.SelectedItem as RecipeModel;
             }
         }
     }

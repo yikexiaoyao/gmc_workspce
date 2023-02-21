@@ -1,4 +1,4 @@
-<Window x:Class="gmc_v_2_0.Views.RecipeEditWindow"
+<Window x:Class="gmc_v_2_0.Views.RecipeEditWindow1"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -389,7 +389,7 @@
                     </ListView>-->
                     <!-- 方法二 -->
                     <DataGrid x:Name="RecipeData" BorderThickness="0" FontSize="16" FontWeight="Bold" IsReadOnly="True"
-                              RowHeight="35" HorizontalContentAlignment="Center" AutoGenerateColumns="False">
+                              RowHeight="35" HorizontalContentAlignment="Center" AutoGenerateColumns="False" ItemsSource="{Binding Recipes}">
                         <DataGrid.Columns>
                             <!--<DataGridTextColumn
                                 Binding="{Binding StepNum}"
@@ -652,7 +652,7 @@
                             </Button.Resources>
                         </Button>
                         <Button Content="Delete" Style="{StaticResource OperationButtonStyle}"
-                                Command="{Binding DeleteCommand}"
+                                Command="{Binding DeleteDataCommand}"
                                 CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
                             <Button.Resources>
                                 <Style TargetType="Border">

@@ -3,11 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:gmc_v_2_0.Views"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:base="clr-namespace:gmc_v_2_0.Base"
-             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="904" d:DesignWidth="1080">
     <UserControl.Resources>
@@ -375,7 +370,7 @@
             <Grid>
                 <DataGrid HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" x:Name="RecipeData"
                           IsReadOnly="True" BorderThickness="0" RowHeight="35" FontSize="16" FontWeight="Bold"
-                          Height="820" AutoGenerateColumns="False">
+                          Height="820" AutoGenerateColumns="False" SelectionChanged="RecipeData_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding StepNum}">
                             <DataGridTextColumn.HeaderTemplate>

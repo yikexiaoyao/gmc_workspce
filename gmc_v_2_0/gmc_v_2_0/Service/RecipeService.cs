@@ -120,12 +120,6 @@ namespace gmc_v_2_0.Service
         public void UpdateRecipeData(string recipe_name)
         {
             string sql = $"select * from recipes where recipe_name='{recipe_name}' order by step_num asc";
-            comm = new SqlCommand(sql, conn);
-            adapter = new SqlDataAdapter(comm);
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-            RecipeEditWindow rew = new RecipeEditWindow();
-            rew.RecipeData.ItemsSource = dt.DefaultView;
         }
 
         // 删除配方数据

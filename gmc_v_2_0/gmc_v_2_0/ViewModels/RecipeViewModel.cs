@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using gmc_v_2_0.Base;
+using gmc_v_2_0.Models;
 using gmc_v_2_0.Service;
 using gmc_v_2_0.Views;
 
@@ -8,27 +11,6 @@ namespace gmc_v_2_0.ViewModels
 {
     public class RecipeViewModel : NotifyBase
     {
-        // 编辑配方数据
-        private CommandBase _editCommand;
-
-        public CommandBase EditCommand
-        {
-            get
-            {
-                if (_editCommand == null)
-                {
-                    _editCommand = new CommandBase();
-                    _editCommand.DoExecute = new Action<object>(obj =>
-                    {
-                        RecipeEditWindow rew = new RecipeEditWindow();
-                        rew.ShowDialog();
-                    });
-                }
-
-                return _editCommand;
-            }
-        }
-
         //关闭窗口
         private CommandBase _closeCommand;
 
@@ -50,37 +32,83 @@ namespace gmc_v_2_0.ViewModels
             }
         }
 
-        RecipeService service = new RecipeService();
+        // 新建配方
+        private CommandBase _newCommand;
 
-        // 保存配方数据
-        private CommandBase _saveCommand;
-
-        public CommandBase SaveCommand
+        public CommandBase NewCommand
         {
             get
             {
-                if (_saveCommand == null)
+                if (_newCommand == null)
                 {
-                    _saveCommand = new CommandBase();
-                    _saveCommand.DoExecute = new Action<object>(obj =>
+                    _newCommand = new CommandBase();
+                    _newCommand.DoExecute = new Action<object>(obj =>
                     {
-                        service.UpdateRecipeData(Application.Current.Properties["RecipeName"].ToString());
-                        // 如果配方数据更新成功
+                        // RecipeEditWindow rew = new RecipeEditWindow();
+                        // rew.ShowDialog();
+                    });
+                }
+
+                return _newCommand;
+            }
+        }
+
+        // 编辑配方
+        private CommandBase _editCommand;
+
+        public CommandBase EditCommand
+        {
+            get
+            {
+                if (_editCommand == null)
+                {
+                    _editCommand = new CommandBase();
+                    _editCommand.DoExecute = new Action<object>(obj =>
+                    {
+                        // 是否选择
+                        if (Application.Current.Properties["selectedRecipeDataItem"] != null)
+                        {
+                            RecipeEditWindow rew = new RecipeEditWindow(Application.Current.Properties["selectedRecipeDataItem"] as RecipeModel);
+                            rew.ShowDialog();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please Select");
+                        }
+                    });
+                }
+
+                return _editCommand;
+            }
+        }
+
+        // 删除配方
+        private CommandBase _deleteCommand;
+
+        public CommandBase DeleteCommand
+        {
+            get
+            {
+                if (_deleteCommand == null)
+                {
+                    _deleteCommand = new CommandBase();
+                    _deleteCommand.DoExecute = new Action<object>(obj =>
+                    {
                         if (true)
                         {
                             // 提示
-                            MessageBox.Show("Save Successfully");
+                            MessageBox.Show("Delete Successfully");
                             // 关闭窗口
                             (obj as Window).DialogResult = false;
                         }
                         else
                         {
-                            MessageBox.Show("Save Failed");
+                            MessageBox.Show("Delete Failed");
                         }
                     });
                 }
 
-                return _saveCommand;
+                return _deleteCommand;
             }
         }
 
@@ -115,17 +143,48 @@ namespace gmc_v_2_0.ViewModels
             }
         }
 
-        // 删除配方数据
-        private CommandBase _deleteCommand;
+        // 保存配方数据
+        private CommandBase _saveCommand;
 
-        public CommandBase DeleteCommand
+        public CommandBase SaveCommand
         {
             get
             {
-                if (_deleteCommand == null)
+                if (_saveCommand == null)
                 {
-                    _deleteCommand = new CommandBase();
-                    _deleteCommand.DoExecute = new Action<object>(obj =>
+                    _saveCommand = new CommandBase();
+                    _saveCommand.DoExecute = new Action<object>(obj =>
+                    {
+                        // 如果配方数据更新成功
+                        if (true)
+                        {
+                            // 提示
+                            MessageBox.Show("Save Successfully");
+                            // 关闭窗口
+                            (obj as Window).DialogResult = false;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Save Failed");
+                        }
+                    });
+                }
+
+                return _saveCommand;
+            }
+        }
+
+        // 删除配方数据
+        private CommandBase _deleteDataCommand;
+
+        public CommandBase DeleteDataCommand
+        {
+            get
+            {
+                if (_deleteDataCommand == null)
+                {
+                    _deleteDataCommand = new CommandBase();
+                    _deleteDataCommand.DoExecute = new Action<object>(obj =>
                     {
                         if (true)
                         {
@@ -170,6 +229,11 @@ namespace gmc_v_2_0.ViewModels
 
                 return _searchCommand;
             }
+        }
+
+        public RecipeViewModel()
+        {
+
         }
     }
 }

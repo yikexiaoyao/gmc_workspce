@@ -5,9 +5,9 @@ using gmc_v_2_0.ViewModels;
 
 namespace gmc_v_2_0.Views
 {
-    public partial class RecipeEditWindow : Window
+    public partial class RecipeEditWindow1 : Window
     {
-        public RecipeEditWindow()
+        public RecipeEditWindow1()
         {
             InitializeComponent();
             //窗口数据绑定
@@ -18,7 +18,7 @@ namespace gmc_v_2_0.Views
             RecipeData.ItemsSource = service.GetRecipeData(recipeName);
         }
 
-        RecipeService service = new RecipeService();
+        private RecipeService service = new RecipeService();
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
