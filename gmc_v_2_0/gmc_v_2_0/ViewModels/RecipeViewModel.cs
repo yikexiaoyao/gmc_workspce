@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using gmc_v_2_0.Base;
@@ -11,6 +12,9 @@ namespace gmc_v_2_0.ViewModels
 {
     public class RecipeViewModel : NotifyBase
     {
+        private RecipeService service = new RecipeService();
+        private SqlDataAdapter adapter { get; set; }
+
         //关闭窗口
         private CommandBase _closeCommand;
 
@@ -68,7 +72,9 @@ namespace gmc_v_2_0.ViewModels
                         // 是否选择
                         if (Application.Current.Properties["selectedRecipeDataItem"] != null)
                         {
-                            RecipeEditWindow rew = new RecipeEditWindow(Application.Current.Properties["selectedRecipeDataItem"] as RecipeModel);
+                            RecipeEditWindow rew =
+                                new RecipeEditWindow(
+                                    Application.Current.Properties["selectedRecipeDataItem"] as RecipeModel);
                             rew.ShowDialog();
                         }
                         else
@@ -155,18 +161,31 @@ namespace gmc_v_2_0.ViewModels
                     _saveCommand = new CommandBase();
                     _saveCommand.DoExecute = new Action<object>(obj =>
                     {
-                        // 如果配方数据更新成功
-                        if (true)
-                        {
-                            // 提示
-                            MessageBox.Show("Save Successfully");
-                            // 关闭窗口
-                            (obj as Window).DialogResult = false;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Save Failed");
-                        }
+                        var changedRecipeModel = (RecipeModel) (obj as RecipeEditWindow).RecipeData.DataContext;
+                        var unChangedRecipeModel = (RecipeModel) Application.Current.Properties["UnChangedRecipeModel"];
+                        bool isEqual =
+                            changedRecipeModel.StepNum == unChangedRecipeModel.StepNum ||
+                            changedRecipeModel.StepTime == unChangedRecipeModel.StepTime ||
+                            changedRecipeModel.WaferRotatiorVal == unChangedRecipeModel.WaferRotatiorVal ||
+                            changedRecipeModel.WaferRotatiorAcc == unChangedRecipeModel.WaferRotatiorAcc ||
+                            changedRecipeModel.RinseArmDisp == unChangedRecipeModel.RinseArmDisp ||
+                            changedRecipeModel.RinseArmSpeed == unChangedRecipeModel.RinseArmSpeed ||
+                            changedRecipeModel.RinseArmStartPos == unChangedRecipeModel.RinseArmStartPos ||
+                            changedRecipeModel.RinseArmEndPos == unChangedRecipeModel.RinseArmEndPos ||
+                            changedRecipeModel.RinseArmScan == unChangedRecipeModel.RinseArmScan ||
+                            changedRecipeModel.DevArmDisp == unChangedRecipeModel.DevArmDisp ||
+                            changedRecipeModel.DevArmTime == unChangedRecipeModel.DevArmTime ||
+                            changedRecipeModel.DevArmSpeed == unChangedRecipeModel.DevArmSpeed ||
+                            changedRecipeModel.DevArmStartPos == unChangedRecipeModel.DevArmStartPos ||
+                            changedRecipeModel.DevArmEndPos == unChangedRecipeModel.DevArmEndPos ||
+                            changedRecipeModel.DevArmScan == unChangedRecipeModel.DevArmScan ||
+                            changedRecipeModel.AutoDamp == unChangedRecipeModel.AutoDamp ||
+                            changedRecipeModel.N2Dry == unChangedRecipeModel.N2Dry ||
+                            changedRecipeModel.WaitType == unChangedRecipeModel.WaitType;
+                        service.UpdateRecipeData(changedRecipeModel,
+                            Application.Current.Properties["RecipeName"].ToString());
+                        // 关闭窗口
+                        (obj as Window).DialogResult = false;
                     });
                 }
 
@@ -229,11 +248,6 @@ namespace gmc_v_2_0.ViewModels
 
                 return _searchCommand;
             }
-        }
-
-        public RecipeViewModel()
-        {
-
         }
     }
 }

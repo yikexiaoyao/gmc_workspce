@@ -1,6 +1,8 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
+using gmc_v_2_0.Base;
 using gmc_v_2_0.Models;
 using gmc_v_2_0.Service;
 using gmc_v_2_0.ViewModels;
@@ -104,7 +106,7 @@ namespace gmc_v_2_0.Views
             }
         }*/
 
-        RecipeService service = new RecipeService();
+        private RecipeService service = new RecipeService();
 
         // 获取选中文件名，显示文件名对应数据
         private void RecipeName_SelectionChanged(object sender, SelectionChangedEventArgs e)

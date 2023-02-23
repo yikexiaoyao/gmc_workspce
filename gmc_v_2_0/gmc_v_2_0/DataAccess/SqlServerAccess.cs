@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
-using System.Windows.Documents;
+using System.Windows;
 using gmc_v_2_0.Base;
 using gmc_v_2_0.Models;
-using gmc_v_2_0.Views;
 
 /*
  * 数据库操作
@@ -21,6 +16,7 @@ namespace gmc_v_2_0.DataAccess
     {
         public SqlConnection Conn { get; set; }
         public SqlCommand Comm { get; set; }
+        public SqlCommandBuilder Cmb { get; set; }
         public SqlDataAdapter adapter { get; set; }
 
         //释放连接
@@ -143,6 +139,25 @@ namespace gmc_v_2_0.DataAccess
             return dt;
         }
 
+        public void SetData(string sql)
+        {
+            try
+            {
+                if (DBConnection())
+                {
+                    adapter = new SqlDataAdapter(sql, Conn);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.Dispose();
+            }
+        }
+
         // 获取配方名称
         public DataTable GetRecipeName()
         {
@@ -167,7 +182,7 @@ namespace gmc_v_2_0.DataAccess
         public void NewRecipe()
         {
             string sql = $"";
-            adapter = new SqlDataAdapter(sql,Conn);
+            adapter = new SqlDataAdapter(sql, Conn);
         }
 
         // 新增配方数据
@@ -188,21 +203,54 @@ namespace gmc_v_2_0.DataAccess
         }
 
         // 更新配方数据
-        public void UpdateRecipeData(string recipe_name, RecipeModel recipeModel)
+        public void UpdateRecipeData(RecipeModel recipeModel, string recipe_name)
         {
-            string sql = $"update recipes set step_num={recipeModel.StepNum},step_time={recipeModel.StepTime}," +
-                         $"wafer_rotatior_val={recipeModel.WaferRotatiorVal},wafer_rotatior_acc={recipeModel.WaferRotatiorAcc}," +
-                         $"rinse_arm_disp='{recipeModel.RinseArmDisp}',rinse_arm_speed='{recipeModel.RinseArmSpeed}',rinse_arm_start_pos='{recipeModel.RinseArmStartPos}',rinse_arm_end_pos='{recipeModel.RinseArmEndPos}',rinse_arm_scan={recipeModel.RinseArmScan}," +
-                         $"dev_arm_disp='{recipeModel.DevArmDisp}',dev_arm_time={recipeModel.DevArmTime},dev_arm_speed='{recipeModel.DevArmSpeed}',dev_arm_start_pos='{recipeModel.DevArmStartPos}',dev_arm_end_pos='{recipeModel.DevArmEndPos}',dev_arm_scan={recipeModel.DevArmScan}," +
-                         $"auto_damp='{recipeModel.AutoDamp}',n2_dry='{recipeModel.N2Dry}',wait_type='{recipeModel.WaitType}'" +
-                         $" where recipe_name='{recipe_name}'";
-            adapter = new SqlDataAdapter(sql, Conn);
-        }
-
-        public void Update(DataTable dt)
-        {
-            string sql = "select * from recipes";
-            adapter.Fill(dt);
+            string sql1 = $"select * from recipes where recipe_name='{recipe_name}'";
+            string sql2 = $"update recipes set step_num={recipeModel.StepNum},step_time={recipeModel.StepTime}," +
+                          $"wafer_rotatior_val={recipeModel.WaferRotatiorVal},wafer_rotatior_acc={recipeModel.WaferRotatiorAcc}," +
+                          $"rinse_arm_disp='{recipeModel.RinseArmDisp}',rinse_arm_speed='{recipeModel.RinseArmSpeed}',rinse_arm_start_pos='{recipeModel.RinseArmStartPos}',rinse_arm_end_pos='{recipeModel.RinseArmEndPos}',rinse_arm_scan={recipeModel.RinseArmScan}," +
+                          $"dev_arm_disp='{recipeModel.DevArmDisp}',dev_arm_time={recipeModel.DevArmTime},dev_arm_speed='{recipeModel.DevArmSpeed}',dev_arm_start_pos='{recipeModel.DevArmStartPos}',dev_arm_end_pos='{recipeModel.DevArmEndPos}',dev_arm_scan={recipeModel.DevArmScan}," +
+                          $"auto_damp='{recipeModel.AutoDamp}',n2_dry='{recipeModel.N2Dry}',wait_type='{recipeModel.WaitType}'" +
+                          $" where recipe_name='{recipe_name}'";
+            if (DBConnection())
+            {
+                try
+                {
+                    adapter = new SqlDataAdapter(sql1, Conn);
+                    DataSet ds = new DataSet();
+                    adapter.Fill(ds);
+                    if (ds.Tables[0].Rows.Count == 1)
+                    {
+                        Cmb = new SqlCommandBuilder(adapter);
+                        DataRow dr = ds.Tables[0].Rows[0];
+                        dr["step_num"] = recipeModel.StepNum;
+                        dr["step_time"] = recipeModel.StepTime;
+                        dr["wafer_rotatior_val"] = recipeModel.WaferRotatiorVal;
+                        dr["wafer_rotatior_acc"] = recipeModel.WaferRotatiorAcc;
+                        dr["rinse_arm_disp"] = recipeModel.RinseArmDisp;
+                        dr["rinse_arm_speed"] = recipeModel.RinseArmSpeed;
+                        dr["rinse_arm_start_pos"] = recipeModel.RinseArmStartPos;
+                        dr["rinse_arm_end_pos"] = recipeModel.RinseArmEndPos;
+                        dr["rinse_arm_scan"] = recipeModel.RinseArmScan;
+                        dr["dev_arm_disp"] = recipeModel.DevArmDisp;
+                        dr["dev_arm_time"] = recipeModel.DevArmTime;
+                        dr["dev_arm_speed"] = recipeModel.DevArmSpeed;
+                        dr["dev_arm_start_pos"] = recipeModel.DevArmStartPos;
+                        dr["dev_arm_end_pos"] = recipeModel.DevArmEndPos;
+                        dr["dev_arm_scan"] = recipeModel.DevArmScan;
+                        dr["auto_damp"] = recipeModel.AutoDamp;
+                        dr["n2_dry"] = recipeModel.N2Dry;
+                        dr["wait_type"] = recipeModel.WaitType;
+                        adapter.Update(ds);
+                        ds.Tables[0].AcceptChanges();
+                        MessageBox.Show("Save Successfully!");
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Save Failed!" + Environment.NewLine + e.Message);
+                }
+            }
         }
 
         // 删除配方数据

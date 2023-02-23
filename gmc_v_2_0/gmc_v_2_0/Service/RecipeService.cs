@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -74,10 +75,6 @@ namespace gmc_v_2_0.Service
             return modelList;
         }
 
-        private SqlConnection conn { get; set; }
-        private SqlCommand comm { get; set; }
-        private SqlDataAdapter adapter { get; set; }
-
         // 新建配方
         public void NewRecipe(RecipeModel recipeModel)
         {
@@ -97,7 +94,7 @@ namespace gmc_v_2_0.Service
         // 删除配方
         public void DeleteRecipe(string recipe_name)
         {
-            string sql = $"";
+            string sql = $"delete from recipes where recipe_name='{recipe_name}'";
         }
 
         // 新增配方数据
@@ -117,9 +114,16 @@ namespace gmc_v_2_0.Service
         }
 
         // 修改配方数据
-        public void UpdateRecipeData(string recipe_name)
+        public void UpdateRecipeData(RecipeModel recipeModel, string recipe_name)
         {
             string sql = $"select * from recipes where recipe_name='{recipe_name}' order by step_num asc";
+            /*string sql = $"update recipes set step_num={recipeModel.StepNum},step_time={recipeModel.StepTime}," +
+                         $"wafer_rotatior_val={recipeModel.WaferRotatiorVal},wafer_rotatior_acc={recipeModel.WaferRotatiorAcc}," +
+                         $"rinse_arm_disp='{recipeModel.RinseArmDisp}',rinse_arm_speed='{recipeModel.RinseArmSpeed}',rinse_arm_start_pos='{recipeModel.RinseArmStartPos}',rinse_arm_end_pos='{recipeModel.RinseArmEndPos}',rinse_arm_scan={recipeModel.RinseArmScan}," +
+                         $"dev_arm_disp='{recipeModel.DevArmDisp}',dev_arm_time={recipeModel.DevArmTime},dev_arm_speed='{recipeModel.DevArmSpeed}',dev_arm_start_pos='{recipeModel.DevArmStartPos}',dev_arm_end_pos='{recipeModel.DevArmEndPos}',dev_arm_scan={recipeModel.DevArmScan}," +
+                         $"auto_damp='{recipeModel.AutoDamp}',n2_dry='{recipeModel.N2Dry}',wait_type='{recipeModel.WaitType}'" +
+                         $" where recipe_name='{recipe_name}'";*/
+            sqlServerAccess.UpdateRecipeData(recipeModel, recipe_name);
         }
 
         // 删除配方数据
