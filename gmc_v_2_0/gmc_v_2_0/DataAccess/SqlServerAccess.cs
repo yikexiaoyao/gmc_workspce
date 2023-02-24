@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
@@ -20,7 +21,7 @@ namespace gmc_v_2_0.DataAccess
         public SqlDataAdapter adapter { get; set; }
 
         //释放连接
-        private void Dispose()
+        public void Dispose()
         {
             if (adapter != null)
             {
@@ -43,7 +44,7 @@ namespace gmc_v_2_0.DataAccess
         }
 
         //创建连接
-        private bool DBConnection()
+        public bool DBConnection()
         {
             //通过配置文件获取数据库信息
             string connStr = ConfigurationManager.ConnectionStrings["gmc01_DB"].ConnectionString;
@@ -205,7 +206,7 @@ namespace gmc_v_2_0.DataAccess
         // 更新配方数据
         public void UpdateRecipeData(RecipeModel recipeModel, string recipe_name)
         {
-            string sql1 = $"select * from recipes where recipe_name='{recipe_name}'";
+            string sql1 = $"select * from recipes where recipe_name='{recipe_name}' order by step_num asc";
             string sql2 = $"update recipes set step_num={recipeModel.StepNum},step_time={recipeModel.StepTime}," +
                           $"wafer_rotatior_val={recipeModel.WaferRotatiorVal},wafer_rotatior_acc={recipeModel.WaferRotatiorAcc}," +
                           $"rinse_arm_disp='{recipeModel.RinseArmDisp}',rinse_arm_speed='{recipeModel.RinseArmSpeed}',rinse_arm_start_pos='{recipeModel.RinseArmStartPos}',rinse_arm_end_pos='{recipeModel.RinseArmEndPos}',rinse_arm_scan={recipeModel.RinseArmScan}," +
@@ -219,11 +220,12 @@ namespace gmc_v_2_0.DataAccess
                     adapter = new SqlDataAdapter(sql1, Conn);
                     DataSet ds = new DataSet();
                     adapter.Fill(ds);
-                    if (ds.Tables[0].Rows.Count == 1)
+                    Cmb = new SqlCommandBuilder(adapter);
+                    DataRow dr = ds.Tables[0].Rows[0];
+                    if (!GetRecipeStepNum(recipe_name).Contains(recipeModel.StepNum.ToString()))
                     {
-                        Cmb = new SqlCommandBuilder(adapter);
-                        DataRow dr = ds.Tables[0].Rows[0];
                         dr["step_num"] = recipeModel.StepNum;
+
                         dr["step_time"] = recipeModel.StepTime;
                         dr["wafer_rotatior_val"] = recipeModel.WaferRotatiorVal;
                         dr["wafer_rotatior_acc"] = recipeModel.WaferRotatiorAcc;
@@ -245,12 +247,36 @@ namespace gmc_v_2_0.DataAccess
                         ds.Tables[0].AcceptChanges();
                         MessageBox.Show("Save Successfully!");
                     }
+                    else
+                    {
+                        MessageBox.Show("Save Failed!");
+                        Application.Current.Properties["StepNumIsChanged"] = false;
+                    }
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show("Save Failed!" + Environment.NewLine + e.Message);
                 }
             }
+        }
+
+        // 获取配方步骤
+        public List<string> GetRecipeStepNum(string recipe_name)
+        {
+            string sql = $"select step_num from recipes where recipe_name='{recipe_name}'";
+            var dt = GetData(sql);
+            string stepNum = "";
+            List<string> stepNumList = new List<string>();
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    stepNum = dt.Rows[i]["step_num"].ToString();
+                    stepNumList.Add(stepNum);
+                }
+            }
+
+            return stepNumList;
         }
 
         // 删除配方数据

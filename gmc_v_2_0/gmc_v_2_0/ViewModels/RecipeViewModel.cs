@@ -184,8 +184,11 @@ namespace gmc_v_2_0.ViewModels
                             changedRecipeModel.WaitType == unChangedRecipeModel.WaitType;
                         service.UpdateRecipeData(changedRecipeModel,
                             Application.Current.Properties["RecipeName"].ToString());
-                        // 关闭窗口
-                        (obj as Window).DialogResult = false;
+                        if (Application.Current.Properties["StepNumIsChanged"]=="true")
+                        {
+                            // 关闭窗口
+                            (obj as Window).DialogResult = false;
+                        }
                     });
                 }
 
