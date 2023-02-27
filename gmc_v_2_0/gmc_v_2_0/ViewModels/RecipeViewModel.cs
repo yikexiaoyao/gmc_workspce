@@ -75,7 +75,7 @@ namespace gmc_v_2_0.ViewModels
                         {
                             RecipeEditWindow rew = new RecipeEditWindow(GlobalVariable.SelectedRecipeDataItem);
                             // 获取修改之前的配方参数
-                            GlobalVariable.UnChangedRecipeModel = GlobalVariable.SelectedRecipeDataItem;
+                            GlobalVariable.UnChangedRecipeModel = GlobalVariable.SelectedRecipeDataItem.Clone();
                             rew.ShowDialog();
                         }
                         else
@@ -155,10 +155,10 @@ namespace gmc_v_2_0.ViewModels
         {
             get
             {
-                if (_saveEditCommand == null)
+                if (_saveAddCommand == null)
                 {
-                    _saveEditCommand = new CommandBase();
-                    _saveEditCommand.DoExecute = new Action<object>(obj =>
+                    _saveAddCommand = new CommandBase();
+                    _saveAddCommand.DoExecute = new Action<object>(obj =>
                     {
                         var addedRecipeModel = (RecipeModel) (obj as RecipeAddWindow).RecipeData.DataContext;
                         if (addedRecipeModel.StepNum == 0)
@@ -193,34 +193,34 @@ namespace gmc_v_2_0.ViewModels
                         var changedRecipeModel = (RecipeModel) (obj as RecipeEditWindow).RecipeData.DataContext;
                         var unChangedRecipeModel = GlobalVariable.UnChangedRecipeModel;
                         bool isEqual =
-                            changedRecipeModel.StepNum.ToString() == unChangedRecipeModel.StepNum.ToString() ||
-                            changedRecipeModel.StepTime.ToString() == unChangedRecipeModel.StepTime.ToString() ||
+                            changedRecipeModel.StepNum.ToString() == unChangedRecipeModel.StepNum.ToString() &&
+                            changedRecipeModel.StepTime.ToString() == unChangedRecipeModel.StepTime.ToString() &&
                             changedRecipeModel.WaferRotatiorVal.ToString() ==
-                            unChangedRecipeModel.WaferRotatiorVal.ToString() ||
+                            unChangedRecipeModel.WaferRotatiorVal.ToString() &&
                             changedRecipeModel.WaferRotatiorAcc.ToString() ==
-                            unChangedRecipeModel.WaferRotatiorAcc.ToString() ||
+                            unChangedRecipeModel.WaferRotatiorAcc.ToString() &&
                             changedRecipeModel.RinseArmDisp.ToString() ==
-                            unChangedRecipeModel.RinseArmDisp.ToString() ||
+                            unChangedRecipeModel.RinseArmDisp.ToString() &&
                             changedRecipeModel.RinseArmSpeed.ToString() ==
-                            unChangedRecipeModel.RinseArmSpeed.ToString() ||
+                            unChangedRecipeModel.RinseArmSpeed.ToString() &&
                             changedRecipeModel.RinseArmStartPos.ToString() ==
-                            unChangedRecipeModel.RinseArmStartPos.ToString() ||
+                            unChangedRecipeModel.RinseArmStartPos.ToString() &&
                             changedRecipeModel.RinseArmEndPos.ToString() ==
-                            unChangedRecipeModel.RinseArmEndPos.ToString() ||
+                            unChangedRecipeModel.RinseArmEndPos.ToString() &&
                             changedRecipeModel.RinseArmScan.ToString() ==
-                            unChangedRecipeModel.RinseArmScan.ToString() ||
-                            changedRecipeModel.DevArmDisp.ToString() == unChangedRecipeModel.DevArmDisp.ToString() ||
-                            changedRecipeModel.DevArmTime.ToString() == unChangedRecipeModel.DevArmTime.ToString() ||
-                            changedRecipeModel.DevArmSpeed.ToString() == unChangedRecipeModel.DevArmSpeed.ToString() ||
+                            unChangedRecipeModel.RinseArmScan.ToString() &&
+                            changedRecipeModel.DevArmDisp.ToString() == unChangedRecipeModel.DevArmDisp.ToString() &&
+                            changedRecipeModel.DevArmTime.ToString() == unChangedRecipeModel.DevArmTime.ToString() &&
+                            changedRecipeModel.DevArmSpeed.ToString() == unChangedRecipeModel.DevArmSpeed.ToString() &&
                             changedRecipeModel.DevArmStartPos.ToString() ==
-                            unChangedRecipeModel.DevArmStartPos.ToString() ||
+                            unChangedRecipeModel.DevArmStartPos.ToString() &&
                             changedRecipeModel.DevArmEndPos.ToString() ==
-                            unChangedRecipeModel.DevArmEndPos.ToString() ||
-                            changedRecipeModel.DevArmScan.ToString() == unChangedRecipeModel.DevArmScan.ToString() ||
-                            changedRecipeModel.AutoDamp.ToString() == unChangedRecipeModel.AutoDamp.ToString() ||
-                            changedRecipeModel.N2Dry.ToString() == unChangedRecipeModel.N2Dry.ToString() ||
+                            unChangedRecipeModel.DevArmEndPos.ToString() &&
+                            changedRecipeModel.DevArmScan.ToString() == unChangedRecipeModel.DevArmScan.ToString() &&
+                            changedRecipeModel.AutoDamp.ToString() == unChangedRecipeModel.AutoDamp.ToString() &&
+                            changedRecipeModel.N2Dry.ToString() == unChangedRecipeModel.N2Dry.ToString() &&
                             changedRecipeModel.WaitType.ToString() == unChangedRecipeModel.WaitType.ToString();
-                        if (isEqual.Equals("true"))
+                        if (isEqual)
                         {
                             MessageBox.Show("No data needs to be saved");
                         }

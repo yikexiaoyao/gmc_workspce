@@ -78,3 +78,7 @@ C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\Views\RecipeE
 C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\Views\RecipeEditWindow1.baml
 C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\Views\RecipeAddWindow.g.cs
 C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\Views\RecipeAddWindow.baml
+C:\Users\DELL\Desktop\Github\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\Views\RecipeAddWindow.g.cs
+C:\Users\DELL\Desktop\Github\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\Views\RecipeEditWindow1.g.cs
+C:\Users\DELL\Desktop\Github\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\Views\RecipeAddWindow.baml
+C:\Users\DELL\Desktop\Github\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\Views\RecipeEditWindow1.baml

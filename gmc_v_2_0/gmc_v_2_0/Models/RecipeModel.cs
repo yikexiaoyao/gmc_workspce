@@ -43,6 +43,31 @@ namespace gmc_v_2_0.Models
         public RecipeModel()
         {
         }
+        public RecipeModel Clone()
+        {
+            return new RecipeModel
+            {
+                StepNum= _stepNum,
+                StepTime= _stepTime,
+                WaferRotatiorVal= _waferRotatiorVal,
+                WaferRotatiorAcc= _waferRotatiorAcc,
+                RinseArmDisp= _rinseArmDisp,
+                RinseArmEndPos= _rinseArmEndPos,
+                RinseArmScan= _rinseArmScan,
+                RinseArmSpeed= _rinseArmSpeed,
+                RinseArmStartPos= _rinseArmStartPos,
+                DevArmDisp= _devArmDisp,
+                DevArmSpeed= _devArmSpeed,
+                DevArmEndPos= _devArmEndPos,
+                DevArmScan= _devArmScan,
+                DevArmStartPos= _devArmStartPos,
+                DevArmTime= _devArmTime,
+                N2Dry= _n2Dry,
+                WaitType= _waitType,
+                AutoDamp= _autoDamp,
+
+            };
+        }
 
         public RecipeModel(int stepNum, double stepTime, int waferRotatiorVal, int waferRotatiorAcc,
             string rinseArmDisp, string rinseArmSpeed, string rinseArmStartPos, string rinseArmEndPos, int rinseArmScan,

@@ -12,6 +12,7 @@ namespace gmc_v_2_0.Views
         {
             InitializeComponent();
             this.DataContext = new RecipeViewModel();
+            RecipeData.DataContext = new RecipeModel();
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
