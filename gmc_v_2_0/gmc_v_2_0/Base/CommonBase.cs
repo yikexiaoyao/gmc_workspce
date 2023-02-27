@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Controls;
+using gmc_v_2_0.DataAccess;
 
 namespace gmc_v_2_0.Base
 {
@@ -21,6 +23,26 @@ namespace gmc_v_2_0.Base
             }
 
             return dt;
+        }
+
+        private SqlServerAccess sqlServerAccess=new SqlServerAccess();
+        // 获取配方步骤
+        public List<string> GetRecipeStepNum(string recipe_name)
+        {
+            string sql = $"select step_num from recipes where recipe_name='{recipe_name}'";
+            var dt = sqlServerAccess.GetData(sql);
+            string stepNum = "";
+            List<string> stepNumList = new List<string>();
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    stepNum = dt.Rows[i]["step_num"].ToString();
+                    stepNumList.Add(stepNum);
+                }
+            }
+
+            return stepNumList;
         }
     }
 }

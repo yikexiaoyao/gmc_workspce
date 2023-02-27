@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using gmc_v_2_0.Base;
+using gmc_v_2_0.DataAccess;
 using gmc_v_2_0.Models;
 using gmc_v_2_0.Service;
 using gmc_v_2_0.Views;
@@ -13,7 +14,7 @@ namespace gmc_v_2_0.ViewModels
     public class RecipeViewModel : NotifyBase
     {
         private RecipeService service = new RecipeService();
-        private SqlDataAdapter adapter { get; set; }
+        private SqlServerAccess sqlServerAccess = new SqlServerAccess();
 
         //关闭窗口
         private CommandBase _closeCommand;
@@ -70,11 +71,11 @@ namespace gmc_v_2_0.ViewModels
                     _editCommand.DoExecute = new Action<object>(obj =>
                     {
                         // 是否选择
-                        if (Application.Current.Properties["selectedRecipeDataItem"] != null)
+                        if (GlobalVariable.SelectedRecipeDataItem != null)
                         {
-                            RecipeEditWindow rew =
-                                new RecipeEditWindow(
-                                    Application.Current.Properties["selectedRecipeDataItem"] as RecipeModel);
+                            RecipeEditWindow rew = new RecipeEditWindow(GlobalVariable.SelectedRecipeDataItem);
+                            // 获取修改之前的配方参数
+                            GlobalVariable.UnChangedRecipeModel = GlobalVariable.SelectedRecipeDataItem;
                             rew.ShowDialog();
                         }
                         else
@@ -133,10 +134,8 @@ namespace gmc_v_2_0.ViewModels
                         // 如果配方数据添加成功
                         if (true)
                         {
-                            // 提示
-                            MessageBox.Show("Add Successfully");
-                            // 关闭窗口
-                            (obj as Window).DialogResult = false;
+                            RecipeAddWindow raw = new RecipeAddWindow();
+                            raw.ShowDialog();
                         }
                         else
                         {
@@ -149,50 +148,97 @@ namespace gmc_v_2_0.ViewModels
             }
         }
 
-        // 保存配方数据
-        private CommandBase _saveCommand;
+        // 保存增加的配方数据
+        private CommandBase _saveAddCommand;
 
-        public CommandBase SaveCommand
+        public CommandBase SaveAddCommand
         {
             get
             {
-                if (_saveCommand == null)
+                if (_saveEditCommand == null)
                 {
-                    _saveCommand = new CommandBase();
-                    _saveCommand.DoExecute = new Action<object>(obj =>
+                    _saveEditCommand = new CommandBase();
+                    _saveEditCommand.DoExecute = new Action<object>(obj =>
                     {
-                        var changedRecipeModel = (RecipeModel) (obj as RecipeEditWindow).RecipeData.DataContext;
-                        var unChangedRecipeModel = (RecipeModel) Application.Current.Properties["UnChangedRecipeModel"];
-                        bool isEqual =
-                            changedRecipeModel.StepNum == unChangedRecipeModel.StepNum ||
-                            changedRecipeModel.StepTime == unChangedRecipeModel.StepTime ||
-                            changedRecipeModel.WaferRotatiorVal == unChangedRecipeModel.WaferRotatiorVal ||
-                            changedRecipeModel.WaferRotatiorAcc == unChangedRecipeModel.WaferRotatiorAcc ||
-                            changedRecipeModel.RinseArmDisp == unChangedRecipeModel.RinseArmDisp ||
-                            changedRecipeModel.RinseArmSpeed == unChangedRecipeModel.RinseArmSpeed ||
-                            changedRecipeModel.RinseArmStartPos == unChangedRecipeModel.RinseArmStartPos ||
-                            changedRecipeModel.RinseArmEndPos == unChangedRecipeModel.RinseArmEndPos ||
-                            changedRecipeModel.RinseArmScan == unChangedRecipeModel.RinseArmScan ||
-                            changedRecipeModel.DevArmDisp == unChangedRecipeModel.DevArmDisp ||
-                            changedRecipeModel.DevArmTime == unChangedRecipeModel.DevArmTime ||
-                            changedRecipeModel.DevArmSpeed == unChangedRecipeModel.DevArmSpeed ||
-                            changedRecipeModel.DevArmStartPos == unChangedRecipeModel.DevArmStartPos ||
-                            changedRecipeModel.DevArmEndPos == unChangedRecipeModel.DevArmEndPos ||
-                            changedRecipeModel.DevArmScan == unChangedRecipeModel.DevArmScan ||
-                            changedRecipeModel.AutoDamp == unChangedRecipeModel.AutoDamp ||
-                            changedRecipeModel.N2Dry == unChangedRecipeModel.N2Dry ||
-                            changedRecipeModel.WaitType == unChangedRecipeModel.WaitType;
-                        service.UpdateRecipeData(changedRecipeModel,
-                            Application.Current.Properties["RecipeName"].ToString());
-                        if (Application.Current.Properties["StepNumIsChanged"]=="true")
+                        var addedRecipeModel = (RecipeModel) (obj as RecipeAddWindow).RecipeData.DataContext;
+                        if (addedRecipeModel.StepNum == 0)
                         {
+                            MessageBox.Show("Step Num can not be \"0\"");
+                        }
+                        else
+                        {
+                            service.AddRecipeData(addedRecipeModel,GlobalVariable.SelectedRecipeName);
                             // 关闭窗口
                             (obj as Window).DialogResult = false;
                         }
                     });
                 }
 
-                return _saveCommand;
+                return _saveAddCommand;
+            }
+        }
+
+        // 保存修改后的配方数据
+        private CommandBase _saveEditCommand;
+
+        public CommandBase SaveEditCommand
+        {
+            get
+            {
+                if (_saveEditCommand == null)
+                {
+                    _saveEditCommand = new CommandBase();
+                    _saveEditCommand.DoExecute = new Action<object>(obj =>
+                    {
+                        var changedRecipeModel = (RecipeModel) (obj as RecipeEditWindow).RecipeData.DataContext;
+                        var unChangedRecipeModel = GlobalVariable.UnChangedRecipeModel;
+                        bool isEqual =
+                            changedRecipeModel.StepNum.ToString() == unChangedRecipeModel.StepNum.ToString() ||
+                            changedRecipeModel.StepTime.ToString() == unChangedRecipeModel.StepTime.ToString() ||
+                            changedRecipeModel.WaferRotatiorVal.ToString() ==
+                            unChangedRecipeModel.WaferRotatiorVal.ToString() ||
+                            changedRecipeModel.WaferRotatiorAcc.ToString() ==
+                            unChangedRecipeModel.WaferRotatiorAcc.ToString() ||
+                            changedRecipeModel.RinseArmDisp.ToString() ==
+                            unChangedRecipeModel.RinseArmDisp.ToString() ||
+                            changedRecipeModel.RinseArmSpeed.ToString() ==
+                            unChangedRecipeModel.RinseArmSpeed.ToString() ||
+                            changedRecipeModel.RinseArmStartPos.ToString() ==
+                            unChangedRecipeModel.RinseArmStartPos.ToString() ||
+                            changedRecipeModel.RinseArmEndPos.ToString() ==
+                            unChangedRecipeModel.RinseArmEndPos.ToString() ||
+                            changedRecipeModel.RinseArmScan.ToString() ==
+                            unChangedRecipeModel.RinseArmScan.ToString() ||
+                            changedRecipeModel.DevArmDisp.ToString() == unChangedRecipeModel.DevArmDisp.ToString() ||
+                            changedRecipeModel.DevArmTime.ToString() == unChangedRecipeModel.DevArmTime.ToString() ||
+                            changedRecipeModel.DevArmSpeed.ToString() == unChangedRecipeModel.DevArmSpeed.ToString() ||
+                            changedRecipeModel.DevArmStartPos.ToString() ==
+                            unChangedRecipeModel.DevArmStartPos.ToString() ||
+                            changedRecipeModel.DevArmEndPos.ToString() ==
+                            unChangedRecipeModel.DevArmEndPos.ToString() ||
+                            changedRecipeModel.DevArmScan.ToString() == unChangedRecipeModel.DevArmScan.ToString() ||
+                            changedRecipeModel.AutoDamp.ToString() == unChangedRecipeModel.AutoDamp.ToString() ||
+                            changedRecipeModel.N2Dry.ToString() == unChangedRecipeModel.N2Dry.ToString() ||
+                            changedRecipeModel.WaitType.ToString() == unChangedRecipeModel.WaitType.ToString();
+                        if (isEqual.Equals("true"))
+                        {
+                            MessageBox.Show("No data needs to be saved");
+                        }
+                        else if (changedRecipeModel.StepNum == 0)
+                        {
+                            MessageBox.Show("Step Num can not be \"0\"");
+                        }
+                        else
+                        {
+                            service.UpdateRecipeData(changedRecipeModel,
+                                GlobalVariable.SelectedRecipeName);
+                            // 关闭窗口
+                            (obj as Window).DialogResult = false;
+                        }
+                    });
+                }
+
+                return _saveEditCommand;
             }
         }
 

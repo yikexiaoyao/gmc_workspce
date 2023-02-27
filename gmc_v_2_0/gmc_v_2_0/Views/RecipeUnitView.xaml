@@ -288,6 +288,15 @@
                             </Style>
                         </Button.Resources>
                     </Button>
+                    <Button Content="Add" Style="{StaticResource OperationButtonStyle}"
+                            Command="{Binding AddCommand}"
+                            CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"></Setter>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                     <Button Content="Delete" Style="{StaticResource OperationButtonStyle}" Command="{Binding}"
                             CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
                         <Button.Resources>

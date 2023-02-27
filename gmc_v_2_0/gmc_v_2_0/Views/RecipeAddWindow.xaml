@@ -1,4 +1,4 @@
-<Window x:Class="gmc_v_2_0.Views.RecipeEditWindow"
+<Window x:Class="gmc_v_2_0.Views.RecipeAddWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -290,7 +290,7 @@
                 <Grid Grid.Row="4">
                     <WrapPanel HorizontalAlignment="Right">
                         <Button Content="Save" Style="{StaticResource OperationButtonStyle}"
-                                Command="{Binding SaveEditCommand}"
+                                Command="{Binding SaveAddCommand}"
                                 CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
                             <Button.Resources>
                                 <Style TargetType="Border">

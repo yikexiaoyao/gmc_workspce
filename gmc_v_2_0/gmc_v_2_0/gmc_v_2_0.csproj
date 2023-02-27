@@ -57,6 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Base\CommonBase.cs" />
+    <Compile Include="Base\GlobalVariable.cs" />
     <Compile Include="Base\WindowManager.cs" />
     <Compile Include="Service\LoginService.cs" />
     <Compile Include="Service\RecipeService.cs" />
@@ -68,6 +69,9 @@
     </Compile>
     <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecipeAddWindow.xaml.cs">
+      <DependentUpon>RecipeAddWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RecipeEditWindow.xaml.cs">
       <DependentUpon>RecipeEditWindow.xaml</DependentUpon>
@@ -103,6 +107,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\RecipeAddWindow.xaml" />
     <Page Include="Views\RecipeEditWindow.xaml" />
     <Page Include="Views\RecipeEditWindow1.xaml" />
     <Page Include="Views\RecipeUnitView.xaml">

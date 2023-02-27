@@ -36,10 +36,10 @@ namespace gmc_v_2_0.Views
             RecipeData.ItemsSource = service.GetRecipeData(recipeName);
 
             // 数据条数
-            // RecipeDataNum.Text = CommonModel.RecipeDataNum.ToString();
-            RecipeDataNum.Text = Application.Current.Properties["RecipeDataNum"].ToString();
+            RecipeDataNum.Text = GlobalVariable.RecipeDataNum.ToString();
 
-            Application.Current.Properties["RecipeName"] = RecipeName.SelectedItem;
+            // 获取选中配方名称
+            GlobalVariable.SelectedRecipeName = RecipeName.SelectedItem.ToString();
         }
 
         /*// 获取无前后缀文件名
@@ -121,9 +121,10 @@ namespace gmc_v_2_0.Views
 
                 // 数据条数
                 // RecipeDataNum.Text = CommonModel.RecipeDataNum.ToString();
-                RecipeDataNum.Text = Application.Current.Properties["RecipeDataNum"].ToString();
+                RecipeDataNum.Text = GlobalVariable.RecipeDataNum.ToString();
 
-                Application.Current.Properties["RecipeName"] = RecipeName.SelectedItem;
+                // 获取选中配方名称
+                GlobalVariable.SelectedRecipeName = RecipeName.SelectedItem.ToString();
             }
         }
 
@@ -132,7 +133,8 @@ namespace gmc_v_2_0.Views
         {
             if (RecipeData.SelectedItem != null)
             {
-                Application.Current.Properties["selectedRecipeDataItem"] = RecipeData.SelectedItem as RecipeModel;
+                GlobalVariable.SelectedRecipeDataItem = RecipeData.SelectedItem as RecipeModel;
+                RecipeData.SelectedItem = null;
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using System.Linq;
 using System.Windows;
 using gmc_v_2_0.Base;
 using gmc_v_2_0.Models;
@@ -207,6 +208,8 @@ namespace gmc_v_2_0.DataAccess
         public void UpdateRecipeData(RecipeModel recipeModel, string recipe_name)
         {
             string sql1 = $"select * from recipes where recipe_name='{recipe_name}' order by step_num asc";
+            var numList = GetRecipeStepNum(recipe_name);
+            var isExistStepNum = numList.Any(n => n == recipeModel.StepNum.ToString());
             string sql2 = $"update recipes set step_num={recipeModel.StepNum},step_time={recipeModel.StepTime}," +
                           $"wafer_rotatior_val={recipeModel.WaferRotatiorVal},wafer_rotatior_acc={recipeModel.WaferRotatiorAcc}," +
                           $"rinse_arm_disp='{recipeModel.RinseArmDisp}',rinse_arm_speed='{recipeModel.RinseArmSpeed}',rinse_arm_start_pos='{recipeModel.RinseArmStartPos}',rinse_arm_end_pos='{recipeModel.RinseArmEndPos}',rinse_arm_scan={recipeModel.RinseArmScan}," +
@@ -222,10 +225,9 @@ namespace gmc_v_2_0.DataAccess
                     adapter.Fill(ds);
                     Cmb = new SqlCommandBuilder(adapter);
                     DataRow dr = ds.Tables[0].Rows[0];
-                    if (!GetRecipeStepNum(recipe_name).Contains(recipeModel.StepNum.ToString()))
+                    if (!isExistStepNum)
                     {
                         dr["step_num"] = recipeModel.StepNum;
-
                         dr["step_time"] = recipeModel.StepTime;
                         dr["wafer_rotatior_val"] = recipeModel.WaferRotatiorVal;
                         dr["wafer_rotatior_acc"] = recipeModel.WaferRotatiorAcc;
@@ -249,8 +251,7 @@ namespace gmc_v_2_0.DataAccess
                     }
                     else
                     {
-                        MessageBox.Show("Save Failed!");
-                        Application.Current.Properties["StepNumIsChanged"] = false;
+                        MessageBox.Show("StepNum already exists!");
                     }
                 }
                 catch (Exception e)

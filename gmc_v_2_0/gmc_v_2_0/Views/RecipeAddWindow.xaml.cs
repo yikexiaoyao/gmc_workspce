@@ -6,16 +6,12 @@ using gmc_v_2_0.ViewModels;
 
 namespace gmc_v_2_0.Views
 {
-    public partial class RecipeEditWindow : Window
+    public partial class RecipeAddWindow : Window
     {
-        public RecipeEditWindow(RecipeModel RecipeModel)
+        public RecipeAddWindow()
         {
             InitializeComponent();
             this.DataContext = new RecipeViewModel();
-            if (RecipeModel != null)
-            {
-                RecipeData.DataContext = RecipeModel;
-            }
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
