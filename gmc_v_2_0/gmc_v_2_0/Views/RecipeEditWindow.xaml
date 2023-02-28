@@ -66,7 +66,7 @@
                     <Grid>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Step Num" FontSize="16" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
-                            <TextBox Height="35" Width="90" VerticalAlignment="Center" Margin="10,5,0,5" x:Name="StepNamewen"
+                            <TextBox Height="35" Width="90" VerticalAlignment="Center" Margin="10,5,0,5" IsReadOnly="True"
                                      HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding StepNum}">
                                 <TextBox.Resources>
                                     <Style TargetType="Border">

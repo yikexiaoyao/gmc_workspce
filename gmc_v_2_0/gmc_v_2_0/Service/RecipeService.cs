@@ -49,7 +49,7 @@ namespace gmc_v_2_0.Service
                     var model = new RecipeModel()
                     {
                         StepNum = int.Parse(dt.Rows[i]["step_num"].ToString()),
-                        StepTime = double.Parse(dt.Rows[i]["step_time"].ToString()),
+                        StepTime = decimal.Parse(dt.Rows[i]["step_time"].ToString()),
                         WaferRotatiorVal = int.Parse(dt.Rows[i]["wafer_rotatior_val"].ToString()),
                         WaferRotatiorAcc = int.Parse(dt.Rows[i]["wafer_rotatior_acc"].ToString()),
                         RinseArmDisp = dt.Rows[i]["rinse_arm_disp"].ToString(),
@@ -58,7 +58,7 @@ namespace gmc_v_2_0.Service
                         RinseArmEndPos = dt.Rows[i]["rinse_arm_end_pos"].ToString(),
                         RinseArmScan = int.Parse(dt.Rows[i]["rinse_arm_scan"].ToString()),
                         DevArmDisp = dt.Rows[i]["dev_arm_disp"].ToString(),
-                        DevArmTime = double.Parse(dt.Rows[i]["dev_arm_time"].ToString()),
+                        DevArmTime = decimal.Parse(dt.Rows[i]["dev_arm_time"].ToString()),
                         DevArmSpeed = dt.Rows[i]["dev_arm_speed"].ToString(),
                         DevArmStartPos = dt.Rows[i]["dev_arm_start_pos"].ToString(),
                         DevArmEndPos = dt.Rows[i]["dev_arm_end_pos"].ToString(),
@@ -100,7 +100,7 @@ namespace gmc_v_2_0.Service
         }
 
         // 新增配方数据
-        public void AddRecipeData(RecipeModel recipeModel,string recipe_name)
+        public void AddRecipeData(RecipeModel recipeModel, string recipe_name)
         {
             string sql = $"insert into recipes(step_num,step_time," +
                          $"wafer_rotatior_val,wafer_rotatior_acc," +
@@ -170,7 +170,7 @@ namespace gmc_v_2_0.Service
         private CommonBase commonBase = new CommonBase();
 
         // 修改配方数据
-        public void UpdateRecipeData(RecipeModel recipeModel, string recipe_name)
+        public void UpdateRecipeData1(RecipeModel recipeModel, string recipe_name)
         {
             string sql = $"select * from recipes where recipe_name='{recipe_name}' order by step_num asc";
             /*string sql = $"update recipes set step_num={recipeModel.StepNum},step_time={recipeModel.StepTime}," +
@@ -179,8 +179,8 @@ namespace gmc_v_2_0.Service
                          $"dev_arm_disp='{recipeModel.DevArmDisp}',dev_arm_time={recipeModel.DevArmTime},dev_arm_speed='{recipeModel.DevArmSpeed}',dev_arm_start_pos='{recipeModel.DevArmStartPos}',dev_arm_end_pos='{recipeModel.DevArmEndPos}',dev_arm_scan={recipeModel.DevArmScan}," +
                          $"auto_damp='{recipeModel.AutoDamp}',n2_dry='{recipeModel.N2Dry}',wait_type='{recipeModel.WaitType}'" +
                          $" where recipe_name='{recipe_name}'";*/
-            var numList = commonBase.GetRecipeStepNum(recipe_name);
-            var isExistStepNum = numList.Any(n => n == recipeModel.StepNum.ToString());
+            /*var numList = commonBase.GetRecipeStepNum(recipe_name);
+            var isExistStepNum = numList.Any(n => n == recipeModel.StepNum.ToString());*/
             if (sqlServerAccess.DBConnection())
             {
                 try
@@ -190,46 +190,74 @@ namespace gmc_v_2_0.Service
                     sqlServerAccess.adapter.Fill(ds);
                     sqlServerAccess.Cmb = new SqlCommandBuilder(sqlServerAccess.adapter);
                     DataRow dr = ds.Tables[0].Rows[0];
-                    if (!isExistStepNum)
+                    /*if (!isExistStepNum)
                     {
-                        if (recipeModel.StepNum != 0)
-                        {
-                            dr["step_num"] = recipeModel.StepNum;
-                            dr["step_time"] = recipeModel.StepTime;
-                            dr["wafer_rotatior_val"] = recipeModel.WaferRotatiorVal;
-                            dr["wafer_rotatior_acc"] = recipeModel.WaferRotatiorAcc;
-                            dr["rinse_arm_disp"] = recipeModel.RinseArmDisp;
-                            dr["rinse_arm_speed"] = recipeModel.RinseArmSpeed;
-                            dr["rinse_arm_start_pos"] = recipeModel.RinseArmStartPos;
-                            dr["rinse_arm_end_pos"] = recipeModel.RinseArmEndPos;
-                            dr["rinse_arm_scan"] = recipeModel.RinseArmScan;
-                            dr["dev_arm_disp"] = recipeModel.DevArmDisp;
-                            dr["dev_arm_time"] = recipeModel.DevArmTime;
-                            dr["dev_arm_speed"] = recipeModel.DevArmSpeed;
-                            dr["dev_arm_start_pos"] = recipeModel.DevArmStartPos;
-                            dr["dev_arm_end_pos"] = recipeModel.DevArmEndPos;
-                            dr["dev_arm_scan"] = recipeModel.DevArmScan;
-                            dr["auto_damp"] = recipeModel.AutoDamp;
-                            dr["n2_dry"] = recipeModel.N2Dry;
-                            dr["wait_type"] = recipeModel.WaitType;
-                            sqlServerAccess.adapter.Update(ds);
-                            ds.Tables[0].AcceptChanges();
-                            MessageBox.Show("Save Successfully!");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Step Num can not be \"0\"");
-                        }
+                    if (recipeModel.StepNum != 0)
+                    {*/
+                        // dr["step_num"] = recipeModel.StepNum;
+                        dr["step_time"] = recipeModel.StepTime;
+                        dr["wafer_rotatior_val"] = recipeModel.WaferRotatiorVal;
+                        dr["wafer_rotatior_acc"] = recipeModel.WaferRotatiorAcc;
+                        dr["rinse_arm_disp"] = recipeModel.RinseArmDisp;
+                        dr["rinse_arm_speed"] = recipeModel.RinseArmSpeed;
+                        dr["rinse_arm_start_pos"] = recipeModel.RinseArmStartPos;
+                        dr["rinse_arm_end_pos"] = recipeModel.RinseArmEndPos;
+                        dr["rinse_arm_scan"] = recipeModel.RinseArmScan;
+                        dr["dev_arm_disp"] = recipeModel.DevArmDisp;
+                        dr["dev_arm_time"] = recipeModel.DevArmTime;
+                        dr["dev_arm_speed"] = recipeModel.DevArmSpeed;
+                        dr["dev_arm_start_pos"] = recipeModel.DevArmStartPos;
+                        dr["dev_arm_end_pos"] = recipeModel.DevArmEndPos;
+                        dr["dev_arm_scan"] = recipeModel.DevArmScan;
+                        dr["auto_damp"] = recipeModel.AutoDamp;
+                        dr["n2_dry"] = recipeModel.N2Dry;
+                        dr["wait_type"] = recipeModel.WaitType;
+                        sqlServerAccess.Cmb = new SqlCommandBuilder(sqlServerAccess.adapter);
+                        sqlServerAccess.Cmb.GetUpdateCommand();
+                        sqlServerAccess.adapter.Update(ds);
+                        ds.Tables[0].AcceptChanges();
+                        MessageBox.Show("Save Successfully!");
+                    /*}
+                    else
+                    {
+                        MessageBox.Show("Step Num can not be \"0\"");
+                    }
                     }
                     else
                     {
                         MessageBox.Show("StepNum already exists!");
-                    }
+                    }*/
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show("Save Failed!" + Environment.NewLine + e.Message);
                 }
+            }
+        }
+
+        public void UpdateRecipeData(RecipeModel recipeModel,string recipe_name,int step_num)
+        {
+            string sql = $"update recipes set step_time={recipeModel.StepTime}," +
+                         $"wafer_rotatior_val={recipeModel.WaferRotatiorVal},wafer_rotatior_acc={recipeModel.WaferRotatiorAcc}," +
+                         $"rinse_arm_disp='{recipeModel.RinseArmDisp}',rinse_arm_speed='{recipeModel.RinseArmSpeed}',rinse_arm_start_pos='{recipeModel.RinseArmStartPos}',rinse_arm_end_pos='{recipeModel.RinseArmEndPos}',rinse_arm_scan={recipeModel.RinseArmScan}," +
+                         $"dev_arm_disp='{recipeModel.DevArmDisp}',dev_arm_time={recipeModel.DevArmTime},dev_arm_speed='{recipeModel.DevArmSpeed}',dev_arm_start_pos='{recipeModel.DevArmStartPos}',dev_arm_end_pos='{recipeModel.DevArmEndPos}',dev_arm_scan={recipeModel.DevArmScan}," +
+                         $"auto_damp='{recipeModel.AutoDamp}',n2_dry='{recipeModel.N2Dry}',wait_type='{recipeModel.WaitType}'" +
+                         $" where recipe_name='{recipe_name}' and step_num={step_num}";
+            if (sqlServerAccess.DBConnection())
+            {
+                try
+                {
+                    sqlServerAccess.Comm = sqlServerAccess.Conn.CreateCommand();
+                    sqlServerAccess.Comm.CommandText = sql;
+                    sqlServerAccess.Comm.Parameters.AddWithValue("step_time", recipeModel.StepTime);
+                    sqlServerAccess.Comm.ExecuteNonQuery();
+                    MessageBox.Show("Save Successfully!");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Save Failed!" + Environment.NewLine + e.Message);
+                }
+
             }
         }
 

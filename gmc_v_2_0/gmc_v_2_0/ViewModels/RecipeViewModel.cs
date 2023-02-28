@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using gmc_v_2_0.Base;
 using gmc_v_2_0.DataAccess;
 using gmc_v_2_0.Models;
@@ -14,7 +15,7 @@ namespace gmc_v_2_0.ViewModels
     public class RecipeViewModel : NotifyBase
     {
         private RecipeService service = new RecipeService();
-        private SqlServerAccess sqlServerAccess = new SqlServerAccess();
+        private CommonBase commonBase = new CommonBase();
 
         //关闭窗口
         private CommandBase _closeCommand;
@@ -192,46 +193,19 @@ namespace gmc_v_2_0.ViewModels
                     {
                         var changedRecipeModel = (RecipeModel) (obj as RecipeEditWindow).RecipeData.DataContext;
                         var unChangedRecipeModel = GlobalVariable.UnChangedRecipeModel;
-                        bool isEqual =
-                            changedRecipeModel.StepNum.ToString() == unChangedRecipeModel.StepNum.ToString() &&
-                            changedRecipeModel.StepTime.ToString() == unChangedRecipeModel.StepTime.ToString() &&
-                            changedRecipeModel.WaferRotatiorVal.ToString() ==
-                            unChangedRecipeModel.WaferRotatiorVal.ToString() &&
-                            changedRecipeModel.WaferRotatiorAcc.ToString() ==
-                            unChangedRecipeModel.WaferRotatiorAcc.ToString() &&
-                            changedRecipeModel.RinseArmDisp.ToString() ==
-                            unChangedRecipeModel.RinseArmDisp.ToString() &&
-                            changedRecipeModel.RinseArmSpeed.ToString() ==
-                            unChangedRecipeModel.RinseArmSpeed.ToString() &&
-                            changedRecipeModel.RinseArmStartPos.ToString() ==
-                            unChangedRecipeModel.RinseArmStartPos.ToString() &&
-                            changedRecipeModel.RinseArmEndPos.ToString() ==
-                            unChangedRecipeModel.RinseArmEndPos.ToString() &&
-                            changedRecipeModel.RinseArmScan.ToString() ==
-                            unChangedRecipeModel.RinseArmScan.ToString() &&
-                            changedRecipeModel.DevArmDisp.ToString() == unChangedRecipeModel.DevArmDisp.ToString() &&
-                            changedRecipeModel.DevArmTime.ToString() == unChangedRecipeModel.DevArmTime.ToString() &&
-                            changedRecipeModel.DevArmSpeed.ToString() == unChangedRecipeModel.DevArmSpeed.ToString() &&
-                            changedRecipeModel.DevArmStartPos.ToString() ==
-                            unChangedRecipeModel.DevArmStartPos.ToString() &&
-                            changedRecipeModel.DevArmEndPos.ToString() ==
-                            unChangedRecipeModel.DevArmEndPos.ToString() &&
-                            changedRecipeModel.DevArmScan.ToString() == unChangedRecipeModel.DevArmScan.ToString() &&
-                            changedRecipeModel.AutoDamp.ToString() == unChangedRecipeModel.AutoDamp.ToString() &&
-                            changedRecipeModel.N2Dry.ToString() == unChangedRecipeModel.N2Dry.ToString() &&
-                            changedRecipeModel.WaitType.ToString() == unChangedRecipeModel.WaitType.ToString();
+                        bool isEqual = commonBase.IsEqual(changedRecipeModel, unChangedRecipeModel);
                         if (isEqual)
                         {
                             MessageBox.Show("No data needs to be saved");
                         }
-                        else if (changedRecipeModel.StepNum == 0)
+                        /*else if (changedRecipeModel.StepNum == 0)
                         {
                             MessageBox.Show("Step Num can not be \"0\"");
-                        }
+                        }*/
                         else
                         {
                             service.UpdateRecipeData(changedRecipeModel,
-                                GlobalVariable.SelectedRecipeName);
+                                GlobalVariable.SelectedRecipeName,changedRecipeModel.StepNum);
                             // 关闭窗口
                             (obj as Window).DialogResult = false;
                         }
