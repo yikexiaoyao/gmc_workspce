@@ -242,9 +242,8 @@
                     </Grid>
                     <Grid Background="White">
                         <TextBox Text="" Foreground="Black" FontSize="16" Width="220" BorderBrush="Gray" Height="35"
-                                 VerticalContentAlignment="Center" HorizontalAlignment="Left"
-                                 VerticalAlignment="Center"
-                                 Margin="10,0,0,10">
+                                 VerticalContentAlignment="Center" HorizontalAlignment="Left" x:Name="SearchContent"
+                                 VerticalAlignment="Center" Margin="10,0,0,10">
                             <TextBox.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"></Setter>
@@ -271,7 +270,7 @@
             </Grid>
             <Grid Grid.Row="1">
                 <UniformGrid VerticalAlignment="Bottom" Margin="0,0,0,85" Background="White">
-                    <Button Content="New" Style="{StaticResource OperationButtonStyle}" Command="{Binding}"
+                    <Button Content="New" Style="{StaticResource OperationButtonStyle}" Command="{Binding NewCommand}"
                             CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
                         <Button.Resources>
                             <Style TargetType="Border">
@@ -297,7 +296,8 @@
                             </Style>
                         </Button.Resources>
                     </Button>
-                    <Button Content="Delete" Style="{StaticResource OperationButtonStyle}" Command="{Binding}"
+                    <Button Content="Delete" Style="{StaticResource OperationButtonStyle}"
+                            Command="{Binding DeleteRecipeCommand}"
                             CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
                         <Button.Resources>
                             <Style TargetType="Border">

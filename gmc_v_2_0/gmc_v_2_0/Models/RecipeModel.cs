@@ -12,33 +12,33 @@ namespace gmc_v_2_0.Models
 
         private int _waferRotatiorAcc;
 
-        private string _rinseArmDisp;
+        private string _rinseArmDisp="";
 
-        private string _rinseArmSpeed;
+        private string _rinseArmSpeed="";
 
-        private string _rinseArmStartPos;
+        private string _rinseArmStartPos="";
 
-        private string _rinseArmEndPos;
+        private string _rinseArmEndPos="";
 
         private int _rinseArmScan;
 
-        private string _devArmDisp;
+        private string _devArmDisp="";
 
         private decimal _devArmTime;
 
-        private string _devArmSpeed;
+        private string _devArmSpeed="";
 
-        private string _devArmStartPos;
+        private string _devArmStartPos="";
 
-        private string _devArmEndPos;
+        private string _devArmEndPos="";
 
         private int _devArmScan;
 
-        private string _autoDamp;
+        private string _autoDamp="";
 
-        private string _n2Dry;
+        private string _n2Dry="";
 
-        private string _waitType;
+        private string _waitType="";
 
         public RecipeModel()
         {

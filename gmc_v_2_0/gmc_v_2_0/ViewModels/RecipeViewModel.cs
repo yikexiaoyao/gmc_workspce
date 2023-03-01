@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using gmc_v_2_0.Base;
@@ -38,6 +39,28 @@ namespace gmc_v_2_0.ViewModels
             }
         }
 
+        // 生成默认配方数据
+        private CommandBase _createRecipeCommand;
+
+        public CommandBase CreateRecipeCommand
+        {
+            get
+            {
+                if (_createRecipeCommand == null)
+                {
+                    _createRecipeCommand = new CommandBase();
+                    _createRecipeCommand.DoExecute = new Action<object>(obj =>
+                    {
+                        GlobalVariable.NewRecipeName = (obj as RecipeNewWindow).NewRecipeName.Text;
+                        service.CreateRecipeCommand();
+                        (obj as Window).DialogResult = false;
+                    });
+                }
+
+                return _createRecipeCommand;
+            }
+        }
+
         // 新建配方
         private CommandBase _newCommand;
 
@@ -50,8 +73,8 @@ namespace gmc_v_2_0.ViewModels
                     _newCommand = new CommandBase();
                     _newCommand.DoExecute = new Action<object>(obj =>
                     {
-                        // RecipeEditWindow rew = new RecipeEditWindow();
-                        // rew.ShowDialog();
+                        RecipeNewWindow rnw = new RecipeNewWindow();
+                        rnw.ShowDialog();
                     });
                 }
 
@@ -91,32 +114,22 @@ namespace gmc_v_2_0.ViewModels
         }
 
         // 删除配方
-        private CommandBase _deleteCommand;
+        private CommandBase _deleteRecipeCommand;
 
-        public CommandBase DeleteCommand
+        public CommandBase DeleteRecipeCommand
         {
             get
             {
-                if (_deleteCommand == null)
+                if (_deleteRecipeCommand == null)
                 {
-                    _deleteCommand = new CommandBase();
-                    _deleteCommand.DoExecute = new Action<object>(obj =>
+                    _deleteRecipeCommand = new CommandBase();
+                    _deleteRecipeCommand.DoExecute = new Action<object>(obj =>
                     {
-                        if (true)
-                        {
-                            // 提示
-                            MessageBox.Show("Delete Successfully");
-                            // 关闭窗口
-                            (obj as Window).DialogResult = false;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Delete Failed");
-                        }
+                        service.DeleteRecipe(GlobalVariable.SelectedRecipeName);
                     });
                 }
 
-                return _deleteCommand;
+                return _deleteRecipeCommand;
             }
         }
 
@@ -132,16 +145,8 @@ namespace gmc_v_2_0.ViewModels
                     _addCommand = new CommandBase();
                     _addCommand.DoExecute = new Action<object>(obj =>
                     {
-                        // 如果配方数据添加成功
-                        if (true)
-                        {
-                            RecipeAddWindow raw = new RecipeAddWindow();
-                            raw.ShowDialog();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Add Failed");
-                        }
+                        RecipeAddWindow raw = new RecipeAddWindow();
+                        raw.ShowDialog();
                     });
                 }
 
@@ -168,7 +173,7 @@ namespace gmc_v_2_0.ViewModels
                         }
                         else
                         {
-                            service.AddRecipeData(addedRecipeModel,GlobalVariable.SelectedRecipeName);
+                            service.AddRecipeData(addedRecipeModel, GlobalVariable.SelectedRecipeName);
                             // 关闭窗口
                             (obj as Window).DialogResult = false;
                         }
@@ -205,7 +210,7 @@ namespace gmc_v_2_0.ViewModels
                         else
                         {
                             service.UpdateRecipeData(changedRecipeModel,
-                                GlobalVariable.SelectedRecipeName,changedRecipeModel.StepNum);
+                                GlobalVariable.SelectedRecipeName, changedRecipeModel.StepNum);
                             // 关闭窗口
                             (obj as Window).DialogResult = false;
                         }
@@ -228,24 +233,18 @@ namespace gmc_v_2_0.ViewModels
                     _deleteDataCommand = new CommandBase();
                     _deleteDataCommand.DoExecute = new Action<object>(obj =>
                     {
-                        if (true)
-                        {
-                            // 提示
-                            MessageBox.Show("Delete Successfully");
-                            // 关闭窗口
-                            (obj as Window).DialogResult = false;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Delete Failed");
-                        }
+                        var deletedRecipeModel = (RecipeModel) (obj as RecipeEditWindow).RecipeData.DataContext;
+                        service.DeleteRecipeData(GlobalVariable.SelectedRecipeName, deletedRecipeModel.StepNum);
+                        // 关闭窗口
+                        (obj as Window).DialogResult = false;
                     });
                 }
 
-                return _deleteCommand;
+                return _deleteDataCommand;
             }
         }
 
+        // 配方查询
         private CommandBase _searchCommand;
 
         public CommandBase SearchCommand
@@ -257,15 +256,14 @@ namespace gmc_v_2_0.ViewModels
                     _searchCommand = new CommandBase();
                     _searchCommand.DoExecute = new Action<object>(obj =>
                     {
-                        if (true)
+                        string str = (obj as RecipeUnitView).SearchContent.Text;
+                        RecipeUnitView ruv = new RecipeUnitView();
+                        if (str != "" && str != null && str.Length > 0)
                         {
-                            // 提示
-                            MessageBox.Show("Search Completed");
+                            ruv.RecipeName.ItemsSource = service.SearchRecipeName(str);
                         }
-                        else
-                        {
-                            MessageBox.Show("Delete Failed");
-                        }
+
+                        ruv.RecipeName.ItemsSource = service.GetRecipeName();
                     });
                 }
 

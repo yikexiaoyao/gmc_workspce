@@ -298,6 +298,15 @@
                                 </Style>
                             </Button.Resources>
                         </Button>
+                        <Button Content="Delete" Style="{StaticResource OperationButtonStyle}"
+                                Command="{Binding DeleteDataCommand}"
+                                CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"></Setter>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
                         <Button Content="Cancel" Style="{StaticResource OperationButtonStyle}"
                                 Command="{Binding CloseCommand}"
                                 CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">

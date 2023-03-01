@@ -76,8 +76,8 @@
     <Compile Include="Views\RecipeEditWindow.xaml.cs">
       <DependentUpon>RecipeEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RecipeEditWindow1.xaml.cs">
-      <DependentUpon>RecipeEditWindow1.xaml</DependentUpon>
+    <Compile Include="Views\RecipeNewWindow.xaml.cs">
+      <DependentUpon>RecipeNewWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RecipeUnitView.xaml.cs">
       <DependentUpon>RecipeUnitView.xaml</DependentUpon>
@@ -109,7 +109,7 @@
     </Page>
     <Page Include="Views\RecipeAddWindow.xaml" />
     <Page Include="Views\RecipeEditWindow.xaml" />
-    <Page Include="Views\RecipeEditWindow1.xaml" />
+    <Page Include="Views\RecipeNewWindow.xaml" />
     <Page Include="Views\RecipeUnitView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

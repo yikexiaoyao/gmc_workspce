@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\DELL\Desktop\Github\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\
+C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\
 gmc_v_2_0
 none
 false
 DEBUG;TRACE
-C:\Users\DELL\Desktop\Github\gmc_workspce\gmc_v_2_0\gmc_v_2_0\App.xaml
-7-2128421621
+C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\App.xaml
+7-864105092
 
-28-772225696
+28380018978
 14-788570704
-Views\MainWindow.xaml;Views\DashboardView.xaml;Views\LoginWindow.xaml;Views\RecipeAddWindow.xaml;Views\RecipeEditWindow.xaml;Views\RecipeEditWindow1.xaml;Views\RecipeUnitView.xaml;
+Views\MainWindow.xaml;Views\DashboardView.xaml;Views\LoginWindow.xaml;Views\RecipeAddWindow.xaml;Views\RecipeEditWindow.xaml;Views\RecipeNewWindow.xaml;Views\RecipeUnitView.xaml;
 
 False
 
