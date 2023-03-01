@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="gmc_v_2_0.Views"
              mc:Ignorable="d"
              d:DesignHeight="904" d:DesignWidth="1080">
     <UserControl.Resources>
@@ -254,7 +255,8 @@
                                 Height="35" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="Gray"
                                 Margin="0,0,15,10" Background="Transparent" BorderThickness="0"
                                 Command="{Binding SearchCommand}"
-                                CommandParameter="{Binding .,RelativeSource={RelativeSource AncestorType=Window}}">
+                                CommandParameter="{Binding .,RelativeSource={RelativeSource  AncestorType=UserControl}}">
+                            <!--CommandParameter="{Binding .,RelativeSource={RelativeSource AncestorType=Window}}">-->
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"></Setter>
@@ -271,7 +273,7 @@
             <Grid Grid.Row="1">
                 <UniformGrid VerticalAlignment="Bottom" Margin="0,0,0,85" Background="White">
                     <Button Content="New" Style="{StaticResource OperationButtonStyle}" Command="{Binding NewCommand}"
-                            CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
+                            CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=UserControl}}">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5"></Setter>
@@ -280,7 +282,7 @@
                     </Button>
                     <Button Content="Edit" Style="{StaticResource OperationButtonStyle}"
                             Command="{Binding EditCommand}"
-                            CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
+                            CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=UserControl}}">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5"></Setter>
@@ -289,7 +291,7 @@
                     </Button>
                     <Button Content="Add" Style="{StaticResource OperationButtonStyle}"
                             Command="{Binding AddCommand}"
-                            CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
+                            CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=UserControl}}">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5"></Setter>
@@ -298,7 +300,7 @@
                     </Button>
                     <Button Content="Delete" Style="{StaticResource OperationButtonStyle}"
                             Command="{Binding DeleteRecipeCommand}"
-                            CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
+                            CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=UserControl}}">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5"></Setter>

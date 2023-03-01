@@ -12,6 +12,7 @@ namespace gmc_v_2_0.Service
         //创建数据库连接
         private SqlServerAccess sqlServerAccess = new SqlServerAccess();
 
+
         // 获取配方名称
         public List<string> GetRecipeName()
         {
@@ -258,7 +259,7 @@ namespace gmc_v_2_0.Service
         // 查询配方
         public List<string> SearchRecipeName(string str)
         {
-            string sql = $"select * from recipes where recipe_name like '%{str}%'";
+            string sql = $"select  distinct recipe_name from recipes where recipe_name like '%{str}%'";
             var dt = sqlServerAccess.GetData(sql);
             string name = "";
             var nameList = new List<string>();

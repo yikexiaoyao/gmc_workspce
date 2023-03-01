@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
@@ -53,7 +54,11 @@ namespace gmc_v_2_0.ViewModels
                     {
                         GlobalVariable.NewRecipeName = (obj as RecipeNewWindow).NewRecipeName.Text;
                         service.CreateRecipeCommand();
-                        (obj as Window).DialogResult = false;
+                        if (obj is RecipeNewWindow window)
+                        {
+                            window.DialogResult = false;
+                            window.CompleteAction?.Invoke();
+                        }
                     });
                 }
 
@@ -74,6 +79,14 @@ namespace gmc_v_2_0.ViewModels
                     _newCommand.DoExecute = new Action<object>(obj =>
                     {
                         RecipeNewWindow rnw = new RecipeNewWindow();
+                        if (obj is RecipeUnitView view)
+                        {
+                            rnw.CompleteAction = () =>
+                            {
+                                // 显示配方名称
+                                view.RecipeName.ItemsSource = service.GetRecipeName();
+                            };
+                        }
                         rnw.ShowDialog();
                     });
                 }
@@ -98,6 +111,14 @@ namespace gmc_v_2_0.ViewModels
                         if (GlobalVariable.SelectedRecipeDataItem != null)
                         {
                             RecipeEditWindow rew = new RecipeEditWindow(GlobalVariable.SelectedRecipeDataItem);
+                            if (obj is RecipeUnitView view)
+                            {
+                                rew.CompleteAction = () =>
+                                {
+                                    // 显示配方名称
+                                    view.RecipeName.ItemsSource = service.GetRecipeName();
+                                };
+                            }
                             // 获取修改之前的配方参数
                             GlobalVariable.UnChangedRecipeModel = GlobalVariable.SelectedRecipeDataItem.Clone();
                             rew.ShowDialog();
@@ -126,6 +147,11 @@ namespace gmc_v_2_0.ViewModels
                     _deleteRecipeCommand.DoExecute = new Action<object>(obj =>
                     {
                         service.DeleteRecipe(GlobalVariable.SelectedRecipeName);
+                        if (obj is RecipeUnitView view)
+                        {
+                            // 显示配方名称
+                            view.RecipeName.ItemsSource = service.GetRecipeName();//你这个方法里面有问题
+                        }
                     });
                 }
 
@@ -166,7 +192,7 @@ namespace gmc_v_2_0.ViewModels
                     _saveAddCommand = new CommandBase();
                     _saveAddCommand.DoExecute = new Action<object>(obj =>
                     {
-                        var addedRecipeModel = (RecipeModel) (obj as RecipeAddWindow).RecipeData.DataContext;
+                        var addedRecipeModel = (RecipeModel)(obj as RecipeAddWindow).RecipeData.DataContext;
                         if (addedRecipeModel.StepNum == 0)
                         {
                             MessageBox.Show("Step Num can not be \"0\"");
@@ -196,7 +222,7 @@ namespace gmc_v_2_0.ViewModels
                     _saveEditCommand = new CommandBase();
                     _saveEditCommand.DoExecute = new Action<object>(obj =>
                     {
-                        var changedRecipeModel = (RecipeModel) (obj as RecipeEditWindow).RecipeData.DataContext;
+                        var changedRecipeModel = (RecipeModel)(obj as RecipeEditWindow).RecipeData.DataContext;
                         var unChangedRecipeModel = GlobalVariable.UnChangedRecipeModel;
                         bool isEqual = commonBase.IsEqual(changedRecipeModel, unChangedRecipeModel);
                         if (isEqual)
@@ -233,7 +259,7 @@ namespace gmc_v_2_0.ViewModels
                     _deleteDataCommand = new CommandBase();
                     _deleteDataCommand.DoExecute = new Action<object>(obj =>
                     {
-                        var deletedRecipeModel = (RecipeModel) (obj as RecipeEditWindow).RecipeData.DataContext;
+                        var deletedRecipeModel = (RecipeModel)(obj as RecipeEditWindow).RecipeData.DataContext;
                         service.DeleteRecipeData(GlobalVariable.SelectedRecipeName, deletedRecipeModel.StepNum);
                         // 关闭窗口
                         (obj as Window).DialogResult = false;
@@ -256,14 +282,18 @@ namespace gmc_v_2_0.ViewModels
                     _searchCommand = new CommandBase();
                     _searchCommand.DoExecute = new Action<object>(obj =>
                     {
-                        string str = (obj as RecipeUnitView).SearchContent.Text;
-                        RecipeUnitView ruv = new RecipeUnitView();
-                        if (str != "" && str != null && str.Length > 0)
+                        if (obj is RecipeUnitView view)
                         {
-                            ruv.RecipeName.ItemsSource = service.SearchRecipeName(str);
+                            string str = view.SearchContent.Text;
+                            if (!string.IsNullOrWhiteSpace(str))
+                            {
+                                view.RecipeName.ItemsSource = new ObservableCollection<string>(service.SearchRecipeName(str));
+                            }
+                            else
+                            {
+                                view.RecipeName.ItemsSource = new ObservableCollection<string>(service.GetRecipeName());
+                            }
                         }
-
-                        ruv.RecipeName.ItemsSource = service.GetRecipeName();
                     });
                 }
 

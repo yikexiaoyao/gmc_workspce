@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Background="Transparent" FontFamily="Microsoft YaHei" FontWeight="ExtraLight" ResizeMode="NoResize"
         WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
-        Title="RecipeEditWindow" SizeToContent="WidthAndHeight">
+        Title="RecipeEditWindow" SizeToContent="WidthAndHeight"
+        Closing="Window_Closing"
+        >
     <Window.Resources>
         <!--配方编辑窗口关闭-->
         <ControlTemplate TargetType="Button" x:Key="CloseButtonTemplate">
