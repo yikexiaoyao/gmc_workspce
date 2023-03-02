@@ -83,22 +83,22 @@ namespace gmc_v_2_0.ViewModels
         }
 
         //指示灯
-        //private CommandBase _changeeColor;
+        /*private CommandBase _changeeColor;
 
-        //public CommandBase ChangeeColor
-        //{
-        //    get
-        //    {
-        //        if (_changeeColor == null)
-        //        {
-        //            _changeeColor = new CommandBase();
-        //            _changeeColor.DoExecute = new Action<object>(obj =>
-        //            {
-        //            });
-        //        }
-        //        return _changeeColor;
-        //    }
-        //}
+        public CommandBase ChangeeColor
+        {
+            get
+            {
+                if (_changeeColor == null)
+                {
+                    _changeeColor = new CommandBase();
+                    _changeeColor.DoExecute = new Action<object>(obj =>
+                    {
+                    });
+                }
+                return _changeeColor;
+            }
+        }*/
 
         // 左侧导航栏
         private CommandBase _menuItemCommand;

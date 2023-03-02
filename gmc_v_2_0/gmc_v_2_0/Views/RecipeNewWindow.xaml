@@ -8,8 +8,7 @@
         Background="Transparent" FontFamily="Microsoft YaHei" FontWeight="ExtraLight" ResizeMode="NoResize"
         WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
         Title="RecipeEditWindow" SizeToContent="WidthAndHeight"
-        Closing="Window_Closing"
-        >
+        Closing="Window_Closing">
     <Window.Resources>
         <!--配方编辑窗口关闭-->
         <ControlTemplate TargetType="Button" x:Key="CloseButtonTemplate">
@@ -63,9 +62,9 @@
                     </TextBox>
                 </Grid>
                 <Grid Grid.Row="2" VerticalAlignment="Bottom" Margin="10,10,10,10">
-                    <WrapPanel HorizontalAlignment="Right">
+                    <WrapPanel HorizontalAlignment="Center">
                         <Button Content="Create" Style="{StaticResource OperationButtonStyle}"
-                                Command="{Binding CreateRecipeCommand}"
+                                Command="{Binding CreateRecipeCommand}" Margin="0,0,20,0"
                                 CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
                             <Button.Resources>
                                 <Style TargetType="Border">
@@ -74,7 +73,7 @@
                             </Button.Resources>
                         </Button>
                         <Button Content="Cancel" Style="{StaticResource OperationButtonStyle}"
-                                Command="{Binding CloseCommand}"
+                                Command="{Binding CloseCommand}" Margin="20,0,0,0"
                                 CommandParameter="{Binding Path=.,RelativeSource={RelativeSource AncestorType=Window}}">
                             <Button.Resources>
                                 <Style TargetType="Border">

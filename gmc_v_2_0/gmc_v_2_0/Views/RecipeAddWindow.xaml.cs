@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using System.Windows.Input;
 using gmc_v_2_0.Base;
@@ -8,6 +9,11 @@ namespace gmc_v_2_0.Views
 {
     public partial class RecipeAddWindow : Window
     {
+        /// <summary>
+        /// 关闭时操作
+        /// </summary>
+        public Action CompleteAction { get; set; } = () => { };
+
         public RecipeAddWindow()
         {
             InitializeComponent();
