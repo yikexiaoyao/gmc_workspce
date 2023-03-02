@@ -16,6 +16,8 @@ namespace gmc_v_2_0.Views
             InitializeComponent();
             //窗口数据绑定
             this.DataContext = new RecipeViewModel();
+            GlobalVariable.ReloadListAction = null;
+            GlobalVariable.ReloadListAction = LoadRecipeData;
 
             /*// 指定数据文件路径
             string recipePath = "../../DataAccess/CSV";
@@ -109,7 +111,13 @@ namespace gmc_v_2_0.Views
         private RecipeService service = new RecipeService();
 
         // 获取选中文件名，显示文件名对应数据
-        private void RecipeName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void RecipeName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LoadRecipeData();
+        }
+
+
+        public void LoadRecipeData()
         {
             if (RecipeName.SelectedItem != null)
             {
@@ -120,11 +128,16 @@ namespace gmc_v_2_0.Views
                 RecipeData.ItemsSource = service.GetRecipeData(RecipeName.SelectedValue.ToString());
 
                 // 数据条数
-                // RecipeDataNum.Text = CommonModel.RecipeDataNum.ToString();
                 RecipeDataNum.Text = GlobalVariable.RecipeDataNum.ToString();
 
                 // 获取选中配方名称
                 GlobalVariable.SelectedRecipeName = RecipeName.SelectedItem.ToString();
+            }
+            else
+            {
+                RecipeDataNum.Text = "";
+                GlobalVariable.SelectedRecipeName = "";
+                RecipeData.ItemsSource = null;
             }
         }
 

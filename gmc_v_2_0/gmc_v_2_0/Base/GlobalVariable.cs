@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using gmc_v_2_0.Models;
 
@@ -10,5 +11,10 @@ namespace gmc_v_2_0.Base
         public static int RecipeDataNum { get; set; }
         public static RecipeModel SelectedRecipeDataItem { get; set; }
         public static string NewRecipeName { get; set; }
+
+        /// <summary>
+        /// ÷ÿ–¬º”‘ÿ
+        /// </summary>
+        public static Action ReloadListAction { get; set; } = () => { };
     }
 }

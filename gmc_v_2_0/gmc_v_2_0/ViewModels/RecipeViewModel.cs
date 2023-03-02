@@ -85,6 +85,7 @@ namespace gmc_v_2_0.ViewModels
                             {
                                 // 显示配方名称
                                 view.RecipeName.ItemsSource = service.GetRecipeName();
+                                GlobalVariable.ReloadListAction();//刷新右侧列表
                             };
                         }
                         rnw.ShowDialog();
@@ -117,6 +118,7 @@ namespace gmc_v_2_0.ViewModels
                                 {
                                     // 显示配方名称
                                     view.RecipeName.ItemsSource = service.GetRecipeName();
+                                    GlobalVariable.ReloadListAction();//刷新右侧列表
                                 };
                             }
                             // 获取修改之前的配方参数
@@ -150,7 +152,13 @@ namespace gmc_v_2_0.ViewModels
                         if (obj is RecipeUnitView view)
                         {
                             // 显示配方名称
-                            view.RecipeName.ItemsSource = service.GetRecipeName();//你这个方法里面有问题
+                            service = null;
+                            service = new RecipeService();
+                            view.RecipeName.ItemsSource = service.GetRecipeName();
+                            view.RecipeName.SelectedIndex = 0;
+                            string recipeName = service.GetRecipeName()[0];
+                            view.RecipeData.ItemsSource = service.GetRecipeData(recipeName);
+                            GlobalVariable.ReloadListAction();//刷新右侧列表
                         }
                     });
                 }
@@ -203,9 +211,9 @@ namespace gmc_v_2_0.ViewModels
                             // 关闭窗口
                             (obj as Window).DialogResult = false;
                         }
+                        GlobalVariable.ReloadListAction();//刷新右侧列表
                     });
                 }
-
                 return _saveAddCommand;
             }
         }
@@ -242,7 +250,7 @@ namespace gmc_v_2_0.ViewModels
                         }
                     });
                 }
-
+                GlobalVariable.ReloadListAction();//刷新右侧列表
                 return _saveEditCommand;
             }
         }
@@ -265,7 +273,7 @@ namespace gmc_v_2_0.ViewModels
                         (obj as Window).DialogResult = false;
                     });
                 }
-
+                GlobalVariable.ReloadListAction();//刷新右侧列表
                 return _deleteDataCommand;
             }
         }
@@ -292,6 +300,7 @@ namespace gmc_v_2_0.ViewModels
                             else
                             {
                                 view.RecipeName.ItemsSource = new ObservableCollection<string>(service.GetRecipeName());
+                                GlobalVariable.ReloadListAction();//刷新右侧列表
                             }
                         }
                     });
