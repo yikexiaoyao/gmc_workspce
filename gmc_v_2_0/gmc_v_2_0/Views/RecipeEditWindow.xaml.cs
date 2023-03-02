@@ -9,9 +9,6 @@ namespace gmc_v_2_0.Views
 {
     public partial class RecipeEditWindow : Window
     {
-
-
-
         /// <summary>
         /// 关闭时操作
         /// </summary>

@@ -150,7 +150,7 @@ namespace gmc_v_2_0.ViewModels
                         if (obj is RecipeUnitView view)
                         {
                             // 显示配方名称
-                            view.RecipeName.ItemsSource = service.GetRecipeName();//你这个方法里面有问题
+                            view.RecipeName.ItemsSource = service.GetRecipeName();//这个方法里面有问题
                         }
                     });
                 }
@@ -285,6 +285,7 @@ namespace gmc_v_2_0.ViewModels
                         if (obj is RecipeUnitView view)
                         {
                             string str = view.SearchContent.Text;
+                            // 判断输入框是否为空
                             if (!string.IsNullOrWhiteSpace(str))
                             {
                                 view.RecipeName.ItemsSource = new ObservableCollection<string>(service.SearchRecipeName(str));
