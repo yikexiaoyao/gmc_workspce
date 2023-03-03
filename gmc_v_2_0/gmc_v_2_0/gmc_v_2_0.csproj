@@ -70,6 +70,9 @@
     <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MessageBoxWindow.xaml.cs">
+      <DependentUpon>MessageBoxWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RecipeAddWindow.xaml.cs">
       <DependentUpon>RecipeAddWindow.xaml</DependentUpon>
     </Compile>
@@ -107,6 +110,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\MessageBoxWindow.xaml" />
     <Page Include="Views\RecipeAddWindow.xaml" />
     <Page Include="Views\RecipeEditWindow.xaml" />
     <Page Include="Views\RecipeNewWindow.xaml" />

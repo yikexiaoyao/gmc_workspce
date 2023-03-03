@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using gmc_v_2_0.Models;
 
 namespace gmc_v_2_0.Base
@@ -13,7 +12,7 @@ namespace gmc_v_2_0.Base
         public static string NewRecipeName { get; set; }
 
         /// <summary>
-        /// ÖØĞÂ¼ÓÔØ
+        /// é‡æ–°åŠ è½½
         /// </summary>
         public static Action ReloadListAction { get; set; } = () => { };
     }

@@ -12,7 +12,6 @@ namespace gmc_v_2_0.Service
         //创建数据库连接
         private SqlServerAccess sqlServerAccess = new SqlServerAccess();
 
-
         // 获取配方名称
         public List<string> GetRecipeName()
         {
@@ -28,6 +27,7 @@ namespace gmc_v_2_0.Service
                     nameList.Add(name);
                 }
             }
+
             return nameList;
         }
 
@@ -73,76 +73,6 @@ namespace gmc_v_2_0.Service
             return modelList;
         }
 
-        // 新建配方
-        public void CreateRecipeCommand()
-        {
-            string sql = $"insert into recipes(recipe_name,step_num,step_time," +
-                         $"wafer_rotatior_val,wafer_rotatior_acc," +
-                         $"rinse_arm_disp,rinse_arm_speed,rinse_arm_start_pos,rinse_arm_end_pos,rinse_arm_scan," +
-                         $"dev_arm_disp,dev_arm_time,dev_arm_speed,dev_arm_start_pos,dev_arm_end_pos,dev_arm_scan," +
-                         $"auto_damp,n2_dry,wait_type)" +
-                         $" values" +
-                         $" ('{GlobalVariable.NewRecipeName}',1,0.0," +
-                         $"0,0," +
-                         $"'','','','',0," +
-                         $"'',0.0,'','','',0," +
-                         $"'','','')";
-            if (sqlServerAccess.DBConnection())
-            {
-                try
-                {
-                    sqlServerAccess.Comm = sqlServerAccess.Conn.CreateCommand();
-                    sqlServerAccess.Comm.CommandText = sql;
-                    sqlServerAccess.Comm.Parameters.AddWithValue("recipe_name", GlobalVariable.NewRecipeName);
-                    sqlServerAccess.Comm.Parameters.AddWithValue("step_num", 1);
-                    sqlServerAccess.Comm.Parameters.AddWithValue("step_time", 0.0);
-                    sqlServerAccess.Comm.Parameters.AddWithValue("wafer_rotatior_val", 0);
-                    sqlServerAccess.Comm.Parameters.AddWithValue("wafer_rotatior_acc", 0);
-                    sqlServerAccess.Comm.Parameters.AddWithValue("rinse_arm_disp", ' ');
-                    sqlServerAccess.Comm.Parameters.AddWithValue("rinse_arm_speed", ' ');
-                    sqlServerAccess.Comm.Parameters.AddWithValue("rinse_arm_start_pos", ' ');
-                    sqlServerAccess.Comm.Parameters.AddWithValue("rinse_arm_end_pos", ' ');
-                    sqlServerAccess.Comm.Parameters.AddWithValue("rinse_arm_scan", 0);
-                    sqlServerAccess.Comm.Parameters.AddWithValue("dev_arm_disp", ' ');
-                    sqlServerAccess.Comm.Parameters.AddWithValue("dev_arm_time", 0.0);
-                    sqlServerAccess.Comm.Parameters.AddWithValue("dev_arm_speed", ' ');
-                    sqlServerAccess.Comm.Parameters.AddWithValue("dev_arm_start_pos", ' ');
-                    sqlServerAccess.Comm.Parameters.AddWithValue("dev_arm_end_pos", ' ');
-                    sqlServerAccess.Comm.Parameters.AddWithValue("dev_arm_scan", 0);
-                    sqlServerAccess.Comm.Parameters.AddWithValue("auto_damp", ' ');
-                    sqlServerAccess.Comm.Parameters.AddWithValue("n2_dry", ' ');
-                    sqlServerAccess.Comm.Parameters.AddWithValue("wait_type", ' ');
-                    sqlServerAccess.Comm.ExecuteNonQuery();
-                    MessageBox.Show("Create Successfully!");
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Create Failed!" + Environment.NewLine + e.Message);
-                }
-            }
-        }
-
-        // 删除配方
-        public void DeleteRecipe(string recipe_name)
-        {
-            string sql = $"delete from recipes where recipe_name='{recipe_name}'";
-            if (sqlServerAccess.DBConnection())
-            {
-                try
-                {
-                    sqlServerAccess.Comm = sqlServerAccess.Conn.CreateCommand();
-                    sqlServerAccess.Comm.CommandText = sql;
-                    sqlServerAccess.Comm.Parameters.AddWithValue("recipe_name", GlobalVariable.SelectedRecipeName);
-                    sqlServerAccess.Comm.ExecuteNonQuery();
-                    MessageBox.Show("Delete Successfully!");
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Delete Failed!" + Environment.NewLine + e.Message);
-                }
-            }
-        }
-
         // 新增配方数据
         public void AddRecipeData(RecipeModel recipeModel, string recipe_name)
         {
@@ -152,7 +82,7 @@ namespace gmc_v_2_0.Service
                          $"dev_arm_disp,dev_arm_time,dev_arm_speed,dev_arm_start_pos,dev_arm_end_pos,dev_arm_scan," +
                          $"auto_damp,n2_dry,wait_type)" +
                          $" values" +
-                         $" ('{GlobalVariable.SelectedRecipeName}',{recipeModel.StepNum},{recipeModel.StepTime}," +
+                         $" ('{recipe_name}',{recipeModel.StepNum},{recipeModel.StepTime}," +
                          $"{recipeModel.WaferRotatiorVal},{recipeModel.WaferRotatiorAcc}," +
                          $"'{recipeModel.RinseArmDisp}','{recipeModel.RinseArmSpeed}','{recipeModel.RinseArmStartPos}','{recipeModel.RinseArmEndPos}',{recipeModel.RinseArmScan}," +
                          $"'{recipeModel.DevArmDisp}',{recipeModel.DevArmTime},'{recipeModel.DevArmSpeed}','{recipeModel.DevArmStartPos}','{recipeModel.DevArmEndPos}',{recipeModel.DevArmScan}," +
@@ -256,6 +186,76 @@ namespace gmc_v_2_0.Service
             }
         }
 
+        // 新建配方
+        public void CreateRecipe()
+        {
+            string sql = $"insert into recipes(recipe_name,step_num,step_time," +
+                         $"wafer_rotatior_val,wafer_rotatior_acc," +
+                         $"rinse_arm_disp,rinse_arm_speed,rinse_arm_start_pos,rinse_arm_end_pos,rinse_arm_scan," +
+                         $"dev_arm_disp,dev_arm_time,dev_arm_speed,dev_arm_start_pos,dev_arm_end_pos,dev_arm_scan," +
+                         $"auto_damp,n2_dry,wait_type)" +
+                         $" values" +
+                         $" ('{GlobalVariable.NewRecipeName}',1,0.0," +
+                         $"0,0," +
+                         $"'','','','',0," +
+                         $"'',0.0,'','','',0," +
+                         $"'','','')";
+            if (sqlServerAccess.DBConnection())
+            {
+                try
+                {
+                    sqlServerAccess.Comm = sqlServerAccess.Conn.CreateCommand();
+                    sqlServerAccess.Comm.CommandText = sql;
+                    sqlServerAccess.Comm.Parameters.AddWithValue("recipe_name", GlobalVariable.NewRecipeName);
+                    sqlServerAccess.Comm.Parameters.AddWithValue("step_num", 1);
+                    sqlServerAccess.Comm.Parameters.AddWithValue("step_time", 0.0);
+                    sqlServerAccess.Comm.Parameters.AddWithValue("wafer_rotatior_val", 0);
+                    sqlServerAccess.Comm.Parameters.AddWithValue("wafer_rotatior_acc", 0);
+                    sqlServerAccess.Comm.Parameters.AddWithValue("rinse_arm_disp", ' ');
+                    sqlServerAccess.Comm.Parameters.AddWithValue("rinse_arm_speed", ' ');
+                    sqlServerAccess.Comm.Parameters.AddWithValue("rinse_arm_start_pos", ' ');
+                    sqlServerAccess.Comm.Parameters.AddWithValue("rinse_arm_end_pos", ' ');
+                    sqlServerAccess.Comm.Parameters.AddWithValue("rinse_arm_scan", 0);
+                    sqlServerAccess.Comm.Parameters.AddWithValue("dev_arm_disp", ' ');
+                    sqlServerAccess.Comm.Parameters.AddWithValue("dev_arm_time", 0.0);
+                    sqlServerAccess.Comm.Parameters.AddWithValue("dev_arm_speed", ' ');
+                    sqlServerAccess.Comm.Parameters.AddWithValue("dev_arm_start_pos", ' ');
+                    sqlServerAccess.Comm.Parameters.AddWithValue("dev_arm_end_pos", ' ');
+                    sqlServerAccess.Comm.Parameters.AddWithValue("dev_arm_scan", 0);
+                    sqlServerAccess.Comm.Parameters.AddWithValue("auto_damp", ' ');
+                    sqlServerAccess.Comm.Parameters.AddWithValue("n2_dry", ' ');
+                    sqlServerAccess.Comm.Parameters.AddWithValue("wait_type", ' ');
+                    sqlServerAccess.Comm.ExecuteNonQuery();
+                    MessageBox.Show("Create Successfully!");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Create Failed!" + Environment.NewLine + e.Message);
+                }
+            }
+        }
+
+        // 删除配方
+        public void DeleteRecipe(string recipe_name)
+        {
+            string sql = $"delete from recipes where recipe_name='{recipe_name}'";
+            if (sqlServerAccess.DBConnection())
+            {
+                try
+                {
+                    sqlServerAccess.Comm = sqlServerAccess.Conn.CreateCommand();
+                    sqlServerAccess.Comm.CommandText = sql;
+                    sqlServerAccess.Comm.Parameters.AddWithValue("recipe_name", GlobalVariable.SelectedRecipeName);
+                    sqlServerAccess.Comm.ExecuteNonQuery();
+                    MessageBox.Show("Delete Successfully!");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Delete Failed!" + Environment.NewLine + e.Message);
+                }
+            }
+        }
+
         // 查询配方
         public List<string> SearchRecipeName(string str)
         {
@@ -271,6 +271,7 @@ namespace gmc_v_2_0.Service
                     nameList.Add(name);
                 }
             }
+
             return nameList;
         }
     }
