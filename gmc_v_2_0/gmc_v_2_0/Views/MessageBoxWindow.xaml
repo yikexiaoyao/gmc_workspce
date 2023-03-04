@@ -10,7 +10,7 @@
         Topmost="True" Title="MessageBoxWindow" SizeToContent="WidthAndHeight" Closing="Window_Closing"
         Loaded="Window_Loaded">
     <Viewbox>
-        <Grid Width="600" Height="260">
+        <Grid Width="260" Height="140" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <Border Margin="10" Background="White">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.5" />
@@ -20,12 +20,12 @@
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding NoText}" Value="{x:Null}" />
                                     <Condition Binding="{Binding YesText}" Value="{x:Null}" />
+                                    <Condition Binding="{Binding NoText}" Value="{x:Null}" />
                                 </MultiDataTrigger.Conditions>
                                 <MultiDataTrigger.Setters>
-                                    <Setter Property="Width" Value="400"></Setter>
-                                    <Setter Property="Height" Value="120"></Setter>
+                                    <Setter Property="Width" Value="50"></Setter>
+                                    <Setter Property="Height" Value="30"></Setter>
                                 </MultiDataTrigger.Setters>
                             </MultiDataTrigger>
                         </Style.Triggers>
@@ -33,16 +33,16 @@
                 </Border.Style>
                 <Grid Margin="20">
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="{Binding Context}" Margin="0,0,0,0" HorizontalAlignment="Center"
-                                   VerticalAlignment="Center" FontSize="48" Foreground="Gray" />
+                        <TextBlock Text="{Binding Context}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   FontSize="12" Foreground="Gray" />
                         <Control Height="40">
                             <Control.Template>
                                 <ControlTemplate>
                                     <ControlTemplate.Triggers>
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding NoText}" Value="{x:Null}" />
                                                 <Condition Binding="{Binding YesText}" Value="{x:Null}" />
+                                                <Condition Binding="{Binding NoText}" Value="{x:Null}" />
                                             </MultiDataTrigger.Conditions>
                                             <MultiDataTrigger.Setters>
                                                 <Setter Property="Visibility" Value="Collapsed"></Setter>
@@ -55,59 +55,14 @@
                     </StackPanel>
 
                     <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Height="64" Width="144" Click="No_Button_Click" Cursor="Hand">
-                            <Button.Template>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="White" BorderBrush="#cccccc">
-                                        <Border.Effect>
-                                            <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.2" />
-                                        </Border.Effect>
-                                        <TextBlock Name="text" FontSize="24" Foreground="Gray"
-                                                   HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}{0}（{1}）">
-                                                    <Binding Path="NoText" />
-                                                    <Binding Path="NoLeftTime.TotalSeconds" />
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding NoLeftTime.TotalSeconds}" Value="-1">
-                                            <Setter TargetName="text" Property="Text" Value="{Binding NoText}"></Setter>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding NoText}" Value="{x:Null}">
-                                            <Setter Property="Visibility" Value="Collapsed"></Setter>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding YesText}" Value="{x:Null}">
-                                            <Setter Property="Margin" Value="0"></Setter>
-                                        </DataTrigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                        <Control Width="30">
-                            <Control.Template>
-                                <ControlTemplate>
-                                    <ControlTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding NoText}" Value="{x:Null}">
-                                            <Setter Property="Visibility" Value="Collapsed"></Setter>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding YesText}" Value="{x:Null}">
-                                            <Setter Property="Visibility" Value="Collapsed"></Setter>
-                                        </DataTrigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Control.Template>
-                        </Control>
-                        <Button Height="64" Width="144" Click="Yes_Button_Click" Cursor="Hand">
+                        <Button Height="30" Width="50" Click="Yes_Button_Click" Cursor="Hand">
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
                                     <Border Background="Gray">
                                         <Border.Effect>
                                             <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.2" />
                                         </Border.Effect>
-                                        <TextBlock Name="text" FontSize="24" Foreground="White"
+                                        <TextBlock Name="text" FontSize="12" Foreground="White"
                                                    HorizontalAlignment="Center" VerticalAlignment="Center">
                                             <TextBlock.Text>
                                                 <MultiBinding StringFormat="{}{0}（{1}）">
@@ -125,6 +80,51 @@
                                             <Setter Property="Visibility" Value="Collapsed"></Setter>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding NoText}" Value="{x:Null}">
+                                            <Setter Property="Margin" Value="0"></Setter>
+                                        </DataTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <Control Width="40">
+                            <Control.Template>
+                                <ControlTemplate>
+                                    <ControlTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding YesText}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding NoText}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                        </DataTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Control.Template>
+                        </Control>
+                        <Button Height="30" Width="50" Click="No_Button_Click" Cursor="Hand">
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="White" BorderBrush="#cccccc">
+                                        <Border.Effect>
+                                            <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.2" />
+                                        </Border.Effect>
+                                        <TextBlock Name="text" FontSize="12" Foreground="Gray"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0}（{1}）">
+                                                    <Binding Path="NoText" />
+                                                    <Binding Path="NoLeftTime.TotalSeconds" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding NoLeftTime.TotalSeconds}" Value="-1">
+                                            <Setter TargetName="text" Property="Text" Value="{Binding NoText}"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding NoText}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding YesText}" Value="{x:Null}">
                                             <Setter Property="Margin" Value="0"></Setter>
                                         </DataTrigger>
                                     </ControlTemplate.Triggers>

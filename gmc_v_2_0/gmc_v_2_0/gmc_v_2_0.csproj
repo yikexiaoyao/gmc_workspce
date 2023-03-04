@@ -58,7 +58,6 @@
     </ApplicationDefinition>
     <Compile Include="Base\CommonBase.cs" />
     <Compile Include="Base\GlobalVariable.cs" />
-    <Compile Include="Base\WindowManager.cs" />
     <Compile Include="Service\LoginService.cs" />
     <Compile Include="Service\RecipeService.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />

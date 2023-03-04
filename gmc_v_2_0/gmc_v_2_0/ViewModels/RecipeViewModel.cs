@@ -93,7 +93,7 @@ namespace gmc_v_2_0.ViewModels
                         }
                         else
                         {
-                            MessageBox.Show("Recipe already exist!");
+                            MessageBoxWindow.Show("Recipe already exist!", null);
                         }
                     });
                 }
@@ -124,7 +124,7 @@ namespace gmc_v_2_0.ViewModels
                         }
                         else
                         {
-                            MessageBox.Show("Please Select");
+                            MessageBoxWindow.Show("Please Select", null);
                         }
                     });
                 }
@@ -150,11 +150,11 @@ namespace gmc_v_2_0.ViewModels
                         bool isEqual = commonBase.IsEqual(changedRecipeModel, unChangedRecipeModel);
                         if (isEqual)
                         {
-                            MessageBox.Show("No data needs to be saved");
+                            MessageBoxWindow.Show("No data needs to be saved", null);
                         }
                         else if (changedRecipeModel.StepNum == 0)
                         {
-                            MessageBox.Show("Step Num can not be \"0\"");
+                            MessageBoxWindow.Show("Step Num can not be \"0\"", null);
                         }
                         else
                         {
@@ -184,14 +184,16 @@ namespace gmc_v_2_0.ViewModels
                     _deleteDataCommand.DoExecute = new Action<object>(obj =>
                     {
                         var deletedRecipeModel = (RecipeModel) (obj as RecipeEditWindow).RecipeData.DataContext;
-                        if (MessageBox.Show("Are you sure?", "Delete Confirmation", MessageBoxButton.YesNo) ==
-                            MessageBoxResult.Yes)
+                        MessageBoxWindow.Show("Are you sure?", (s, e) =>
                         {
-                            service.DeleteRecipeData(GlobalVariable.SelectedRecipeName, deletedRecipeModel.StepNum);
-                            // 关闭窗口
-                            (obj as Window).DialogResult = false;
-                            GlobalVariable.ReloadListAction(); //刷新右侧列表
-                        }
+                            if (e.Result.IsYes)
+                            {
+                                service.DeleteRecipeData(GlobalVariable.SelectedRecipeName, deletedRecipeModel.StepNum);
+                                // 关闭窗口
+                                (obj as Window).DialogResult = false;
+                                GlobalVariable.ReloadListAction(); //刷新右侧列表
+                            }
+                        });
                     });
                 }
 
@@ -235,7 +237,7 @@ namespace gmc_v_2_0.ViewModels
                         var addedRecipeModel = (RecipeModel) (obj as RecipeAddWindow).RecipeData.DataContext;
                         if (addedRecipeModel.StepNum == 0)
                         {
-                            MessageBox.Show("Step Num can not be \"0\"");
+                            MessageBoxWindow.Show("Step Num can not be \"0\"", null);
                         }
                         else
                         {
@@ -263,23 +265,25 @@ namespace gmc_v_2_0.ViewModels
                     _deleteRecipeCommand = new CommandBase();
                     _deleteRecipeCommand.DoExecute = new Action<object>(obj =>
                     {
-                        if (MessageBox.Show("Are you sure?", "Delete Confirmation", MessageBoxButton.YesNo) ==
-                            MessageBoxResult.Yes)
+                        MessageBoxWindow.Show("Are you sure?", (s, e) =>
                         {
-                            service.DeleteRecipe(GlobalVariable.SelectedRecipeName);
-                            if (obj is RecipeUnitView view)
+                            if (e.Result.IsYes)
                             {
-                                // 显示配方名称
-                                service = null;
-                                service = new RecipeService();
-                                view.RecipeName.ItemsSource = service.GetRecipeName();
-                                view.RecipeName.SelectedIndex = 0;
-                                string recipeName = service.GetRecipeName()[0];
-                                view.RecipeData.ItemsSource = service.GetRecipeData(recipeName);
-                                GlobalVariable.SelectedRecipeDataItem = null;
-                                GlobalVariable.ReloadListAction(); //刷新右侧列表
+                                service.DeleteRecipe(GlobalVariable.SelectedRecipeName);
+                                if (obj is RecipeUnitView view)
+                                {
+                                    // 显示配方名称
+                                    service = null;
+                                    service = new RecipeService();
+                                    view.RecipeName.ItemsSource = service.GetRecipeName();
+                                    view.RecipeName.SelectedIndex = 0;
+                                    string recipeName = service.GetRecipeName()[0];
+                                    view.RecipeData.ItemsSource = service.GetRecipeData(recipeName);
+                                    GlobalVariable.SelectedRecipeDataItem = null;
+                                    GlobalVariable.ReloadListAction(); //刷新右侧列表
+                                }
                             }
-                        }
+                        });
                     });
                 }
 
