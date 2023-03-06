@@ -2,6 +2,7 @@
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using gmc_v_2_0.Base;
 using gmc_v_2_0.Models;
 using gmc_v_2_0.Service;
@@ -111,14 +112,15 @@ namespace gmc_v_2_0.Views
         private RecipeService service = new RecipeService();
 
         // 获取选中文件名，显示文件名对应数据
-        public void RecipeName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void RecipeName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             LoadRecipeData();
         }
 
 
-        public void LoadRecipeData()
+        private void LoadRecipeData()
         {
+            GlobalVariable.SelectedRecipeDataItem = null;
             if (RecipeName.SelectedItem != null)
             {
                 // MessageBox.Show(RecipeName.SelectedValue.ToString());
@@ -137,6 +139,7 @@ namespace gmc_v_2_0.Views
             {
                 RecipeDataNum.Text = "";
                 GlobalVariable.SelectedRecipeName = "";
+                GlobalVariable.RecipeDataNum = 0;
                 RecipeData.ItemsSource = null;
             }
         }
@@ -148,6 +151,15 @@ namespace gmc_v_2_0.Views
             {
                 GlobalVariable.SelectedRecipeDataItem = RecipeData.SelectedItem as RecipeModel;
                 RecipeData.SelectedItem = null;
+            }
+        }
+
+        // 回车事件
+        private void SearchBox_OnKeyDown(object sender, KeyEventArgs keyEventArgs)
+        {
+            if (keyEventArgs.Key == Key.Enter)
+            {
+                SearchContent.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             }
         }
     }

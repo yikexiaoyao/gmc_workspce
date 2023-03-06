@@ -176,14 +176,14 @@
                 </StackPanel>
 
                 <!--用户名-->
-                <TextBox Grid.Row="3" Style="{StaticResource UserNameTextBoxStyle}"
-                         Text="{Binding UserModel.UserName,UpdateSourceTrigger=PropertyChanged}">
+                <TextBox Grid.Row="3" Style="{StaticResource UserNameTextBoxStyle}" x:Name="UserNameBox"
+                         Text="{Binding UserModel.UserName,UpdateSourceTrigger=PropertyChanged}" PreviewKeyDown="UserNameBox_OnKeyDown">
                 </TextBox>
 
                 <!--密码-->
-                <PasswordBox Grid.Row="4" Style="{StaticResource PasswordBoxStyle}"
+                <PasswordBox Grid.Row="4" Style="{StaticResource PasswordBoxStyle}" x:Name="PasswordBox"
                              base:PasswordBoxHelper.Password="{Binding UserModel.Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                             base:PasswordBoxHelper.Attach="true">
+                             base:PasswordBoxHelper.Attach="true" PreviewKeyDown="PasswordBox_OnKeyDown">
                 </PasswordBox>
 
                 <!--记住我-->

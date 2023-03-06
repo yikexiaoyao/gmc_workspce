@@ -5,12 +5,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:gmc_v_2_0.Views"
         mc:Ignorable="d"
-        Background="Transparent" FontFamily="Microsoft YaHei" FontWeight="ExtraLight" ResizeMode="NoResize"
-        WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen" ShowInTaskbar="False"
-        Topmost="True" Title="MessageBoxWindow" SizeToContent="WidthAndHeight" Closing="Window_Closing"
+        Background="Transparent" FontFamily="Microsoft YaHei" 
+        FontWeight="ExtraLight" ResizeMode="NoResize"
+        WindowStyle="None" AllowsTransparency="True" 
+        WindowStartupLocation="CenterScreen" ShowInTaskbar="False"
+        Topmost="True" Title="MessageBoxWindow" SizeToContent="WidthAndHeight" 
+        Closing="Window_Closing"
         Loaded="Window_Loaded">
-    <Viewbox>
-        <Grid Width="260" Height="140" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+    <!--<Viewbox>-->
+        <Grid Width="160" Height="140" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <Border Margin="10" Background="White">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.5" />
@@ -135,5 +138,5 @@
                 </Grid>
             </Border>
         </Grid>
-    </Viewbox>
+    <!--</Viewbox>-->
 </Window>
