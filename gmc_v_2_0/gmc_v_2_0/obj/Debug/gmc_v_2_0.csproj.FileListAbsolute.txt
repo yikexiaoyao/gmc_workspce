@@ -86,3 +86,12 @@ C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\Views\Message
 C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\Views\MessageBoxWindow.baml
 C:\Users\DELL\Desktop\Github\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\Views\MessageBoxWindow.g.cs
 C:\Users\DELL\Desktop\Github\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\Views\MessageBoxWindow.baml
+C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\bin\Debug\LiveCharts.dll
+C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\bin\Debug\LiveCharts.pdb
+C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\bin\Debug\LiveCharts.xml
+C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\Views\UtilityPlotterView.g.cs
+C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\Views\UtilityPlotterView.baml
+C:\Users\华硕\Desktop\gmc_workspce\gmc_v_2_0\gmc_v_2_0\obj\Debug\gmc_v_2_0.csproj.CopyComplete

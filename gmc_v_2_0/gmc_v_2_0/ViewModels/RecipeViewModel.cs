@@ -93,7 +93,7 @@ namespace gmc_v_2_0.ViewModels
                         }
                         else
                         {
-                            MessageBoxWindow.Show("Recipe already exist!", null);
+                            MessageBox.Show("Recipe already exist!", "Warning");
                         }
                     });
                 }
@@ -124,7 +124,7 @@ namespace gmc_v_2_0.ViewModels
                         }
                         else
                         {
-                            MessageBoxWindow.Show("Please Select", null);
+                            MessageBox.Show("Please Select", "Warning");
                         }
                     });
                 }
@@ -150,11 +150,11 @@ namespace gmc_v_2_0.ViewModels
                         bool isEqual = commonBase.IsEqual(changedRecipeModel, unChangedRecipeModel);
                         if (isEqual)
                         {
-                            MessageBoxWindow.Show("No data needs to be saved", null);
+                            MessageBox.Show("No data needs to be saved", "Warning");
                         }
                         else if (changedRecipeModel.StepNum == 0)
                         {
-                            MessageBoxWindow.Show("Step Num can not be \"0\"", null);
+                            MessageBox.Show("Step Num can not be \"0\"", "Warning");
                         }
                         else
                         {
@@ -237,7 +237,7 @@ namespace gmc_v_2_0.ViewModels
                         var addedRecipeModel = (RecipeModel) (obj as RecipeAddWindow).RecipeData.DataContext;
                         if (addedRecipeModel.StepNum == 0)
                         {
-                            MessageBoxWindow.Show("Step Num can not be \"0\"", null);
+                            MessageBox.Show("Step Num can not be \"0\"", "Warning");
                         }
                         else
                         {

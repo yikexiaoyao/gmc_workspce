@@ -113,11 +113,11 @@ namespace gmc_v_2_0.Service
                     sqlServerAccess.Comm.Parameters.AddWithValue("n2_dry", recipeModel.N2Dry);
                     sqlServerAccess.Comm.Parameters.AddWithValue("wait_type", recipeModel.WaitType);
                     sqlServerAccess.Comm.ExecuteNonQuery();
-                    MessageBox.Show("Save Successfully!");
+                    MessageBox.Show("Save Successfully!", "Message");
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Save Failed!" + Environment.NewLine + e.Message);
+                    MessageBox.Show("Save Failed!" + Environment.NewLine + e.Message, "Warning");
                 }
             }
         }
@@ -155,11 +155,11 @@ namespace gmc_v_2_0.Service
                     sqlServerAccess.Comm.Parameters.AddWithValue("n2_dry", recipeModel.N2Dry);
                     sqlServerAccess.Comm.Parameters.AddWithValue("wait_type", recipeModel.WaitType);
                     sqlServerAccess.Comm.ExecuteNonQuery();
-                    MessageBox.Show("Save Successfully!");
+                    MessageBox.Show("Save Successfully!", "Message");
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Save Failed!" + Environment.NewLine + e.Message);
+                    MessageBox.Show("Save Failed!" + Environment.NewLine + e.Message, "Warning");
                 }
             }
         }
@@ -177,11 +177,11 @@ namespace gmc_v_2_0.Service
                     sqlServerAccess.Comm.Parameters.AddWithValue("recipe_name", recipe_name);
                     sqlServerAccess.Comm.Parameters.AddWithValue("step_num", step_num);
                     sqlServerAccess.Comm.ExecuteNonQuery();
-                    MessageBox.Show("Delete Successfully!");
+                    MessageBox.Show("Delete Successfully!", "Message");
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Delete Failed!" + Environment.NewLine + e.Message);
+                    MessageBox.Show("Delete Failed!" + Environment.NewLine + e.Message, "Warning");
                 }
             }
         }
@@ -226,11 +226,11 @@ namespace gmc_v_2_0.Service
                     sqlServerAccess.Comm.Parameters.AddWithValue("n2_dry", ' ');
                     sqlServerAccess.Comm.Parameters.AddWithValue("wait_type", ' ');
                     sqlServerAccess.Comm.ExecuteNonQuery();
-                    MessageBox.Show("Create Successfully!");
+                    MessageBox.Show("Create Successfully!", "Message");
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Create Failed!" + Environment.NewLine + e.Message);
+                    MessageBox.Show("Create Failed!" + Environment.NewLine + e.Message, "Warning");
                 }
             }
         }
@@ -247,11 +247,11 @@ namespace gmc_v_2_0.Service
                     sqlServerAccess.Comm.CommandText = sql;
                     sqlServerAccess.Comm.Parameters.AddWithValue("recipe_name", GlobalVariable.SelectedRecipeName);
                     sqlServerAccess.Comm.ExecuteNonQuery();
-                    MessageBox.Show("Delete Successfully!");
+                    MessageBox.Show("Delete Successfully!", "Message");
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Delete Failed!" + Environment.NewLine + e.Message);
+                    MessageBox.Show("Delete Failed!" + Environment.NewLine + e.Message, "Warning");
                 }
             }
         }

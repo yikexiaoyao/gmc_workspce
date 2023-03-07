@@ -295,7 +295,10 @@
                     <TreeViewItem Header="Utility" ToolTip="Contains:&#x0a;Alarm History&#x0a;User&#x0a;Plotter">
                         <TreeViewItem Header="Alarm History"></TreeViewItem>
                         <TreeViewItem Header="User"></TreeViewItem>
-                        <TreeViewItem Header="Plotter"></TreeViewItem>
+                        <RadioButton Content="Plotter" Style="{StaticResource LeftMenuItemButtonStyle}"
+                                     ToolTip="Plotter" Command="{Binding MenuItemCommand}"
+                                     CommandParameter="gmc_v_2_0.Views.UtilityPlotterView">
+                        </RadioButton>
                     </TreeViewItem>
                     <TreeViewItem Header="OEM">
                         <TreeViewItem Header="3"></TreeViewItem>

@@ -1,0 +1,68 @@
+<UserControl x:Class="gmc_v_2_0.Views.UtilityPlotterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:gmc_v_2_0.Views"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d"
+             d:DesignHeight="904" d:DesignWidth="1080">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!-- 第一行 -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!--
+                1.线条显示数值: DataLabels="True"
+                2.线条是否弯曲: LineSmoothness="0" 或 "1"
+                3.线条的颜色: Stroke="Red"  //设置线条的颜色为红色
+                4.线条下方颜色: Fill="Pink" //线条的下方颜色
+                5.线条的每个点: PointGeometrySize="20" //设置数据点大小
+                6.显示数据字体颜色: Foreground="Red"
+                7.数据点的颜色: PointForeground="#FF6347"
+                8.线条虚线: StrokeDashArray="5" //数值愈大间隔愈大, 如下绿色虚线
+            -->
+            <Grid Margin="20,20,10,20">
+                <lvc:CartesianChart LegendLocation="Top" Background="#EEE">
+                    <!-- 曲线 -->
+                    <lvc:CartesianChart.Series>
+                        <!--曲线参数-->
+                        <lvc:LineSeries Values="1,2,3,4,5,6" DataLabels="True" LineSmoothness="1" Stroke="Red"
+                                        Fill="Pink" PointGeometrySize="20" Foreground="Red" PointForeground="#FF6347"
+                                        StrokeDashArray="5">
+                        </lvc:LineSeries>
+                        <lvc:LineSeries Values="2,4,6,8,10,12"></lvc:LineSeries>
+                    </lvc:CartesianChart.Series>
+                    <!--定义Y轴-->
+                    <lvc:CartesianChart.AxisY>
+                        <!-- 定义Y轴名称 -->
+                        <lvc:Axis Title="Value"></lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                    <!--定义X轴-->
+                    <lvc:CartesianChart.AxisX>
+                        <!-- 定义X轴名称 -->
+                        <lvc:Axis Title="Type"></lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                </lvc:CartesianChart>
+            </Grid>
+            <Grid Grid.Column="1">
+            </Grid>
+        </Grid>
+        <!-- 第二行 -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
